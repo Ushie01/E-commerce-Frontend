@@ -10,7 +10,7 @@ const Input = () => {
             </Link>
             <input
                 type="search"
-                className="h-12 w-48  text-xs border-white ml-1 font-black"
+                className="h-12 w-48 input text-xs border-white ml-1 font-black"
                 placeholder="Search Product"
             />
       </div>

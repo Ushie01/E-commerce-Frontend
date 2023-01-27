@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input {
+    border: 0;
+    outline: 0;
+  }
+
+input:focus {
+  outline: none !important;
+}
+
+.textColor {
+  color: skyBlue;
+}

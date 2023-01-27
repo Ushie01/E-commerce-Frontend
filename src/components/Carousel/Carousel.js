@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSwipeable } from "react-swipeable";
+import Circle from "../../assets/circle-fill.svg";
+import CircleClick from "../../assets/circle.svg";
 // import arrowR from "./arrow-right.svg";
 // import arrowL from "./arrow-left.svg"
 import './Carousel.css';
@@ -77,13 +79,21 @@ const Carousel = ({ children }) => {
           return (
             <button
               className={`${
-                index === activeIndex ? "active" : ""
+                index === activeIndex ? (
+                  <img
+                    src={Circle}
+                    alt={Circle}
+                    className="h-2 w-2"
+                  />
+                ) : (
+                  ""
+                )
               } text-gray-500`}
               onClick={() => {
                 updateIndex(index);
               }}
             >
-              {`*`}
+              <img src={CircleClick} alt={CircleClick} className="h-2 w-2" />
             </button>
           );
         })}
