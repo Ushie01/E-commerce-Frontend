@@ -1,9 +1,9 @@
-import Input from './../../components/input'; 
-import lightSun from './../../assets/dark-sun.svg';
-import notificationBell from './../../assets/notification-bell.svg'
+import Input from './../components/Input'; 
+import lightSun from '../assets/dark-sun.svg';
+import notificationBell from '../assets/notification-bell.svg'
 
     
-const Home = () => {
+const Navbar = () => {
     return (
       <nav className="flex flex-row items-center justify-between w-98 p-3 h-20 bg-white">
         <Input />
@@ -12,11 +12,11 @@ const Home = () => {
           <img
             src={notificationBell}
             alt={notificationBell}
-            className="h-7 w-7 ml-2"
+            className="h-7 w-7 ml-2"         
           />
         </div>
       </nav>
     );
 }
 
-export default Home;
+export default Navbar;
