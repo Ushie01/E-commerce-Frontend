@@ -1,5 +1,6 @@
-import Navbar from "./../../Navbar";
 import Carousel, { CarouselItem } from "../../Carousel/Carousel";
+import Footer from "./../../Footer";
+import Navbar from "../../Navbar";
 import Shirt1 from "../../../assets/1.webp";
 import Shirt2 from "../../../assets/22.webp";
 import Shirt3 from "../../../assets/euphorya.jpg";
@@ -190,6 +191,11 @@ const Homepage = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+      <section>
+        <div className="m-3">
+          <Footer />
         </div>
       </section>
     </div>

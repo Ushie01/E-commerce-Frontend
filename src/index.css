@@ -19,3 +19,7 @@ input:focus {
   scrollbar-width: none;
   scrollbar-height: none;
 }
+
+/* .stickyPosition{
+  position: fixed;
+} */
