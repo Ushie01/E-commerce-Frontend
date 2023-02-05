@@ -104,8 +104,8 @@ const Homepage = () => {
                   ₦3,000.00
                 </h3>
                 <div className="flex flex-row m-2 items-start justify-between">
-                  <s className="text-gray-500">₦6,000.00</s>
-                  <h2 className="font-red text-red-700 text-extrabold">
+                  <s className="text-gray-500 text-sm">₦6,000.00</s>
+                  <h2 className="font-red text-sm font-bold text-red-700 text-extrabold">
                     25% off
                   </h2>
                 </div>
@@ -131,8 +131,10 @@ const Homepage = () => {
                   ₦3,000.00
                 </h3>
                 <div className="flex flex-row m-2 items-start justify-between">
-                  <s className="text-gray-500">₦6,000.00</s>
-                  <h2 className="font-red text-red-700 text-bold">25% off</h2>
+                  <s className="text-gray-500 text-sm">₦6,000.00</s>
+                  <h2 className="font-red text-sm font-bold text-red-700 text-bold">
+                    25% off
+                  </h2>
                 </div>
               </div>
             </div>
@@ -163,8 +165,8 @@ const Homepage = () => {
                   ₦3,000.00
                 </h3>
                 <div className="flex flex-row m-2 items-start justify-between">
-                  <s className="text-gray-500">₦6,000.00</s>
-                  <h2 className="font-red text-red-700 text-extrabold">
+                  <s className="text-gray-500 test-sm">₦6,000.00</s>
+                  <h2 className="font-red text-sm font-bold text-red-700 text-extrabold">
                     25% off
                   </h2>
                 </div>
@@ -173,7 +175,7 @@ const Homepage = () => {
           ))}
         </div>
 
-        <div className="flex flex-row mt-6 m-3 items-center justify-center space-x-2 overflow-x-auto scrollbar-hide category">
+        <div className="flex flex-row mt-6 m-3 mb-24 items-center justify-center space-x-2 overflow-x-auto scrollbar-hide category">
           {men.map((man, value) => (
             <div className="border-2 p-1 rounded-md">
               <div className="h-72 w-44 mt-3">
@@ -185,16 +187,19 @@ const Homepage = () => {
                   ₦3,000.00
                 </h3>
                 <div className="flex flex-row m-2 items-start justify-between">
-                  <s className="text-gray-500">₦6,000.00</s>
-                  <h2 className="font-red text-red-700 text-bold">25% off</h2>
+                  <s className="text-gray-500 text-sm">₦6,000.00</s>
+                  <h2 className="font-red text-sm text-red-700 font-extrabold">
+                    25% off
+                  </h2>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </section>
+
       <section>
-        <div className="m-3">
+        <div className="m-6 relative">
           <Footer />
         </div>
       </section>
