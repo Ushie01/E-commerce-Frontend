@@ -1,4 +1,4 @@
-import Input from './../components/Input'; 
+import Input from './Input'; 
 import lightSun from '../assets/dark-sun.svg';
 import notificationBell from '../assets/notification-bell.svg'
 
