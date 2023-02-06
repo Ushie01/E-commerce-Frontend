@@ -15,9 +15,8 @@ input:focus {
   color: skyBlue;
 }
 
-.category {
-  scrollbar-width: none;
-  scrollbar-height: none;
+::-webkit-scrollbar {
+  width: 0.2px;
 }
 
 .stickyPosition{
