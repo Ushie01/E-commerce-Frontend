@@ -34,7 +34,7 @@ const men = [
 
 const Favorite = () => {
     return (
-      <div className='h-max'>
+      <div className='h-max mb-20'>
         <div className="flex flex-row items-center justify-between p-7 border-b-2">
           <div className="flex flex-row">
             <Link to="/">

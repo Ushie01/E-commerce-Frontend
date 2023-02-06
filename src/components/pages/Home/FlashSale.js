@@ -37,7 +37,7 @@ const men = [
 
 const FlashSale = () => {
     return (
-      <div>
+      <div className="mb-20">
         <div className="flex flex-row items-center justify-between p-7 border-b-2">
           <div className="flex flex-row">
             <Link to="/">

@@ -19,11 +19,11 @@ const SaleSection = ({ men, picture, amount, category, price, discount, star, de
                         star === true
                             ?  
                             <div className="m-2 flex flex-row items-start justify-start">
-                            <img src={starFill} alt={starFill} className="w-4 h-4" />
-                            <img src={starFill} alt={starFill} className="w-4 h-4" />
-                            <img src={starFill} alt={starFill} className="w-4 h-4" />
-                            <img src={starHalf} alt={starHalf} className="w-4 h-4" />
-                            <img src={starEmpty} alt={starEmpty} className="w-4 h-4" />
+                                <img src={starFill} alt={starFill} className="w-4 h-4" />
+                                <img src={starFill} alt={starFill} className="w-4 h-4" />
+                                <img src={starFill} alt={starFill} className="w-4 h-4" />
+                                <img src={starHalf} alt={starHalf} className="w-4 h-4" />
+                                <img src={starEmpty} alt={starEmpty} className="w-4 h-4" />
                             </div>
                             :
                             ""
