@@ -46,11 +46,13 @@ const FlashSale = () => {
             <p className="text-xl font-bold ml-3">Flash Sale</p>
           </div>
           <div className="flex flex-row">
-            <img src={love} alt={love} className="w-7 h-7 mr-4" />
+            <Link to="/Favorite">
+              <img src={love} alt={love} className="w-7 h-7 mr-4" />
+            </Link>
             <img src={search} alt={search} className="w-7 h-7" />
           </div>
         </div>
-        <CarouselComponent />
+        <CarouselComponent value={true} />
         <SaleSection
           men={men}
           picture={Shirt2}
@@ -58,7 +60,7 @@ const FlashSale = () => {
           category={"Men's Regular Fit"}
           price={"₦3,000.00"}
           discount={"25% off"}
-          star={true}      
+          star={true}
         />
         <SaleSection
           men={men}
@@ -68,7 +70,7 @@ const FlashSale = () => {
           price={"₦3,000.00"}
           discount={"25% off"}
           star={true}
-        //   className='m'
+          //   className='m'
         />
         <Footer />
       </div>

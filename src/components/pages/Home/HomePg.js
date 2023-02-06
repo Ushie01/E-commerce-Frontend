@@ -41,7 +41,9 @@ const Homepage = () => {
     <div>
       <Navbar />
       <hr />
-      <CarouselComponent />
+      <CarouselComponent
+        value={true}
+      />
       <section>
         <div className="flex flew-row justify-between p-3">
           <p className="text-lg text-black font-bold">Category</p>
