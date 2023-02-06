@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import CarouselComponent from '../../Carousel/CarouselComponent';
-// import SaleSection from './SaleSection';
+import SaleSection from './SaleSection';
 import Footer from '../../Footer';
+import Button from '../../Button';
 import arrow from '../../../assets/arrow.svg';
 import threeDots from '../../../assets/three-dots.svg';
 import search from '../../../assets/search_.svg';
@@ -9,7 +10,8 @@ import love from '../../../assets/love_.svg';
 import starEmpty from "./../../../assets/star.svg";
 import starHalf from "./../../../assets/star-half.svg";
 import starFill from "./../../../assets/star-fill.svg";
-// import Shirt2 from '../../../assets/1.webp'
+import person from "./../../../assets/account.svg";
+import Shirt2 from '../../../assets/1.webp'
 
 
 const men = [
@@ -47,7 +49,7 @@ const colors = [
 
 const ProductDetail = () => {
     return (
-      <div className="mb-20">
+      <div className="mb-24">
         <div className="flex flex-row items-center justify-between p-5">
           <div className="flex flex-row">
             <Link to="/">
@@ -110,17 +112,61 @@ const ProductDetail = () => {
           compatibilities can be found
         </p>
 
-        <p className="m-3 font-bold text-xl mt-6">Review Product</p>
+        <p className="m-3 font-bold text-xl mt-12">Review Product</p>
         <div className="m-3 flex flex-row items-start justify-start space-x-1 mt-2">
           <img src={starFill} alt={starFill} className="w-5 h-5" />
           <img src={starFill} alt={starFill} className="w-5 h-5" />
           <img src={starFill} alt={starFill} className="w-5 h-5" />
           <img src={starHalf} alt={starHalf} className="w-5 h-5" />
           <img src={starEmpty} alt={starEmpty} className="w-5 h-5" />
-          <p className='font-bold text-md'>3.5</p>
-          <p className='text-md'>(5 Reviews)</p>
+          <p className="font-bold text-md">3.5</p>
+          <p className="text-md">(5 Reviews)</p>
         </div>
 
+        <div className="flex flex-row items-start justify-start m-3 borde">
+          <Link
+            to="#"
+            className={`h-20 text-3xl w-16 h-16 border-2 rounded-full`}
+          >
+            <img src={person} alt={person} className="w-12 h-12 m-auto" />
+          </Link>
+          <div className="flex flex-col items-start justify-start ml-3">
+            <p className="font-bold text-2xl">Rekureku Judith</p>
+            <div className="flex flex-row">
+              <div className="flex flex-row">
+                <img src={starFill} alt={starFill} className="w-5 h-5" />
+                <img src={starFill} alt={starFill} className="w-5 h-5" />
+                <img src={starFill} alt={starFill} className="w-5 h-5" />
+                <img src={starFill} alt={starFill} className="w-5 h-5" />
+                <img src={starEmpty} alt={starEmpty} className="w-5 h-5" />
+              </div>
+              <p className="text-gray text-xs m-auto ml-3">December 10, 2022</p>
+            </div>
+          </div>
+        </div>
+        <p className="text-gray m-3 ">
+          air max are always very comfortable fit, clean and just perfect in
+          every way. just the box was too small and scrunched the sneakers up a
+          little bit, not sure if the box was always this small but the 90s are
+          and will always be one of my favorites.
+        </p>
+
+        <p className="m-3 font-bold text-xl mt-12">You May Also Like</p>
+
+        <SaleSection
+          men={men}
+          picture={Shirt2}
+          amount={"₦1,000.00"}
+          category={"Men's Regular Fit"}
+          price={"₦3,000.00"}
+          discount={"25% off"}
+          star={true}
+          deleteBin={false}
+        />
+
+        <div className='flex items-center justify-center'>
+          <Button />
+        </div>
         <Footer />
       </div>
     );
