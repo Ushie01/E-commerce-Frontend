@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Footer from '../../Footer';
 import arrow from './../../../assets/arrow.svg';
 import starEmpty from './../../../assets/star.svg';
 import starFill from './../../../assets/star-fill.svg';
@@ -34,6 +35,7 @@ const WriteReview = () => {
                 </p>
                 <textarea className='w-full h-48 border-2 rounded-md' placeholder='Write A Review'></textarea>
             </div>
+            <Footer />
         </div>
     )
 }

@@ -6,6 +6,8 @@ import Favorite from './components/pages/Home/Favorite';
 import ProductDetail from './components/pages/Home/ProductDetail';
 import ProductReviews from './components/pages/Review/ProductReviews';
 import WriteReview from './components/pages/Review/WriteReview';
+import Explore from './components/pages/Explore/Explore';
+import SearchResult from './components/pages/Explore/SearchResult';
 
 
 
@@ -20,6 +22,8 @@ const App = () => {
           <Route path='ProductDetail' element={<ProductDetail />} />
           <Route path='ProductReviews' element={<ProductReviews />}/>
           <Route path="WriteReview" element={<WriteReview />} />
+          <Route path='Explore' element={<Explore/>} />
+          <Route path='SearchResult' element={<SearchResult />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import Footer from '../../Footer';
 import Button from '../../Button';
 import starFill from './../../../assets/star-fill.svg';
 import arrow from './../../../assets/arrow.svg';
@@ -52,6 +53,8 @@ const ProductReviews = () => {
                     />
                 </Link>
             </div>
+
+            <Footer />
         </div>
 
             

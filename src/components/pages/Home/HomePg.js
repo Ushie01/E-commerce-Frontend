@@ -7,6 +7,8 @@ import Navbar from "../../Navbar";
 import Shirt1 from "../../../assets/1.webp";
 import Shirt2 from "../../../assets/22.webp";
 import collection from "../../../assets/collection.jpg";
+import love from "../../../assets/love.svg";
+import notificationBell from "../../../assets/notification-bell.svg";
 
 
 const men = [
@@ -39,7 +41,10 @@ const men = [
 const Homepage = () => {
   return (
     <div>
-      <Navbar />
+      <Navbar
+        love={love}
+        notificationBell={notificationBell}
+      />
       <hr />
       <CarouselComponent
         value={true}
