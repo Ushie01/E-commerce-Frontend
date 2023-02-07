@@ -4,6 +4,10 @@ import FlashSale from './components/pages/Home/FlashSale';
 import Notification from './components/pages/Notification/Notification';
 import Favorite from './components/pages/Home/Favorite';
 import ProductDetail from './components/pages/Home/ProductDetail';
+import ProductReviews from './components/pages/Review/ProductReviews';
+import WriteReview from './components/pages/Review/WriteReview';
+
+
 
 const App = () => {
   return (
@@ -14,6 +18,8 @@ const App = () => {
           <Route path='Favorite' element={<Favorite />} />
           <Route path='FlashSale' element={<FlashSale />} /> 
           <Route path='ProductDetail' element={<ProductDetail />} />
+          <Route path='ProductReviews' element={<ProductReviews />}/>
+          <Route path="WriteReview" element={<WriteReview />} />
       </Routes>
     </BrowserRouter>
   )

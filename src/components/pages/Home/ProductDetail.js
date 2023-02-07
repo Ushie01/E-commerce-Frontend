@@ -14,38 +14,8 @@ import person from "./../../../assets/account.svg";
 import Shirt2 from '../../../assets/1.webp'
 
 
-const men = [
-  {
-    item: "x"
-  },
-  {
-    item: "M"
-  },
-  {
-    item: "XL"
-  },
-  {
-    item: "XX"
-  }
-];
-
-const colors = [
-    {
-        item: "green"
-    },
-    {
-        item: "red"
-    },
-    {
-        item: "purple"
-    },
-    {
-        item: "cyan"
-    },
-    {
-        item: "orange"
-    }
-];
+const men = ["X", "M", "XL", "XX"];
+const colors = ["cyan", "red"];
 
 const ProductDetail = () => {
     return (
@@ -79,12 +49,12 @@ const ProductDetail = () => {
         <h1 className="font-bold text-2xl m-3 text-cyan-500">₦4,000.00</h1>
 
         <p className="m-3 font-bold text-xl mt-6">Select Size</p>
-        <div className="flex flex-row items-start justify-start space-x-2 overflow-x-auto scrollbar-hide category">
+        <div className="flex flex-row m-3 items-start justify-start space-x-2 overflow-x-auto scrollbar-hide category">
           {men.map((man, index) => (
             <div key={index}>
               <div>
-                <button className="m-2 h-20 text-2xl w-16 h-16 border-2 rounded-full">
-                  {man.item}
+                <button className="h-16 text-3xl w-16 border-2 rounded-full">
+                  {man}
                 </button>
               </div>
             </div>
@@ -92,13 +62,12 @@ const ProductDetail = () => {
         </div>
 
         <p className="m-3 font-bold text-xl mt-6">Select Color</p>
-        <div className="flex flex-row items-start justify-start space-x-2 overflow-x-auto scrollbar-hide category">
-          {colors.map((man, index) => (
+        <div className="flex flex-row m-3 items-start justify-start space-x-2 overflow-x-auto scrollbar-hide category">
+          {colors.map((color, index) => (
             <div key={index}>
               <div>
-                <button
-                  className={`m-2 h-20 text-3xl w-16 h-16 border-2 rounded-full bg-${man.item}-700`}
-                ></button>
+                <div className={`h-20 text-3xl border-2 w-20 bg-${color}-400 rounded-full`}>
+                </div>
               </div>
             </div>
           ))}
@@ -112,7 +81,14 @@ const ProductDetail = () => {
           compatibilities can be found
         </p>
 
-        <p className="m-3 font-bold text-xl mt-12">Review Product</p>
+        
+        <div className="flex flew-row justify-between p-3 mt-12">
+          <p className="text-lg text-black font-bold">Review Product</p>
+          <Link to="/ProductReviews">
+            <p className="text-lg textColor font-bold">See More</p>
+          </Link>
+        </div>
+
         <div className="m-3 flex flex-row items-start justify-start space-x-1 mt-2">
           <img src={starFill} alt={starFill} className="w-5 h-5" />
           <img src={starFill} alt={starFill} className="w-5 h-5" />
@@ -124,13 +100,10 @@ const ProductDetail = () => {
         </div>
 
         <div className="flex flex-row items-start justify-start m-3 borde">
-          <Link
-            to="#"
-            className={`h-20 text-3xl w-16 h-16 border-2 rounded-full`}
-          >
+          <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
             <img src={person} alt={person} className="w-12 h-12 m-auto" />
-          </Link>
-          <div className="flex flex-col items-start justify-start ml-3">
+          </button>
+          <div className="flex flex-col items-start justify-start mt-5 ml-3">
             <p className="font-bold text-2xl">Rekureku Judith</p>
             <div className="flex flex-row">
               <div className="flex flex-row">
@@ -165,7 +138,9 @@ const ProductDetail = () => {
         />
 
         <div className='flex items-center justify-center'>
-          <Button />
+          <Button
+             text="Add To Cart"
+          />
         </div>
         <Footer />
       </div>
