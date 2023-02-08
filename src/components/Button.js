@@ -1,7 +1,7 @@
 const Button = ({text}) => {
     return (
         <>
-            <button className="w-full rounded-md h-16 w-96 m-2 bg-red-600 text-white m-auto text-xl font-bold">
+            <button className="rounded-md h-12 w-80 bg-red-600 text-white m-auto text-md font-bold">
                 {text}
             </button>
         </>

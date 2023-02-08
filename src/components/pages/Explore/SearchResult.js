@@ -3,7 +3,7 @@ import sort from '../../../assets/sort-down.svg';
 import funnel from '../../../assets/funnel.svg';
 import SaleSection from '../Home/SaleSection';
 import Shirt2 from './../../../assets/1.webp';
-
+import ErrorMsgPage from './ErrorMsgPage';
 
 const men = [
   {
@@ -36,6 +36,7 @@ const SearchResult = () => {
     return (
       <div>
         <Navbar love={sort} notificationBell={funnel} />
+        <ErrorMsgPage />
         <div className="flex flex-row items-center justify-between m-3 ">
           <p className="text-gray-400 font-bold">145 Result</p>
           <select name="" id="" className="w-24 h-6">
@@ -56,7 +57,7 @@ const SearchResult = () => {
           discount={"25% off"}
           star={true}
           deleteBin={false}
-          column={true}
+          column={false}
         />
       </div>
     );
