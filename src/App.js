@@ -12,6 +12,7 @@ import Category from './components/pages/Explore/Category';
 import Filter from './components/pages/Explore/Filter';
 import SignIn from './components/pages/Auth/SignIn';
 import SignUp from './components/pages/Auth/SignUp';
+import Cart from './components/pages/Cart/Cart';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
           <Route path='Filter' element={<Filter />} />
           <Route path='SignIn' element={<SignIn />}/>
           <Route path='SignUp' element={<SignUp/>}/>
+          <Route path='Cart' element={<Cart />}/>
       </Routes>
     </BrowserRouter>
   )
