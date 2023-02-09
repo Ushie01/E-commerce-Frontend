@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Input from './../components/Input';
-import mic from '../assets/mic-fill.svg';
+import Input from './../componentsItem/Input';
+import mic from './../../assets/mic-fill.svg';
+import search from './../../assets/search.svg';
 
 
 
@@ -20,7 +21,14 @@ const Navbar = ({love, notificationBell}) => {
 
     return (
       <nav className="flex flex-row border-gray-100 border-b-2 items-center justify-between w-98 p-3 h-20 bg-white">
-        <Input handleKeyDown={handleKeyDown} handleKeyUp={handleKeyUp} />
+        <Input
+          handleKeyDown={handleKeyDown}
+          handleKeyUp={handleKeyUp}
+          image={search}
+          placeholder={"Search Product"}
+          height={"h-12"}
+          width={"w-56"}
+        />
 
         {isClick ? (
           <div className='flex flex-row items-end justify-end space-x-4"'>

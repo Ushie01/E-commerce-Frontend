@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
+import Navbar2 from '../../componentsItem/Navbar2';
 import SaleSection from './SaleSection';
-import Footer from '../../Footer';
-import arrow from '../../../assets/arrow.svg';
+import Footer from '../../componentsItem/Footer';
 import Shirt2 from '../../../assets/1.webp'
 
 
@@ -35,15 +34,7 @@ const men = [
 const Favorite = () => {
     return (
       <div className='h-max mb-20'>
-        <div className="flex flex-row items-center justify-between p-7 border-b-2">
-          <div className="flex flex-row">
-            <Link to="/">
-              <img src={arrow} alt={arrow} className="h-7 w-7" />
-            </Link>
-            <p className="text-xl font-bold ml-3">Favorite Product</p>
-          </div>
-        </div>
-
+        <Navbar2 text={"Favorite Product"} />
         <SaleSection
           men={men}
           picture={Shirt2}

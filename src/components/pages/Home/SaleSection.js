@@ -22,8 +22,8 @@ const SaleSection = ({
         } m-3 items-center justify-center space-x-2 overflow-x-auto scrollbar-hide category`}
       >
         {men.map((man, index) => (
-          <div className="border-gray-100 border-2 p-2 rounded-xs" key={index}>
-            <div className="h-72 w-36 mt-3">
+          <div className="border-gray-100 border-2 p-3 rounded-xs" key={index}>
+            <div className="h-max w-40 mt-3">
               <div>
                 <img src={picture} alt={picture} className="m-auto w-full" />
               </div>

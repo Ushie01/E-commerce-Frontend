@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import CarouselComponent from '../../Carousel/CarouselComponent';
 import SaleSection from './SaleSection';
-import Footer from '../../Footer';
+import Footer from "../../componentsItem/Footer";
 import arrow from '../../../assets/arrow.svg';
 import love from '../../../assets/love.svg';
 import search from '../../../assets/search_.svg';

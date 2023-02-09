@@ -8,8 +8,8 @@ import ProductReviews from './components/pages/Review/ProductReviews';
 import WriteReview from './components/pages/Review/WriteReview';
 import Explore from './components/pages/Explore/Explore';
 import SearchResult from './components/pages/Explore/SearchResult';
-
-
+import Category from './components/pages/Explore/Category';
+import Filter from './components/pages/Explore/Filter';
 
 const App = () => {
   return (
@@ -24,6 +24,8 @@ const App = () => {
           <Route path="WriteReview" element={<WriteReview />} />
           <Route path='Explore' element={<Explore/>} />
           <Route path='SearchResult' element={<SearchResult />} />
+          <Route path='Category' element={<Category />} />
+          <Route path='Filter' element={<Filter />} />
       </Routes>
     </BrowserRouter>
   )

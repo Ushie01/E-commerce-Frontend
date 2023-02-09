@@ -1,7 +1,7 @@
-import Navbar from "../../Navbar";
-import Footer from "../../Footer";
-import love from "../../../assets/love.svg";
-import notificationBell from "../../../assets/notification-bell.svg";
+import Navbar from "../../componentsItem/Navbar";
+import Footer from "../../componentsItem/Footer";
+import love from "./../../../assets/love.svg";
+import notificationBell from "./../../../assets/notification-bell.svg";
 
 const men = [
   {

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import Footer from '../../Footer';
-import Button from '../../Button';
+import Footer from '../../componentsItem/Footer';
+import Button from '../../componentsItem/Button';
 import starFill from './../../../assets/star-fill.svg';
 import arrow from './../../../assets/arrow.svg';
 import starEmpty from './../../../assets/star.svg';

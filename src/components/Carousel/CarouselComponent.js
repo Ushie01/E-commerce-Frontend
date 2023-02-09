@@ -1,5 +1,5 @@
 import Carousel, { CarouselItem } from "./Carousel";
-import Timer from "../Timer";
+import Timer from "../componentsItem/Timer";
 import Shirt1 from "../../assets/1.webp";
 import Shirt2 from "../../assets/22.webp";
 import Shirt3 from "../../assets/euphorya.jpg";

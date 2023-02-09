@@ -2,14 +2,13 @@
 import { Link } from "react-router-dom";
 import CarouselComponent from "../../Carousel/CarouselComponent";
 import SaleSection from "./SaleSection";
-import Footer from "./../../Footer";
-import Navbar from "../../Navbar";
+import Footer from "./../../componentsItem/Footer";
+import Navbar from "../../componentsItem/Navbar";
 import Shirt1 from "../../../assets/1.webp";
 import Shirt2 from "../../../assets/22.webp";
 import collection from "../../../assets/collection.jpg";
 import love from "../../../assets/love.svg";
 import notificationBell from "../../../assets/notification-bell.svg";
-
 
 const men = [
   {
@@ -41,14 +40,9 @@ const men = [
 const Homepage = () => {
   return (
     <div>
-      <Navbar
-        love={love}
-        notificationBell={notificationBell}
-      />
+      <Navbar love={love} notificationBell={notificationBell} />
       <hr />
-      <CarouselComponent
-        value={true}
-      />
+      <CarouselComponent value={true} />
       <section>
         <div className="flex flew-row justify-between p-3">
           <p className="text-lg text-black font-bold">Category</p>

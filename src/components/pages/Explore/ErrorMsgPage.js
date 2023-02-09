@@ -1,4 +1,4 @@
-import Button from './../../../components/Button';
+import Button from './../../componentsItem/Button';
 import x from './../../../assets/x.svg';
 
 const ErrorMsgPage = () => {
