@@ -20,11 +20,11 @@ export default function RangeSlider() {
         <div className="m-5">
             <p className="text-md font-bold">Price Range</p>
             <div className="flex flex-row items-center justify-between mt-3">
-              <Input placeholder="₦2400.00" value={`₦${value[0] * 120}.00`} width={"w-44"} />
-              <Input placeholder="₦6000.00" value={`₦${value[1] * 120}.00`} width={"w-44"} />
+              <Input placeholder="₦2400.00" value={`₦${value[0] * 120}.00`} width={"w-40"} />
+              <Input placeholder="₦6000.00" value={`₦${value[1] * 120}.00`} width={"w-40"} />
             </div>
 
-            <Box sx={{ width: 370 }} className="m-auto mt-5">
+            <Box sx={{ width: 350 }} className="m-auto mt-5">
                 <Slider
                     getAriaLabel={() => "Temperature range"}
                     value={value}
