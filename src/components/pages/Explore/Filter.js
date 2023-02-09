@@ -1,27 +1,19 @@
 import Navbar2 from "../../componentsItem/Navbar2";
 import backButton from "./../../../assets/back.svg"
-import Input from "../../componentsItem/Input";
+import SliderBar from "./../../SliderBar/SliderBar";
+import Button from './../../componentsItem/Button';
 
 
 const Filter = () => {
-    return (
-      <div>
-        <Navbar2 image={backButton} text="Filter Search" />
-        <div className="m-4">
-          <p className="text-md font-bold">Price Range</p>
-          <div className="flex flex-row items-center justify-between mt-3">
-                    <Input
-                        placeholder={"₦00.00"}
-                        width={"w-44"}
-                    />
-                    <Input
-                        placeholder={"₦00.00"}
-                        width={"w-44"}
-                    />
-          </div>
-        </div>
+  return (
+    <div>
+      <Navbar2 image={backButton} text="Filter Search" />
+      <SliderBar />
+      <div className="flex m-2 items-center mt-12">
+        <Button text={"Apply"} className="m-auto"/>
       </div>
-    );
+    </div>
+  );
 }
 
 export default Filter;
