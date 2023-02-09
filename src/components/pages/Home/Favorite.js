@@ -1,7 +1,8 @@
 import Navbar2 from '../../componentsItem/Navbar2';
 import SaleSection from './SaleSection';
 import Footer from '../../componentsItem/Footer';
-import Shirt2 from '../../../assets/1.webp'
+import Shirt2 from '../../../assets/1.webp';
+import arrow from '../../../assets/arrow.svg';
 
 
 const men = [
@@ -34,7 +35,7 @@ const men = [
 const Favorite = () => {
     return (
       <div className='h-max mb-20'>
-        <Navbar2 text={"Favorite Product"} />
+        <Navbar2 text={"Favorite Product"} image={arrow} />
         <SaleSection
           men={men}
           picture={Shirt2}

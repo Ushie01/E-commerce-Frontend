@@ -14,6 +14,7 @@ import SignIn from './components/pages/Auth/SignIn';
 import SignUp from './components/pages/Auth/SignUp';
 import Cart from './components/pages/Cart/Cart';
 import ShipTo from './components/pages/Cart/ShipTo';
+import ScreenMsg from './components/pages/Cart/SuccessMsg';
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
           <Route path='SignUp' element={<SignUp/>}/>
           <Route path='Cart' element={<Cart />}/>
           <Route path='ShipTo' element={<ShipTo/>}/>
+          <Route path='ScreenPage' element={<ScreenMsg />}/>
       </Routes>
     </BrowserRouter>
   )
