@@ -13,6 +13,7 @@ import Filter from './components/pages/Explore/Filter';
 import SignIn from './components/pages/Auth/SignIn';
 import SignUp from './components/pages/Auth/SignUp';
 import Cart from './components/pages/Cart/Cart';
+import ShipTo from './components/pages/Cart/ShipTo';
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           <Route path='SignIn' element={<SignIn />}/>
           <Route path='SignUp' element={<SignUp/>}/>
           <Route path='Cart' element={<Cart />}/>
+          <Route path='ShipTo' element={<ShipTo/>}/>
       </Routes>
     </BrowserRouter>
   )
