@@ -100,7 +100,7 @@ const Homepage = () => {
           <img
             src={collection}
             alt={collection}
-            className="h-60 w-full z-60 rounded-md bg-gradient-to-r from-green-400 to-blue-500"
+            className="h-60 w-full z-60 rounded-lg bg-gradient-to-r from-green-400 to-blue-500"
           />
           <div className="absolute -mt-48 m-5 text-white">
             <h1 className="text-3xl font-bold">Recommendation</h1>

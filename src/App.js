@@ -15,6 +15,7 @@ import SignUp from './components/pages/Auth/SignUp';
 import Cart from './components/pages/Cart/Cart';
 import ShipTo from './components/pages/Cart/ShipTo';
 import ScreenMsg from './components/pages/Cart/SuccessMsg';
+import Offer from './components/pages/Offer/Offer';
 
 
 const App = () => {
@@ -37,6 +38,7 @@ const App = () => {
           <Route path='Cart' element={<Cart />}/>
           <Route path='ShipTo' element={<ShipTo/>}/>
           <Route path='ScreenPage' element={<ScreenMsg />}/>
+          <Route path="Offer" element={<Offer />} />
       </Routes>
     </BrowserRouter>
   )

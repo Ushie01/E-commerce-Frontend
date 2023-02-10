@@ -7,9 +7,15 @@ const Navbar2 = ({text, image, secondImage}) => {
       <div>
         <div className="flex flex-row items-center justify-between p-7 border-gray-100 border-b-2">
           <div className="flex flex-row">
-            <Link to="/">
-              <img src={image} alt={image} className="h-7 w-7" />
-            </Link>
+            {
+              image ?
+                <Link to="/">
+                  <img src={image} alt={image} className="h-7 w-7" />
+                </Link>
+                :
+                ""
+            }
+
             <p className="text-xl font-bold ml-3">{text}</p>
           </div>
           {
