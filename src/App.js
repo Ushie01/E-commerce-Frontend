@@ -24,6 +24,10 @@ import Birthday from './components/pages/Account/Birthday';
 import Email from './components/pages/Account/Email';
 import PhoneNumber from './components/pages/Account/PhoneNumber';
 import ChangePassword from './components/pages/Account/ChangePassword';
+import Order from './components/pages/Order/Order';
+import OrderDetails from './components/pages/Order/OrderDetails';
+import Address from './components/pages/Address/Address';
+import AddAddress from './components/pages/Address/AddAddress';
 
 
 const App = () => {
@@ -55,6 +59,10 @@ const App = () => {
         <Route path='Account/Email' element={<Email />} />
         <Route path='Account/PhoneNumber' element={<PhoneNumber />} />
         <Route path='Account/ChangePassword' element={<ChangePassword />} />
+        <Route path='Order' element={<Order />} />
+        <Route path='Order/OrderDetails' element={<OrderDetails />} />
+        <Route path='Address' element={<Address />} />
+        <Route path='AddAddress' element={<AddAddress/>} />
       </Routes>
     </BrowserRouter>
   )

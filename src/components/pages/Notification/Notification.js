@@ -1,7 +1,10 @@
+import Navbar2 from "../../componentsItem/Navbar2";
+import arrow from "./../../../assets/arrow.svg";
+
 const Notification = () => {
     return (
         <div>
-            <h1>Hello Notification</h1>
+            <Navbar2 text={"Notification"} image={arrow} />
         </div>
     )
 }

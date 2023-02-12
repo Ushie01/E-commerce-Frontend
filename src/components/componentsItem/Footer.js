@@ -107,7 +107,7 @@ const Footer = () => {
       {
         pathname === '/Account'
           ?
-        <Link to="/">
+        <Link to="/Account">
           <div className="text-center">
             <button>
               <img src={account1} alt={account1} className="h-8 w-8" />
@@ -116,7 +116,7 @@ const Footer = () => {
           </div>
         </Link>
         :
-        <Link to="/">
+        <Link to="/Account">
           <div className="text-center">
             <button>
               <img src={account} alt={account} className="h-8 w-8" />

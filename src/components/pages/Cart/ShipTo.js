@@ -23,7 +23,7 @@ const ShipTo = () => {
               <img src={deleteBin} alt={deleteBin} className="ml-8 h-8 w-8" />
             </div>
           </div>
-          <div className="flex flex-auto mt-12">
+          <div className="flex flex-auto mt-12 fixed left-0 right-0 bottom-5">
             <Button text="Next" className="m-auto" />
           </div>
         </div>

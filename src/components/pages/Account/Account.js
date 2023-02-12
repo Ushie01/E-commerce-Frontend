@@ -1,4 +1,5 @@
 import Navbar2 from "../../componentsItem/Navbar2";
+import Footer from "../../componentsItem/Footer";
 import profile from "../../../assets/account.svg";
 import box from "../../../assets/box.svg";
 import location from "../../../assets/location.svg";
@@ -27,6 +28,7 @@ const Account = () => {
             <p>Payment</p>
           </div>
         </div>
+        <Footer />
       </>
     );
 }

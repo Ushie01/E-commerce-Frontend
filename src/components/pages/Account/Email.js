@@ -10,15 +10,15 @@ const Email = () => {
       <>
         <div className="">
           <Navbar2 text="Account/ChangePassword" image={arrow} />
-            <div className="flex flex-col items-start justify-start space-y-6 p-4">
-                <label className="text-md font-bold">Email:</label>
-                    <Input
-                        placeholder={"Password"}
-                        image={email}
-                        type="email"
-                        width={"w-full"}
-                    />
-            </div>
+          <div className="flex flex-col items-start justify-start space-y-6 p-4">
+              <label className="text-md font-bold">Email:</label>
+                  <Input
+                      placeholder={"Password"}
+                      image={email}
+                      type="email"
+                      width={"w-full"}
+                  />
+          </div>
           <div className="flex flex-auto fixed left-0 right-0 bottom-5">
             <Button text={"SAVE"} className="m-auto" />
           </div>

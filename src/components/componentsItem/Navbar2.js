@@ -16,7 +16,7 @@ const Navbar2 = ({text, image, secondImage}) => {
                 ""
             }
 
-            <p className="text-md font-bold ml-3">{text}</p>
+            <p className="text-md font-extrabold ml-3">{text}</p>
           </div>
           {
             secondImage ? <img src={secondImage} alt={secondImage} className="h-5 w-5"/> : ""
