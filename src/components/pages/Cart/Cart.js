@@ -12,7 +12,6 @@ const Cart = () => {
     return (
       <>
         <Navbar2 text="Your Cart" image={arrow} />
-
         <div className="flex flex-row items-center justify-between m-4 p-3 border-gray-100 border-2">
           <div className="w-28 h-28">
             <img src={shirt} alt={shirt} className="w-28 h-28" />
