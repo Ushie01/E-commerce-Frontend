@@ -9,7 +9,7 @@ const ChangePassword = () => {
     return (
       <>
         <div className="">
-          <Navbar2 text="Account/ChangePassword" image={arrow} />
+          <Navbar2 text="Account/ChangePassword" image={arrow} linkRoute='/Account' />
             <div className="flex flex-col items-start justify-start space-y-6 p-4">
                 <label className="text-md font-bold">Current Password:</label>
                 <Input placeholder={"Password"} image={lock} type="password" width={"w-full"} />

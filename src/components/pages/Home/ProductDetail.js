@@ -137,11 +137,13 @@ const ProductDetail = () => {
           deleteBin={false}
         />
 
-        <div className='flex items-center justify-center'>
-          <Button
-             text="Add To Cart"
-          />
-        </div>
+        <Link to="/Cart">
+          <div className='flex items-center justify-center'>
+            <Button
+                text="Add To Cart"
+            />
+          </div>
+        </Link>
         <Footer />
       </div>
     );

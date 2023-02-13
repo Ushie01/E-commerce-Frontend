@@ -35,7 +35,11 @@ const men = [
 const Favorite = () => {
     return (
       <div className='h-max mb-20'>
-        <Navbar2 text={"Favorite Product"} image={arrow} />
+        <Navbar2
+          text={"Favorite Product"}
+          image={arrow}
+          linkRoute="/"
+        />
         <SaleSection
           men={men}
           picture={Shirt2}

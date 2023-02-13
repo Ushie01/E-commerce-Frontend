@@ -8,7 +8,11 @@ const PhoneNumber = () => {
   return (
     <>
       <div className="">
-        <Navbar2 text="Account/ChangePassword" image={arrow} />
+        <Navbar2
+          text="Account/ChangePassword"
+          image={arrow}
+          linkRoute="/Account"
+        />
         <div className="flex flex-col items-start justify-start space-y-6 p-4">
           <label className="text-md font-bold">Phone Number:</label>
           <Input

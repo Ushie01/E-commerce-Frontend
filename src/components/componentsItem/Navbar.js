@@ -53,7 +53,7 @@ const Navbar = ({love, notificationBell}) => {
                 />
               </button>
             </Link>
-            <Link to="#">
+            <Link to="/Notification">
               <button>
                 <img
                   src={notificationBell}

@@ -7,7 +7,11 @@ const Birthday = () => {
     return (
       <>
         <div className="">
-          <Navbar2 text="Account/Birthday" image={arrow} />
+          <Navbar2
+            text="Account/Birthday"
+            image={arrow}
+            linkRoute={"/Account"}
+          />
           <div className="flex flex-col items-start justify-start space-y-6 p-4">
             <label className="text-md font-bold">Birthday:</label>
             <input
@@ -18,7 +22,10 @@ const Birthday = () => {
             />
           </div>
           <div className="flex flex-auto fixed left-0 right-0 bottom-5">
-            <Button text={"SAVE"} className="m-auto" />
+            <Button
+              text={"SAVE"}
+              className="m-auto"
+            />
           </div>
         </div>
       </>

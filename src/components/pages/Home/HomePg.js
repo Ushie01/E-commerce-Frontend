@@ -46,7 +46,9 @@ const Homepage = () => {
       <section>
         <div className="flex flew-row justify-between p-3">
           <p className="text-lg text-black font-bold">Category</p>
-          <p className="text-lg textColor font-bold">More Category</p>
+          <Link to="/Explore">
+            <p className="text-lg textColor font-bold">More Category</p>
+          </Link>
         </div>
 
         <div className="flex flex-row m-3 items-center justify-center space-x-2 overflow-x-auto scrollbar-hide category">
@@ -63,10 +65,10 @@ const Homepage = () => {
         </div>
 
         <div className="flex flew-row justify-between p-3 mt-12">
+          <p className="text-lg text-black font-bold">Flash Sale</p>
           <Link to="/Flashsale">
-            <p className="text-lg text-black font-bold">Flash Sale</p>
+            <p className="text-lg textColor font-bold">See More</p>
           </Link>
-          <p className="text-lg textColor font-bold">See More</p>
         </div>
 
         <SaleSection
@@ -82,7 +84,9 @@ const Homepage = () => {
 
         <div className="flex flew-row justify-between p-3 mt-12">
           <p className="text-lg text-black font-bold">Mega Sale</p>
-          <p className="text-lg textColor font-bold">See More</p>
+          <Link to="/Favorite">
+            <p className="text-lg textColor font-bold">See More</p>
+          </Link>
         </div>
 
         <SaleSection

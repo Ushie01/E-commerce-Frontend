@@ -3,11 +3,12 @@ import Button from "../../componentsItem/Button";
 import deleteBin from "../../../assets/delete.svg";
 import arrow from "../../../assets/arrow.svg";
 import add from "../../../assets/plus_.svg";
+import { Link } from "react-router-dom";
 
 const ShipTo = () => {
     return (
       <>
-        <Navbar2 image={arrow} text="Ship To" secondImage={add} />
+        <Navbar2 image={arrow} text="Ship To" secondImage={add} linkRoute="/Cart" />
         <div className="m-5">
           <div className="flex flex-col border-gray-100 border-2 p-5 rounded-md space-y-3 ">
             <p className="text-md font-extrabold">Madhusudan Kaliya</p>
@@ -23,9 +24,9 @@ const ShipTo = () => {
               <img src={deleteBin} alt={deleteBin} className="ml-8 h-8 w-8" />
             </div>
           </div>
-          <div className="flex flex-auto mt-12 fixed left-0 right-0 bottom-5">
+          <Link to="/ScreenPage" className="flex flex-auto mt-12 fixed left-0 right-0 bottom-5">
             <Button text="Next" className="m-auto" />
-          </div>
+          </Link>
         </div>
       </>
     );

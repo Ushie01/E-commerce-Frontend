@@ -11,7 +11,7 @@ const OrderDetails = () => {
   const success = "Success";
   return (
     <>
-      <Navbar2 text={"Order Details"} image={arrow} />
+      <Navbar2 text={"Order Details"} image={arrow} linkRoute="/Order" />
       <div className="m-2 mt-7 mb-6">
         <div className="flex flex-row items-center justify-center">
           <div className="flex h-9 w-9 text-3xl bg-cyan-400 shadow-2xl rounded-full">

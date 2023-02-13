@@ -4,7 +4,7 @@ import arrow from "./../../../assets/arrow.svg";
 const Notification = () => {
     return (
         <div>
-            <Navbar2 text={"Notification"} image={arrow} />
+            <Navbar2 text={"Notification"} image={arrow} linkRoute="/"/>
         </div>
     )
 }

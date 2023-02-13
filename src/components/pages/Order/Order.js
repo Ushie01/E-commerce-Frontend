@@ -5,7 +5,7 @@ import arrow from './../../../assets/arrow.svg';
 const Order = () => {
     return (
       <>
-        <Navbar2 image={arrow} text={"Order"} />
+        <Navbar2 image={arrow} text={"Order"} linkRoute='/Account'/>
         <div className="m-5">
           <div className="p-4 flex flex-col space-y-3 rounded-md border-gray-200 border-2">
             <p className="text-xl font-bold">LQNSU346JK</p>

@@ -9,11 +9,11 @@ const Email = () => {
     return (
       <>
         <div className="">
-          <Navbar2 text="Account/ChangePassword" image={arrow} />
+          <Navbar2 text="Account/Email" image={arrow} linkRoute='/Account'/>
           <div className="flex flex-col items-start justify-start space-y-6 p-4">
-              <label className="text-md font-bold">Email:</label>
+              <label className="text-md font-bold">Email</label>
                   <Input
-                      placeholder={"Password"}
+                      placeholder={"Email"}
                       image={email}
                       type="email"
                       width={"w-full"}

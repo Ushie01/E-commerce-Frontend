@@ -52,16 +52,16 @@ const App = () => {
         <Route path='ScreenPage' element={<ScreenMsg />}/>
         <Route path="Offer" element={<Offer />} />
         <Route path="Account" element={<Account />} />
-        <Route path="Account/Profile" element={<Profile />} />
-        <Route path='Account/ChangeName' element={<ChangeName />} />
-        <Route path="Account/Gender" element={<Gender />} />
-        <Route path='Account/Birthday' element={<Birthday />} />
-        <Route path='Account/Email' element={<Email />} />
-        <Route path='Account/PhoneNumber' element={<PhoneNumber />} />
-        <Route path='Account/ChangePassword' element={<ChangePassword />} />
-        <Route path='Order' element={<Order />} />
-        <Route path='Order/OrderDetails' element={<OrderDetails />} />
-        <Route path='Address' element={<Address />} />
+        <Route path="/Account/Profile" element={<Profile />} />
+        <Route path='/Account/ChangeName' element={<ChangeName />} />
+        <Route path="/Account/Gender" element={<Gender />} />
+        <Route path='/Account/Birthday' element={<Birthday />} />
+        <Route path='/Account/Email' element={<Email />} />
+        <Route path='/Account/PhoneNumber' element={<PhoneNumber />} />
+        <Route path='/Account/ChangePassword' element={<ChangePassword />} />
+        <Route path='/Account/Order' element={<Order />} />
+        <Route path='/Order/OrderDetails' element={<OrderDetails />} />
+        <Route path='/Account/Address' element={<Address />} />
         <Route path='AddAddress' element={<AddAddress/>} />
       </Routes>
     </BrowserRouter>

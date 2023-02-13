@@ -2,6 +2,7 @@ import starEmpty from "./../../../assets/star.svg";
 import starHalf from "./../../../assets/star-half.svg";
 import starFill from "./../../../assets/star-fill.svg";
 import deleteSvg from "./../../../assets/delete.svg";
+import { Link } from "react-router-dom";
 
 const SaleSection = ({
   men,
@@ -23,6 +24,7 @@ const SaleSection = ({
       >
         {men.map((man, index) => (
           <div className="border-gray-100 border-2 p-3 rounded-xs" key={index}>
+            <Link to="/ProductDetail">
             <div className="h-max w-40 mt-3">
               <div>
                 <img src={picture} alt={picture} className="m-auto w-full" />
@@ -54,6 +56,7 @@ const SaleSection = ({
                 )}
               </div>
             </div>
+            </Link>
           </div>
         ))}
       </div>
