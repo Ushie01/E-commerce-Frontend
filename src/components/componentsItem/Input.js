@@ -5,10 +5,10 @@ const Input = ({
     handleKeyDown,
     handleKeyUp,
     image, height,
-    width,
-    placeholder,
-    value,
-    type
+    width, placeholder,
+    value, type,
+    onChange, name,
+    testWidth
 }) => {
     
     return (
@@ -27,10 +27,12 @@ const Input = ({
                 onKeyDown={handleKeyDown}
                 onBlur={handleKeyUp}
                 type={type}
-                className={`${!image ? "pl-5" : ""} ${width} text-sm font-thin`}
+                className={`${!image ? "pl-3" : ""} ${width} ${testWidth} font-bold`}
                 placeholder={placeholder}
                 value={value}
-
+                onChange={onChange}
+                name={name}
+                required
             />
       </div>
     );

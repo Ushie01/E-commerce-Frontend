@@ -4,40 +4,20 @@ import CarouselComponent from "../../Carousel/CarouselComponent";
 import SaleSection from "./SaleSection";
 import Footer from "./../../componentsItem/Footer";
 import Navbar from "../../componentsItem/Navbar";
-import Shirt1 from "../../../assets/1.webp";
-import Shirt2 from "../../../assets/22.webp";
 import collection from "../../../assets/collection.jpg";
 import love from "../../../assets/love.svg";
 import notificationBell from "../../../assets/notification-bell.svg";
+import { useAllProduct } from "../../../Hooks/useProduct";
+import Loader from "../../componentsItem/Loading/Loader";
 
-const men = [
-  {
-    item: "S",
-    name: "Man Shirt",
-  },
-  {
-    item: "D",
-    name: "Dress",
-  },
-  {
-    item: "U",
-    name: "Men Bag",
-  },
-  {
-    item: "B",
-    name: "Footwear",
-  },
-  {
-    item: "BM",
-    name: "Bago Max",
-  },
-  {
-    item: "BP",
-    name: "Pant",
-  },
-];
 
 const Homepage = () => {
+  const product = useAllProduct();
+  const fil = product.product?.data.products.slice(-6).reverse();
+  console.log(fil);
+  if (!product) return <Loader />;
+
+
   return (
     <div>
       <Navbar love={love} notificationBell={notificationBell} />
@@ -51,17 +31,27 @@ const Homepage = () => {
           </Link>
         </div>
 
-        <div className="flex flex-row m-3 items-center justify-center space-x-2 overflow-x-auto scrollbar-hide category">
-          {men.map((man, index) => (
-            <div key={index}>
+        <div className="flex p-3 items-center justify-start space-x-2 overflow-x-auto scrollbar-hide ">
+          {
+            product
+              ?
+              <>
+                {product.product?.data.products.map((man, index) => (
+                  <div key={index}>
+                    <div>
+                      <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
+                        {man.name.split(" ")[0][0]}{man.name.split(" ")[1][0]}
+                      </button>
+                    </div>
+                    <div className="text-center m-3">{man.name}</div>
+                  </div>
+                ))}
+              </>
+              :
               <div>
-                <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
-                  {man.item}
-                </button>
+                <Loader />
               </div>
-              <div className="text-center m-3">{man.name}</div>
-            </div>
-          ))}
+          }
         </div>
 
         <div className="flex flew-row justify-between p-3 mt-12">
@@ -72,12 +62,7 @@ const Homepage = () => {
         </div>
 
         <SaleSection
-          men={men}
-          picture={Shirt2}
-          amount={"₦1,000.00"}
-          category={"Men's Regular Fit"}
-          price={"₦3,000.00"}
-          discount={"25% off"}
+          men={product.product?.data.products.slice(-5).reverse()}
           star={false}
           deleteBin={false}
         />
@@ -90,12 +75,7 @@ const Homepage = () => {
         </div>
 
         <SaleSection
-          men={men}
-          picture={Shirt1}
-          amount={"₦1,500.00"}
-          category={"Men's Regular Fit"}
-          price={"₦4,000.00"}
-          discount={"25% off"}
+          men={product.product?.data.products}
           star={false}
           deleteBin={false}
         />
@@ -113,37 +93,13 @@ const Homepage = () => {
           </div>
         </div>
 
-        <SaleSection
-          men={men}
-          picture={Shirt2}
-          amount={"₦1,000.00"}
-          category={"Men's Regular Fit"}
-          price={"₦3,000.00"}
-          discount={"25% off"}
-          star={false}
-          deleteBin={false}
-        />
-
-        <div className="flex flex-row mt-6 m-3 mb-24 items-center justify-center space-x-2 overflow-x-auto scrollbar-hide category">
-          {men.map((man, value) => (
-            <div className="border-2 p-1 rounded-md" key={value}>
-              <div className="h-72 w-44 mt-3">
-                <div className="h-40 w-40 m-auto">
-                  <img src={Shirt1} alt={Shirt1} />
-                </div>
-                <h3 className="m-2 font-extrabold break-all">Men's Regular</h3>
-                <h3 className="m-2 font-extrabold break-all textColor">
-                  ₦3,000.00
-                </h3>
-                <div className="flex flex-row m-2 items-start justify-between">
-                  <s className="text-gray-500 text-sm">₦6,000.00</s>
-                  <h2 className="font-red text-sm text-red-700 font-extrabold">
-                    25% off
-                  </h2>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="mb-24">
+          <SaleSection
+            men={product.product?.data.products.slice(0,4)}
+            star={false}
+            deleteBin={false}
+            column={true}
+          />
         </div>
       </section>
 

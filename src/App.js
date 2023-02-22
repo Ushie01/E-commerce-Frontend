@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import Homepage from './components/pages/Home/HomePg';
 import FlashSale from './components/pages/Home/FlashSale';
 import Notification from './components/pages/Notification/Notification';
@@ -62,7 +62,17 @@ const App = () => {
         <Route path='/Account/Order' element={<Order />} />
         <Route path='/Order/OrderDetails' element={<OrderDetails />} />
         <Route path='/Account/Address' element={<Address />} />
-        <Route path='AddAddress' element={<AddAddress/>} />
+        <Route path='AddAddress' element={<AddAddress />} />
+        <Route path="*" element={
+          <main>
+            <h1 className='text-lg font-extrabold m-5'>
+              There's nothing here! <br />
+              <Link to="/" className='text-cyan-600 underline'>
+                Click here
+              </Link> <br />
+              to return to home page.
+            </h1>
+          </main>} />
       </Routes>
     </BrowserRouter>
   )
