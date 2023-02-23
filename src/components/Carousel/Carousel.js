@@ -7,9 +7,9 @@ import CircleClick from "../../assets/circle.svg";
 import './Carousel.css';
 
 // Child Item
-export const CarouselItem = ({ children, width }) => {
+export const CarouselItem = ({ children }) => {
     return (
-        <div className='carousel-item' style={{ width: width }}>
+        <div className='carousel-item' >
             {children}
         </div>
     )
@@ -58,12 +58,12 @@ const Carousel = ({ children }) => {
       <div
         className="inner"
         style={{
-          transform: `translateX(-${activeIndex * 100}%)`,
+          transform: `translateX(-${activeIndex * 50}%)`,
           transition: "1s",
         }}
       >
         {React.Children.map(children, (child, index) => {
-          return React.cloneElement(child, { width: "100%" });
+          return React.cloneElement(child, { width: "50%" });
         })}
       </div>
       <div className="indicators">

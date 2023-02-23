@@ -1,9 +1,9 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
 import Homepage from './components/pages/Home/HomePg';
 import FlashSale from './components/pages/Home/FlashSale';
 import Notification from './components/pages/Notification/Notification';
 import Favorite from './components/pages/Home/Favorite';
-import ProductDetail from './components/pages/Home/ProductDetail';
+import Product from './components/pages/Home/Product';
 import ProductReviews from './components/pages/Review/ProductReviews';
 import WriteReview from './components/pages/Review/WriteReview';
 import Explore from './components/pages/Explore/Explore';
@@ -38,7 +38,7 @@ const App = () => {
         <Route path='Notification' element={<Notification />} />
         <Route path='Favorite' element={<Favorite />} />
         <Route path='FlashSale' element={<FlashSale />} /> 
-        <Route path='ProductDetail' element={<ProductDetail />} />
+        <Route path='Product/:id' element={<Product />} />
         <Route path='ProductReviews' element={<ProductReviews />}/>
         <Route path="WriteReview" element={<WriteReview />} />
         <Route path='Explore' element={<Explore/>} />
@@ -62,7 +62,17 @@ const App = () => {
         <Route path='/Account/Order' element={<Order />} />
         <Route path='/Order/OrderDetails' element={<OrderDetails />} />
         <Route path='/Account/Address' element={<Address />} />
-        <Route path='AddAddress' element={<AddAddress/>} />
+        <Route path='AddAddress' element={<AddAddress />} />
+        <Route path="*" element={
+          <main>
+            <h1 className='text-lg font-extrabold m-5'>
+              There's nothing here! <br />
+              <Link to="/" className='text-cyan-600 underline'>
+                Click here
+              </Link> <br />
+              to return to home page.
+            </h1>
+          </main>} />
       </Routes>
     </BrowserRouter>
   )
