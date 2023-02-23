@@ -13,8 +13,16 @@ import Loader from "../../componentsItem/Loading/Loader";
 
 const Homepage = () => {
   const product = useAllProduct();
+<<<<<<< HEAD
   if (!product) return <Loader />;
 
+=======
+  const fil = product.product?.data.products.slice(-6).reverse();
+  console.log(fil);
+  if (!product) return <Loader />;
+
+
+>>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
   return (
     <div>
       <Navbar love={love} notificationBell={notificationBell} />
@@ -59,6 +67,7 @@ const Homepage = () => {
         </div>
 
         <SaleSection
+<<<<<<< HEAD
           products={
             product
               .product
@@ -67,6 +76,9 @@ const Homepage = () => {
               .slice(-5)
               .reverse()
           }
+=======
+          men={product.product?.data.products.slice(-5).reverse()}
+>>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
           star={false}
           deleteBin={false}
         />
@@ -79,6 +91,7 @@ const Homepage = () => {
         </div>
 
         <SaleSection
+<<<<<<< HEAD
           products={
             product
               .product
@@ -87,6 +100,9 @@ const Homepage = () => {
               .sort((a, b) => b.price - a.price)
               .slice(0, 5)
           }
+=======
+          men={product.product?.data.products}
+>>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
           star={false}
           deleteBin={false}
         />
@@ -106,6 +122,7 @@ const Homepage = () => {
 
         <div className="mb-24">
           <SaleSection
+<<<<<<< HEAD
             products={
               product
                 .product
@@ -113,6 +130,9 @@ const Homepage = () => {
                 .products
                 .slice(0, 4)
             }
+=======
+            men={product.product?.data.products.slice(0,4)}
+>>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
             star={false}
             deleteBin={false}
             column={true}

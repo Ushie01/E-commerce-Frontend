@@ -1,5 +1,8 @@
 import 'react-toastify/dist/ReactToastify.css';
+<<<<<<< HEAD
 import GoogleAuth from './GoogleAuth';
+=======
+>>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
