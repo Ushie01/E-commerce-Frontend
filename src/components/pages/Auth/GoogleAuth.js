@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 import { googleSignIn } from '../../../helper/api';
@@ -68,6 +69,8 @@ const GoogleAuth = () => {
 
 export default GoogleAuth;
 =======
+=======
+>>>>>>> origin/master
 // import React, { useEffect, useState } from 'react';
 // import { useNavigate } from 'react-router-dom';
 // import Google from '../assets/google.png';
@@ -137,4 +140,7 @@ export default GoogleAuth;
 
 
 // export default GoogleAuth;
+<<<<<<< HEAD
 >>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
+=======
+>>>>>>> origin/master

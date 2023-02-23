@@ -11,7 +11,10 @@ const SaleSection = ({
   products,
 =======
   men,
+<<<<<<< HEAD
 >>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
+=======
+>>>>>>> origin/master
   star,
   deleteBin,
   column
@@ -29,18 +32,24 @@ const SaleSection = ({
       >
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           products
             ?
             products.map((value, index) => (
             <div className={`${column === true ? "p-3 h-96" : "p-1 text-sm"} border-gray-100 border-2 rounded-xs`} key={index}>
             <Link to={`/Product/${value._id}`}>
 =======
+=======
+>>>>>>> origin/master
           men
             ?
             men.map((value, index) => (
             <div className={`${column === true ? "p-3 h-96" : "p-1 text-sm"} border-gray-100 border-2 rounded-xs`} key={index}>
             <Link to="/ProductDetail">
+<<<<<<< HEAD
 >>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
+=======
+>>>>>>> origin/master
               <div className={`${column === true ? "w-40" : "w-36"} h-max mt-3`}>
                 <div>
                   <img
