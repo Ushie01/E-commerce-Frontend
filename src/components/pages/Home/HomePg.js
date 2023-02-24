@@ -13,22 +13,12 @@ import Loader from "../../componentsItem/Loading/Loader";
 
 const Homepage = () => {
   const product = useAllProduct();
-<<<<<<< HEAD
-<<<<<<< HEAD
   if (!product) return <Loader />;
 
-=======
-=======
->>>>>>> origin/master
-  const fil = product.product?.data.products.slice(-6).reverse();
-  console.log(fil);
-  if (!product) return <Loader />;
+  // const fil = product.product?.data.products.slice(-6).reverse();
+  // console.log(fil);
 
 
-<<<<<<< HEAD
->>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
-=======
->>>>>>> origin/master
   return (
     <div>
       <Navbar love={love} notificationBell={notificationBell} />
@@ -73,8 +63,7 @@ const Homepage = () => {
         </div>
 
         <SaleSection
-<<<<<<< HEAD
-<<<<<<< HEAD
+
           products={
             product
               .product
@@ -83,12 +72,6 @@ const Homepage = () => {
               .slice(-5)
               .reverse()
           }
-=======
-          men={product.product?.data.products.slice(-5).reverse()}
->>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
-=======
-          men={product.product?.data.products.slice(-5).reverse()}
->>>>>>> origin/master
           star={false}
           deleteBin={false}
         />
@@ -101,8 +84,6 @@ const Homepage = () => {
         </div>
 
         <SaleSection
-<<<<<<< HEAD
-<<<<<<< HEAD
           products={
             product
               .product
@@ -111,12 +92,6 @@ const Homepage = () => {
               .sort((a, b) => b.price - a.price)
               .slice(0, 5)
           }
-=======
-          men={product.product?.data.products}
->>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
-=======
-          men={product.product?.data.products}
->>>>>>> origin/master
           star={false}
           deleteBin={false}
         />
@@ -136,8 +111,6 @@ const Homepage = () => {
 
         <div className="mb-24">
           <SaleSection
-<<<<<<< HEAD
-<<<<<<< HEAD
             products={
               product
                 .product
@@ -145,12 +118,6 @@ const Homepage = () => {
                 .products
                 .slice(0, 4)
             }
-=======
-            men={product.product?.data.products.slice(0,4)}
->>>>>>> c23831efd2f7ca7ffc76074a390743cd9c14b792
-=======
-            men={product.product?.data.products.slice(0,4)}
->>>>>>> origin/master
             star={false}
             deleteBin={false}
             column={true}
