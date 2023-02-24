@@ -2,7 +2,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import GoogleAuth from './GoogleAuth';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { verifyAccountToast, successToast } from '../../../Hooks/useToast';
 import { signIn } from '../../../helper/api';
 import { validateSignIn } from '../../../utils/validateInfo';
@@ -21,7 +21,7 @@ const SignIn = () => {
   const [err, setError] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [isSubmitted, setIsSubmited] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   
 
   const handleSubmit = async (e) => {
@@ -32,7 +32,6 @@ const SignIn = () => {
     }
 
     setError(validateSignIn(values));
-
     if (email && password) {
       setIsSubmited(true);
       const payload = await signIn(values);
@@ -47,9 +46,9 @@ const SignIn = () => {
         setErrMsg("");
         setPassword("");
         setEmail("");
-        setTimeout(() => {
-          navigate('/')
-        }, 6000);
+        // setTimeout(() => {
+        //   navigate('/')
+        // }, 6000);
       }
     }
   }

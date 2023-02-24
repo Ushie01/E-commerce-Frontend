@@ -15,10 +15,6 @@ const Homepage = () => {
   const product = useAllProduct();
   if (!product) return <Loader />;
 
-  // const fil = product.product?.data.products.slice(-6).reverse();
-  // console.log(fil);
-
-
   return (
     <div>
       <Navbar love={love} notificationBell={notificationBell} />
@@ -37,14 +33,14 @@ const Homepage = () => {
             product
               ?
               <>
-                {product.product?.data.products.map((man, index) => (
+                {product.product?.data.products.map((prod, index) => (
                   <div key={index}>
                     <div>
                       <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
-                        {man.name.split(" ")[0][0]}{man.name.split(" ")[1][0]}
+                        {prod.name.split(" ")[0][0]}{prod.name.split(" ")[1][0]}
                       </button>
                     </div>
-                    <div className="text-center m-3">{man.name}</div>
+                    <div className="text-center m-3">{prod.name}</div>
                   </div>
                 ))}
               </>
@@ -63,7 +59,6 @@ const Homepage = () => {
         </div>
 
         <SaleSection
-
           products={
             product
               .product
