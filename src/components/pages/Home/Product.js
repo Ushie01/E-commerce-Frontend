@@ -17,19 +17,17 @@ const ProductDetail = () => {
   const { id } = useParams();
   const products = useAllProduct();
   const product = useSingleProduct(id);
-  if (!product) return <Loader />;
   const productValue = product.product?.data?.product;
   const productValueDate = new Date(`
     ${productValue?.reviews[0]?.createdAt.split("T")[0]}
   `);
-  
 
 
   const colors = ["cyan", "red"];
     return (
       <div className="mb-24">
         {
-          product
+          productValue?.name
           ?
           <>
             <div className="flex flex-row items-center justify-between p-5">
@@ -103,59 +101,57 @@ const ProductDetail = () => {
               <p className="text-gray m-3">
                 {productValue?.description}
             </p>
-
         
             <div className="flex flew-row justify-between p-3 mt-12">
               <p className="text-lg text-black font-bold">Review Product</p>
-                <Link to={`/ProductReviews/`}>
+                <Link to={`/ProductReviews/${productValue?._id}`}>
                   <p className="text-lg textColor font-bold">See More</p>
                </Link>
             </div>
 
-              {
-                !productValue?.reviews[0]
-                  ?
-                  <div className="flex items-center justify-start space-x-1">
-                    <Star value={3.5} />
-                    <p className="font-bold text-md">{`(No Review)`}</p>
-                  </div>
-                  :
-                  <div className="flex items-center justify-start space-x-1">
-                    <Star value={2.4} />
-                    <p className="font-bold text-md">{productValue?.ratingsAverage}</p>
-                    <p className="text-md">{`(${productValue?.ratingsQuantity} Reviews)`}</p>
-                  </div>
-              }
+            {
+              !productValue?.reviews[0]
+                ?
+                <div className="flex items-center justify-start space-x-1">
+                  <Star value={3.5} />
+                  <p className="font-bold text-md">{`(No Review)`}</p>
+                </div>
+                :
+                <div className="flex items-center justify-start space-x-1">
+                  <Star value={2.4} />
+                  <p className="font-bold text-md">{productValue?.ratingsAverage}</p>
+                  <p className="text-md">{`(${productValue?.ratingsQuantity} Reviews)`}</p>
+                </div>
+            }
 
-
-              {
-                !productValue?.reviews[0]
-                  ?
-                  " "
-                  :
-                  <>
-                    <div className="flex flex-row items-start justify-start m-3">
-                      <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
-                        <img src={person} alt={person} className="w-12 h-12 m-auto" />
-                      </button>
-                      <div className="flex flex-col items-start justify-start mt-5 ml-3">
-                          <p className="font-bold text-2xl">{productValue?.reviews[0]?.user?.name}</p>
+            {
+              !productValue?.reviews[0]
+                ?
+                " "
+                :
+                <>
+                  <div className="flex flex-row items-start justify-start m-3">
+                    <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
+                      <img src={person} alt={person} className="w-12 h-12 m-auto" />
+                    </button>
+                    <div className="flex flex-col items-start justify-start mt-5 ml-3">
+                        <p className="font-bold text-2xl">{productValue?.reviews[0]?.user?.name}</p>
+                      <div className="flex flex-row">
                         <div className="flex flex-row">
-                          <div className="flex flex-row">
-                            <Star value={4.5} />
-                          </div>
-                            <p className="text-gray text-xs m-auto ml-3">{`
-                              ${productValueDate.toLocaleString('default', { month: 'long' })} 
-                              ${productValueDate.getDate()}, 
-                              ${productValueDate.getFullYear()}
-                            `}
-                            </p>
+                          <Star value={4.5} />
                         </div>
+                          <p className="text-gray text-xs m-auto ml-3">{`
+                            ${productValueDate.toLocaleString('default', { month: 'long' })} 
+                            ${productValueDate.getDate()}, 
+                            ${productValueDate.getFullYear()}
+                          `}
+                          </p>
                       </div>
                     </div>
-                    <p className="text-gray m-3 ">{productValue?.reviews[0]?.review}</p>
-                  </>
-              }
+                  </div>
+                  <p className="text-gray m-3 ">{productValue?.reviews[0]?.review}</p>
+                </>
+            }
 
             <p className="m-3 font-bold text-xl mt-12">You May Also Like</p>
 
@@ -181,7 +177,9 @@ const ProductDetail = () => {
             <Footer />
           </>
           :
-          <Loader />
+          <div className='flex m-3'>
+            <Loader />
+          </div>
         }
       </div>
     );

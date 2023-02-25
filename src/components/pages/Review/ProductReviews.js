@@ -1,12 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useSingleProduct } from "../../../Hooks/useProduct";
+import Star from "../../componentsItem/Star";
 import Footer from "../../componentsItem/Footer";
 import Button from "../../componentsItem/Button";
-import starFill from "./../../../assets/star-fill.svg";
+import Loader from "../../componentsItem/Loading/Loader";
 import arrow from "./../../../assets/arrow.svg";
-import starEmpty from "./../../../assets/star.svg";
 import person from "./../../../assets/account.svg";
 
 const ProductReviews = () => {
+  const { id } = useParams();
+  const product = useSingleProduct(id);
+  const productValue = product.product?.data?.product;
+  const productValueDate = new Date(`
+    ${productValue?.reviews[0]?.createdAt.split("T")[0]}
+  `);
+
+  
   return (
     <div>
       <div className="flex flex-row items-center justify-between border-b-2 p-5">
@@ -18,35 +27,45 @@ const ProductReviews = () => {
         </div>
       </div>
 
-      <div className="flex flex-row items-start justify-start m-3 borde">
-        <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
-          <img src={person} alt={person} className="w-12 h-12 m-auto" />
-        </button>
-        <div className="flex flex-col items-start justify-start mt-5 ml-3">
-          <p className="font-bold text-2xl">Rekureku Judith</p>
-          <div className="flex flex-row">
-            <div className="flex flex-row">
-              <img src={starFill} alt={starFill} className="w-5 h-5" />
-              <img src={starFill} alt={starFill} className="w-5 h-5" />
-              <img src={starFill} alt={starFill} className="w-5 h-5" />
-              <img src={starFill} alt={starFill} className="w-5 h-5" />
-              <img src={starEmpty} alt={starEmpty} className="w-5 h-5" />
-            </div>
-            <p className="text-gray text-xs m-auto ml-3">December 10, 2022</p>
+      {
+        productValue?.name
+          ?
+          <>
+            {
+              productValue?.reviews.map((value, key) => (
+                <>
+                  <div className="flex flex-row items-start justify-start m-3" key={key}>
+                    <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
+                      <img src={person} alt={person} className="w-12 h-12 m-auto" />
+                    </button>
+                    <div className="flex flex-col items-start justify-start mt-5 ml-3">
+                        <p className="font-bold text-2xl">{value?.user?.name}</p>
+                      <div className="flex flex-row">
+                        <div className="flex flex-row">
+                          <Star value={value.rating} />
+                        </div>
+                          <p className="text-gray text-xs m-auto ml-3">{`
+                            ${productValueDate.toLocaleString('default', { month: 'long' })} 
+                            ${productValueDate.getDate()}, 
+                            ${productValueDate.getFullYear()}
+                          `}
+                          </p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className="text-gray m-3 ">{value?.review}</p>
+                </>
+              ))
+            }
+          </>
+          :
+          <div className='flex m-3'>
+            <Loader />
           </div>
-        </div>
-      </div>
-      <p className="text-gray m-5 mb-12 ">
-        air max are always very comfortable fit, clean and just perfect in every
-        way. just the box was too small and scrunched the sneakers up a little
-        bit, not sure if the box was always this small but the 90s are and will
-        always be one of my favorites.
-      </p>
-
-        <Link to="/WriteReview" className="flex">
-          {" "}
-          <Button text="Write Review" />
-        </Link> 
+      }      
+      <Link to="/WriteReview" className="flex left-0 right-0 bottom-24">
+        <Button text="Write Review" />
+      </Link> 
       <Footer />
     </div>
   );
