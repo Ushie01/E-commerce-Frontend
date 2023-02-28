@@ -1,14 +1,11 @@
+import Star from "../../componentsItem/Star";
 import { Link } from "react-router-dom";
-import starEmpty from "./../../../assets/star.svg";
-import starHalf from "./../../../assets/star-half.svg";
-import starFill from "./../../../assets/star-fill.svg";
 import deleteSvg from "./../../../assets/delete.svg";
 import Loading from "./../../componentsItem/Loading/Loader";
 
 
 const SaleSection = ({
   products,
-  star,
   deleteBin,
   column
 }) => {
@@ -39,17 +36,7 @@ const SaleSection = ({
                   />
                 </div>
                 <h3 className="m-2 font-extrabold break-all">{value.name}</h3>
-                {star === true ? (
-                  <div className="m-2 flex flex-row items-start justify-start">
-                    <img src={starFill} alt={starFill} className="w-4 h-4" />
-                    <img src={starFill} alt={starFill} className="w-4 h-4" />
-                    <img src={starFill} alt={starFill} className="w-4 h-4" />
-                    <img src={starHalf} alt={starHalf} className="w-4 h-4" />
-                    <img src={starEmpty} alt={starEmpty} className="w-4 h-4" />
-                  </div>
-                ) : (
-                  ""
-                )}
+                <Star value={value?.ratingsQuantity} />
                 <h3 className="m-2 font-extrabold break-all textColor">
                   ₦{value.price}
                 </h3>

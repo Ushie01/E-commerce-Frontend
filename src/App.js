@@ -40,7 +40,7 @@ const App = () => {
         <Route path='FlashSale' element={<FlashSale />} /> 
         <Route path='Product/:id' element={<Product />} />
         <Route path='ProductReviews/:id' element={<ProductReviews />}/>
-        <Route path="WriteReview" element={<WriteReview />} />
+        <Route path="WriteReview/:id" element={<WriteReview />} />
         <Route path='Explore' element={<Explore/>} />
         <Route path='SearchResult' element={<SearchResult />} />
         <Route path='Category' element={<Category />} />
@@ -72,7 +72,8 @@ const App = () => {
               </Link> <br />
               to return to home page.
             </h1>
-          </main>} />
+          </main>
+        } />
       </Routes>
     </BrowserRouter>
   )

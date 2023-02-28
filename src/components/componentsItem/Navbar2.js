@@ -1,6 +1,4 @@
 import { Link } from "react-router-dom";
-
-
 const Navbar2 = ({text, image, secondImage, linkRoute }) => {
     return (
       <div>
@@ -24,5 +22,4 @@ const Navbar2 = ({text, image, secondImage, linkRoute }) => {
       </div>
     );
 }
-
 export default Navbar2;

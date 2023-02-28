@@ -23,7 +23,7 @@ const ProductDetail = () => {
   `);
 
 
-  const colors = ["cyan", "red"];
+  // const colors = ["cyan", "red"];
     return (
       <div className="mb-24">
         {
@@ -54,7 +54,7 @@ const ProductDetail = () => {
                         <img
                           src={`http://localhost:5000/api/v1/products/${img}`}
                           alt={`http://localhost:5000/api/v1/products/${img}`}
-                          className="h-72 w-full z-60 rounded"
+                          className="h-72 w-full z-60 rounded filteredImage drop-shadow-xl"
                         />
                       </Link>
                     </div>
@@ -68,8 +68,7 @@ const ProductDetail = () => {
               <img src={love} alt={love} className="w-7 h-7" />
             </div>
             
-            <Star value={4.5} />
-           
+            <Star value={productValue?.ratingsQuantity} />
             <h1 className="font-bold text-2xl m-3 text-cyan-500">₦{productValue?.price}</h1>
 
             <p className="m-3 font-bold text-xl mt-6">Select Size</p>
@@ -85,7 +84,7 @@ const ProductDetail = () => {
               ))}
             </div>
 
-            <p className="m-3 font-bold text-xl mt-6">Select Color</p>
+            {/* <p className="m-3 font-bold text-xl mt-6">Select Color</p>
             <div className="flex flex-row m-3 items-start justify-start space-x-2 overflow-x-auto scrollbar-hide category">
               {colors.map((color, index) => (
                 <div key={index}>
@@ -95,7 +94,7 @@ const ProductDetail = () => {
                   </div>
                 </div>
               ))}
-            </div>
+            </div> */}
 
             <p className="m-3 font-bold text-xl mt-6">Description</p>
               <p className="text-gray m-3">
@@ -104,21 +103,27 @@ const ProductDetail = () => {
         
             <div className="flex flew-row justify-between p-3 mt-12">
               <p className="text-lg text-black font-bold">Review Product</p>
-                <Link to={`/ProductReviews/${productValue?._id}`}>
-                  <p className="text-lg textColor font-bold">See More</p>
-               </Link>
+              {
+                !productValue?.reviews[0]
+                  ?
+                  ""
+                  :
+                  <Link to={`/ProductReviews/${productValue?._id}`}>
+                    <p className="text-lg textColor font-bold">See More</p>
+                  </Link>
+              }
             </div>
 
             {
               !productValue?.reviews[0]
                 ?
                 <div className="flex items-center justify-start space-x-1">
-                  <Star value={3.5} />
+                  <Star value={0} />
                   <p className="font-bold text-md">{`(No Review)`}</p>
                 </div>
                 :
                 <div className="flex items-center justify-start space-x-1">
-                  <Star value={2.4} />
+                  <Star value={productValue?.ratingsQuantity} />
                   <p className="font-bold text-md">{productValue?.ratingsAverage}</p>
                   <p className="text-md">{`(${productValue?.ratingsQuantity} Reviews)`}</p>
                 </div>
@@ -164,7 +169,6 @@ const ProductDetail = () => {
                   .filter(product => product.brand.toLowerCase().includes('euphorya'))
               }
               discount={"25% off"}
-              star={true}
               deleteBin={false}
               column={true}
             />

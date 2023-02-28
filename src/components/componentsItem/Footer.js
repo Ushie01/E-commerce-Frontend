@@ -17,7 +17,6 @@ const Footer = () => {
   const pathname = window.location.pathname;
 
 
-
   return (
     <div className="flex flex-row text-gray-500 space-x-2 h-20 w-full p-3 items-center justify-between bg-white fixed left-0 right-0 bottom-0 border-t-2">
       {

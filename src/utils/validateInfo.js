@@ -53,3 +53,17 @@ export const validateCreateNewPassword = (values) => {
     }
     return errors;
 }
+
+export const validateCreateReview = (values) => {
+    let errors = {};
+
+    if (!values.rating) {
+        errors.rating = "Please Select A Star"
+    }
+
+    if (!values.input) {
+        errors.input = "Please Provide A Review Text"
+    }
+
+    return errors;
+}

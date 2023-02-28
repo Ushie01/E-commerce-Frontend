@@ -1,28 +1,27 @@
-import { useState } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
+import { Toast } from '../../../Hooks/useToast';
 import { signUp } from '../../../helper/api';
+import { useState } from 'react';
+import { validateSignUp } from '../../../utils/validateInfo';
 import { ToastContainer } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-import { failedToast, successToast } from '../../../Hooks/useToast';
-import 'react-toastify/dist/ReactToastify.css';
-// import Loader from '../../componentsItem/Loading/Loader';
-import { validateSignUp } from '../../../utils/validateInfo';
-import account from './../../../assets/account_.svg';
 import logo from './../../../assets/logo.jpeg';
-import Input from './../../componentsItem/Input';
-import Button from './../../componentsItem/Button'
 import lock from './../../../assets/lock.svg';
+import Input from './../../componentsItem/Input';
+import Button from './../../componentsItem/Button';
+import account from './../../../assets/account_.svg';
 import envelope from './../../../assets/envelope.svg';
 
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const [err, setErr] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [err, setErr] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState("");
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,14 +39,20 @@ const SignUp = () => {
       const payload = await signUp(values);
       if (payload.message) {
         setIsSubmitted(false)
-        failedToast();
+        Toast({
+            text: 'Request failed!! 💥💥',
+            position: 'top-left',
+        });
         setErrMsg("Email already in used");
       } else {
         localStorage.setItem('user', JSON.stringify(payload));
         setIsSubmitted(false)
         setConfirmPassword("");
         setPassword("");
-        successToast();
+        Toast({
+            text: 'Request successfull!! 🦅✨',
+            position: 'top-right',
+        });
         setErrMsg("");
         setEmail("");
         setName("");

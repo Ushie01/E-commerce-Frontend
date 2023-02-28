@@ -1,25 +1,25 @@
 import 'react-toastify/dist/ReactToastify.css';
 import GoogleAuth from './GoogleAuth';
+import { Link } from 'react-router-dom';
+import { Toast } from '../../../Hooks/useToast';
+import { signIn } from '../../../helper/api';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { Link } from 'react-router-dom';
-import { verifyAccountToast, successToast } from '../../../Hooks/useToast';
-import { signIn } from '../../../helper/api';
 import { validateSignIn } from '../../../utils/validateInfo';
 import logo from './../../../assets/logo.jpeg'
-import Input from './../../componentsItem/Input';
-import Button from './../../componentsItem/Button'
 import lock from './../../../assets/lock.svg';
 import apple from "./../../../assets/apple.svg";
+import Input from './../../componentsItem/Input';
+import Button from './../../componentsItem/Button'
 import envelope from './../../../assets/envelope.svg';
 
 
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [err, setError] = useState("");
+  const [email, setEmail] = useState("");
   const [errMsg, setErrMsg] = useState("");
+  const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmited] = useState(false);
   // const navigate = useNavigate();
   
@@ -37,12 +37,18 @@ const SignIn = () => {
       const payload = await signIn(values);
       if (payload.message) {
         setIsSubmited(false);
-        verifyAccountToast();
+        Toast({
+          text: 'Incorrect email or password 😥😪',
+          position: 'top-left'
+        });
         setErrMsg("Incorrent Email or Password")
       } else {
         localStorage.setItem('user', JSON.stringify(payload));
         setIsSubmited(false);
-        successToast();
+        Toast({
+            text: 'Request successfull!! 🦅✨',
+            position: 'top-right',
+        });
         setErrMsg("");
         setPassword("");
         setEmail("");
@@ -89,7 +95,7 @@ const SignIn = () => {
             />
             {err.password && <p className='text-red-600 text-sm font-bold'>{err.password}</p>}
           </div>
-            {errMsg && <p className='text-red-600 text-sm font-bold'>{errMsg}</p>}
+          {errMsg && <p className='text-red-600 text-sm font-bold'>{errMsg}</p>}
           
           <div>
             <ToastContainer />
