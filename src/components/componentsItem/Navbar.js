@@ -4,19 +4,20 @@ import Input from './../componentsItem/Input';
 import mic from './../../assets/mic-fill.svg';
 import search from './../../assets/search.svg';
 
-
-
-const Navbar = ({love, notificationBell}) => {
+const Navbar = ({
+  love,
+  notificationBell,
+  value,
+  onChange,
+}) => {
   const [isClick, setIsClick] = useState(false);
-  const [, setNotClick] = useState(false);
-  
+  //Event listener for input key down
   const handleKeyDown = () => {
     setIsClick(true);
   };
+  //Event listener for input key up
   const handleKeyUp = () => {
-    setNotClick(true);
-    window.location.reload(false);
-    // setNotClick({});
+    setIsClick(false);
   }
 
     return (
@@ -27,7 +28,9 @@ const Navbar = ({love, notificationBell}) => {
           image={search}
           placeholder={"Search Product"}
           height={"h-12"}
-          width={"w-56"}
+          width={"w-52"}
+          value={value}
+          onChange={onChange}
         />
 
         {isClick ? (
