@@ -42,7 +42,10 @@ const SaleSection = ({
                       {
                         star
                           ?
-                          <Star value={value?.ratingsQuantity} />
+                          <Star 
+                            value={value?.ratingsQuantity} 
+                            starSize='w-4 h-4'
+                          />
                           :
                           ""
                       }

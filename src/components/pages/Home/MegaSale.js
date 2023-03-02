@@ -5,12 +5,12 @@ import Footer from '../../componentsItem/Footer';
 import arrow from '../../../assets/arrow.svg';
 
 
-const Favorite = () => {
+const MegaSale = () => {
   const product = useAllProduct();
     return (
       <div className='h-max mb-20'>
         <Navbar2
-          text={"Favorite Product"}
+          text={"Mega Sale"}
           image={arrow}
           linkRoute="/"
         />
@@ -20,7 +20,8 @@ const Favorite = () => {
               .product
               ?.data
               .products
-
+              .sort((a, b) => b.price - a.price)
+              .slice(0, 5)
           }
           star={false}
           deleteBin={false}
@@ -31,4 +32,4 @@ const Favorite = () => {
     );
 }
 
-export default Favorite;
+export default MegaSale;

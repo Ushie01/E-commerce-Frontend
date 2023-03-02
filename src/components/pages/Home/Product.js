@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
-import Carousel, { CarouselItem } from '../../Carousel/Carousel';
+import CarouselComponent from '../../Carousel/CarouselComponent';
 import { useAllProduct, useSingleProduct } from '../../../Hooks/useProduct';
 import Star from '../../componentsItem/Star';
 import Loader from '../../componentsItem/Loading/Loader';
@@ -11,6 +11,8 @@ import threeDots from '../../../assets/three-dots.svg';
 import search from '../../../assets/search_.svg';
 import love from '../../../assets/love_.svg';
 import person from "./../../../assets/account.svg";
+import Navbar2 from '../../componentsItem/Navbar2';
+
 
 
 const ProductDetail = () => {
@@ -30,37 +32,20 @@ const ProductDetail = () => {
           productValue?.name
           ?
           <>
-            <div className="flex flex-row items-center justify-between p-5">
-              <div className="flex flex-row">
-                <Link to="/">
-                  <img src={arrow} alt={arrow} className="h-7 w-7" />
-                </Link>
-                <p className="text-sm font-bold ml-3 mt-1">
-                  {productValue?.name}
-                </p>
-              </div>
-              <div className="flex flex-row">
-                <img src={search} alt={search} className="w-7 h-7" />
-                <img src={threeDots} alt={threeDots} className="w-7 h-7 ml-3" />
-              </div>
-            </div>
-
-            <div className='flex'>
-              <Carousel>
-                {product.product?.data.product.productGallery.map((img, index) => (
-                  <CarouselItem key={index}>
-                    <div className="m-3 h-72 rounded-lg w-full">
-                      <Link to={`http://localhost:5000/api/v1/products/${img}`}>
-                        <img
-                          src={`http://localhost:5000/api/v1/products/${img}`}
-                          alt={`http://localhost:5000/api/v1/products/${img}`}
-                          className="h-72 w-full z-60 rounded filteredImage drop-shadow-xl"
-                        />
-                      </Link>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </Carousel>
+            <Navbar2 
+              image={arrow} 
+              text={productValue?.name} 
+              secondImage={search} 
+              thirdImage={threeDots} 
+              linkRoute={'/'}
+              />
+            <div className='flex items-center justify-center'>
+                <CarouselComponent
+                  image={productValue?.productGallery}
+                  value={false}
+                  mapCarosel={true}
+                  circleClick={true}
+                />
             </div>
 
             <div className="flex flex-row items-center justify-between m-3">
@@ -68,7 +53,10 @@ const ProductDetail = () => {
               <img src={love} alt={love} className="w-7 h-7" />
             </div>
             
-            <Star value={productValue?.ratingsQuantity} />
+              <Star
+                value={productValue?.ratingsAverage}
+                starSize={'h-6 w-6'}
+              />
             <h1 className="font-bold text-2xl m-3 text-cyan-500">₦{productValue?.price}</h1>
 
             <p className="m-3 font-bold text-xl mt-6">Select Size</p>
@@ -123,7 +111,10 @@ const ProductDetail = () => {
                 </div>
                 :
                 <div className="flex items-center justify-start space-x-1">
-                  <Star value={productValue?.ratingsQuantity} />
+                  <Star 
+                      value={productValue?.ratingsAverage}
+                      starSize={'h-6 w-6'}
+                    />
                   <p className="font-bold text-md">{productValue?.ratingsAverage}</p>
                   <p className="text-md">{`(${productValue?.ratingsQuantity} Reviews)`}</p>
                 </div>
@@ -142,9 +133,12 @@ const ProductDetail = () => {
                     <div className="flex flex-col items-start justify-start mt-5 ml-3">
                         <p className="font-bold text-2xl">{productValue?.reviews[0]?.user?.name}</p>
                       <div className="flex flex-row">
-                        <div className="flex flex-row">
-                          <Star value={4.5} />
-                        </div>
+                        {/* <div className="flex flex-row"> */}
+                          <Star 
+                              value={productValue?.reviews[0]?.rating}
+                              starSize={'h-5 w-5'}  
+                          />
+                        {/* </div> */}
                           <p className="text-gray text-xs m-auto ml-3">{`
                             ${productValueDate.toLocaleString('default', { month: 'long' })} 
                             ${productValueDate.getDate()}, 

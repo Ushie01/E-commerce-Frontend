@@ -2,8 +2,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAllProduct } from "../../../Hooks/useProduct";
-import ScreenMsgPage from "../Explore/ScreenMsgPage";
 import CarouselComponent from "../../Carousel/CarouselComponent";
+import ScreenMsgPage from "../Explore/ScreenMsgPage";
 import SaleSection from "./SaleSection";
 import Loader from "../../componentsItem/Loading/Loader";
 import Category from "../../componentsItem/Category";
@@ -13,11 +13,16 @@ import collection from "../../../assets/collection.jpg";
 import love from "../../../assets/love.svg";
 import notificationBell from "../../../assets/notification-bell.svg";
 import empty from "../../../assets/x.svg";
+// import pic1 from "../../../assets/menu1.jpg";
+// import pic2 from "../../../assets/menu2.jpg";
+// import pic3 from "../../../"
 
 
 const Homepage = () => {
   const [inputValue, setInputValue] = useState('');
   const product = useAllProduct();
+  const productImage = product.product?.data.products.slice(0, 4).map((value) => value?.productGallery[1]);
+
 
   return (
     <div>
@@ -70,7 +75,12 @@ const Homepage = () => {
         </div>
         :
         <>
-            <CarouselComponent value={true} />
+            <CarouselComponent 
+                value={true} 
+                mapCarosel={true} 
+                circleClick={true} 
+                image={productImage}
+            />
             <section>
                 <div className="flex flew-row justify-between p-3">
                     <p className="text-lg text-black font-bold">Category</p>
@@ -90,7 +100,6 @@ const Homepage = () => {
                             ?.data
                             .products
                             .slice(0, 6)
-                            
                         }
                         column={false}
                     />
@@ -122,10 +131,10 @@ const Homepage = () => {
                 />
 
                 <div className="flex flew-row justify-between p-3 mt-12">
-                <p className="text-lg text-black font-bold">Mega Sale</p>
-                <Link to="/Favorite">
-                    <p className="text-lg textColor font-bold">See More</p>
-                </Link>
+                    <p className="text-lg text-black font-bold">Mega Sale</p>
+                    <Link to="MegaSale">
+                        <p className="text-lg textColor font-bold">See More</p>
+                    </Link>
                 </div>
 
                 <SaleSection
@@ -157,11 +166,11 @@ const Homepage = () => {
                 <div className="mb-24">
                     <SaleSection
                         products={
-                        product
+                            product
                             .product
                             ?.data
                             .products
-                            .slice(0, 4)
+                            .slice(0, 5)
                         }
                         star={false}
                         deleteBin={false}

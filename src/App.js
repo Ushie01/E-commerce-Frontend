@@ -28,7 +28,7 @@ import Order from './components/pages/Order/Order';
 import OrderDetails from './components/pages/Order/OrderDetails';
 import Address from './components/pages/Address/Address';
 import AddAddress from './components/pages/Address/AddAddress';
-
+import MegaSale from './components/pages/Home/MegaSale';
 
 const App = () => {
   return (
@@ -38,6 +38,7 @@ const App = () => {
         <Route path='Notification' element={<Notification />} />
         <Route path='Favorite' element={<Favorite />} />
         <Route path='FlashSale' element={<FlashSale />} /> 
+        <Route path='MegaSale' element={<MegaSale />} />
         <Route path='Product/:id' element={<Product />} />
         <Route path='ProductReviews/:id' element={<ProductReviews />}/>
         <Route path="WriteReview/:id" element={<WriteReview />} />

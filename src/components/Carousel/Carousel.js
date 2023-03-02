@@ -16,7 +16,7 @@ export const CarouselItem = ({ children }) => {
 }
 
 // Parent Item
-const Carousel = ({ children }) => {
+const Carousel = ({ children, circleClick }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   
@@ -35,7 +35,6 @@ const Carousel = ({ children }) => {
         updateIndex(activeIndex + 1); 
       }
     }, 1000);
-
     return () => {
       if (interval) {
         clearInterval(interval);
@@ -75,7 +74,7 @@ const Carousel = ({ children }) => {
         >
           <img src={arrowL} alt={arrowL} className="w-20 h-7" />
         </button> */}
-        {React.Children.map(children, (child, index) => {
+        {circleClick ? React.Children.map(children, (child, index) => {
           return (
             <button
               className={`${
@@ -96,7 +95,7 @@ const Carousel = ({ children }) => {
               <img src={CircleClick} alt={CircleClick} className="h-2 w-2" />
             </button>
           );
-        })}
+        }) : ""}
         {/* <button
           onClick={() => {
             updateIndex(activeIndex + 1);

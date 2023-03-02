@@ -1,23 +1,42 @@
 import Carousel, { CarouselItem } from "./Carousel";
 import Timer from "../componentsItem/Timer";
-import Shirt1 from "../../assets/1.webp";
-import Shirt2 from "../../assets/22.webp";
-import Shirt3 from "../../assets/euphorya.jpg";
+import Loader from "../componentsItem/Loading/Loader";
+import collection from "../../assets/collection.jpg";
 
 
-const image = [Shirt1, Shirt2, Shirt3];
-const CarouselComponent = ({ value }) => {
+const CarouselComponent = ({ image, value, mapCarosel, circleClick }) => {
   return (
-    <section className="relative mt-4 h-72">
-      <Carousel>
-        {image.map((img, index) => (
-          <CarouselItem key={index}>
-            <div className="m-3 h-72 rounded-lg w-full">
-              <img src={img} alt={img} className="h-72 w-full z-60 rounded" />
-            </div>
-          </CarouselItem>
-        ))}
-      </Carousel>
+    <section className="relative h-72">
+      <>
+        {
+          image
+            ?
+            <>
+            {
+            mapCarosel
+            ?
+          <Carousel circleClick={circleClick}>
+            {image.map((img, index) => (
+              <CarouselItem key={index}>
+                <div className="m-3 h-72 rounded-lg w-full">
+                  <img
+                    src={`http://localhost:5000/api/v1/products/${img}`}
+                    alt={`http://localhost:5000/api/v1/products/${img}`}
+                    className="h-72 w-full z-60 rounded"
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </Carousel>
+          :
+          <div className="flex items-center justify-centerm-8 h-72 rounded-lg w-full">
+            <img
+              src={collection}
+              alt={collection}
+              className="h-60 w-full m-4 z-60 rounded-lg bg-gradient-to-r from-green-400 to-blue-500"
+            />
+          </div>
+      }
       {
         value === true 
         ?
@@ -33,6 +52,11 @@ const CarouselComponent = ({ value }) => {
         :
         ""
       }
+      </>
+      :
+      <Loader />
+        }
+      </>
     </section>
   )
 }

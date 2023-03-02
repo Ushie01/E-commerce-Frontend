@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-const Navbar2 = ({text, image, secondImage, linkRoute }) => {
+const Navbar2 = ({text, image, secondImage, linkRoute, thirdImage }) => {
     return (
       <div>
         <div className="flex flex-row items-center justify-between p-7 border-gray-100 border-b-2">
@@ -14,10 +14,10 @@ const Navbar2 = ({text, image, secondImage, linkRoute }) => {
             }
             <p className="text-md font-extrabold ml-3">{text}</p>
           </div>
-          {
-            secondImage ? <img src={secondImage} alt={secondImage} className="h-5 w-5"/> : ""
-          }
-          
+          <div className="flex flex-row space-x-4">
+            {secondImage ? <img src={secondImage} alt={secondImage} className="w-7 h-7" /> : ""}
+            {thirdImage ? <img src={thirdImage} alt={thirdImage} className="w-7 h-7" /> : ""}
+          </div>
         </div>
       </div>
     );
