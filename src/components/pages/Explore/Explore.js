@@ -3,31 +3,40 @@ import Loader from "../../componentsItem/Loading/Loader";
 import Navbar from "../../componentsItem/Navbar";
 import Footer from "../../componentsItem/Footer";
 import Category from "../../componentsItem/Category";
+import SearchResult from "./SearchResult";
 import love from "./../../../assets/love.svg";
 import notificationBell from "./../../../assets/notification-bell.svg";
 import { useState } from "react";
 
 const Explore = () => {
-  const product = useAllProduct();
   const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState('');
+  const product = useAllProduct();
   if (!product) return <Loader />;
+  const productItems = product.product?.data.products;
+  console.log(productItems)
+
+  
   
     return (
       <>
-        <Navbar
-          love={love}
-          notificationBell={notificationBell}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
         {
-          inputValue
+          product.product?.data.products
+          ?
+          !value
+            ?
+            <>
+            <Navbar
+              love={love}
+              notificationBell={notificationBell}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+          {
+            inputValue
             ?
             <>
               {
-                product
-                  .product
-                  ?.data
-                  .products
+                productItems
                   .filter(
                       value => value
                       .name
@@ -36,8 +45,10 @@ const Explore = () => {
                     )
                   .map((value, index) => (
                     <div key={index}>
-                      <div className="p-4 bg-gray-100 hover:bg-gray-200" >
-                        <p className="text-md font-bold">{value?.name}</p>
+                      <div className="p-4 bg-gray-100 hover:bg-gray-200"
+                        onClick={() => setValue(value?.name)}
+                      >
+                        <p className="text-md font-bold" >{value?.name}</p>
                       </div>
                       <hr className="border-2"/>
                     </div>
@@ -51,10 +62,7 @@ const Explore = () => {
               <Category
                 column={true}
                 products={
-                  product
-                  .product
-                  ?.data
-                  .products
+                  productItems
                   .filter(
                     value => value
                       .category
@@ -68,10 +76,7 @@ const Explore = () => {
               <Category
                 column={true}
                 products={
-                  product
-                  .product
-                  ?.data
-                  .products
+                  productItems
                   .filter(
                     value => value
                       .category
@@ -85,10 +90,7 @@ const Explore = () => {
               <Category
                 column={true}
                 products={
-                  product
-                  .product
-                  ?.data
-                  .products
+                  productItems
                   .filter(
                     value => value
                       .category
@@ -98,6 +100,15 @@ const Explore = () => {
                 }
               />
             </div>
+            }
+            </>
+            :
+            <SearchResult
+              products={product.product?.data.products}
+              inputValue={value}
+            />
+            :
+           <Loader />
         }
         <Footer />
       </>

@@ -10,6 +10,7 @@ import search from '../../../assets/search_.svg';
 
 const FlashSale = () => {
   const product = useAllProduct();
+  const productImage = product.product?.data.products.slice(0, 4).reverse().map((value) => value?.productGallery[1]);
 
     return (
       <div className="mb-20">
@@ -20,7 +21,12 @@ const FlashSale = () => {
           linkRoute={'/'}
           thirdImage={search}
         />
-        <CarouselComponent value={true} />
+        <CarouselComponent
+          value={true}
+          mapCarosel={true}
+          circleClick={true}
+          image={productImage}
+        />
         <SaleSection
             products={
               product

@@ -26,7 +26,7 @@ const SaleSection = ({
             ?
             products.map((value, index) => (
               <div
-                className={`${column === true ? "p-3 h-96" : "p-1 text-sm"} border-gray-100 border-2 rounded-xs`}
+                className={`${column === true ? "p-3" : "p-1 text-sm"} flex items-center justify-center border-gray-100 border-2 rounded-xs`}
                 key={index}
               >
               <Link to={`/Product/${value._id}`}>
@@ -38,7 +38,7 @@ const SaleSection = ({
                       className={`${column === true ? "" : "pl-1 pr-1"} m-auto w-full`}
                     />
                   </div>
-                      <h3 className="m-2 font-extrabold break-all">{value.name}</h3>
+                      <h3 className="font-extrabold break-all p-1">{value.name}</h3>
                       {
                         star
                           ?
@@ -49,10 +49,10 @@ const SaleSection = ({
                           :
                           ""
                       }
-                  <h3 className="m-2 font-extrabold break-all textColor">
+                  <h3 className="p-1 font-extrabold break-all textColor">
                     ₦{value.price}
                   </h3>
-                  <div className="flex flex-row m-2 items-start justify-between">
+                  <div className="flex flex-row p-1 items-start justify-between">
                     <s className="text-gray-500 text-sm">₦1200</s>
                     <h2 className="font-red text-sm font-bold text-red-700 text-extrabold">
                       25% off

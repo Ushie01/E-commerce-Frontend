@@ -24,8 +24,6 @@ const ProductDetail = () => {
     ${productValue?.reviews[0]?.createdAt.split("T")[0]}
   `);
 
-
-  // const colors = ["cyan", "red"];
     return (
       <div className="mb-24">
         {
@@ -71,18 +69,6 @@ const ProductDetail = () => {
                 </div>
               ))}
             </div>
-
-            {/* <p className="m-3 font-bold text-xl mt-6">Select Color</p>
-            <div className="flex flex-row m-3 items-start justify-start space-x-2 overflow-x-auto scrollbar-hide category">
-              {colors.map((color, index) => (
-                <div key={index}>
-                  <div>
-                    <div className={`h-20 text-3xl w-20 bg-${color}-400 rounded-full`}>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div> */}
 
             <p className="m-3 font-bold text-xl mt-6">Description</p>
               <p className="text-gray m-3">
