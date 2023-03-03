@@ -6,10 +6,31 @@ import arrow from "./../../../assets/arrow.svg";
 
 
 const Cart = () => {
+  const product = JSON.parse(localStorage.getItem('cart'));
+  const productId = product.reverse().map(value => value._id)[0];
+  // console.log(product.productGallery)
+
     return (
       <>
-        <Navbar2 text="Your Cart" image={arrow} linkRoute='/' />
-        <Counter />
+        <Navbar2
+          text="Your Cart"
+          image={arrow}
+          linkRoute={`/Product/${productId}`}
+        />
+          {
+          product.map((item, index) => (
+            <div key={index}>
+              <Counter 
+                image={item.productGallery[0]}
+                name={item.name}
+                price={item.price}
+                quantity={0}
+              />
+            </div>
+            ))
+          }
+        
+        
 
         <div className="m-4 flex flex-col items-center justify-center space-y-8 ">
           <div className="flex flex-col items-center justify-center space-y-3 w-full border-gray border-2 p-3">

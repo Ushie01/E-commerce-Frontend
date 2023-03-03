@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import CarouselComponent from '../../Carousel/CarouselComponent';
 import { useAllProduct, useSingleProduct } from '../../../Hooks/useProduct';
@@ -17,12 +18,32 @@ import Navbar2 from '../../componentsItem/Navbar2';
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const [submitted, setSubmitted] = useState(false);
+  const [isClick, setIsClick] = useState('');
   const products = useAllProduct();
   const product = useSingleProduct(id);
   const productValue = product.product?.data?.product;
   const productValueDate = new Date(`
     ${productValue?.reviews[0]?.createdAt.split("T")[0]}
   `);
+
+  console.log(isClick);
+  if (!localStorage.getItem('cart')){
+    localStorage.setItem('cart', '[]')
+  }
+  
+  const onHandleSubmit = () => {
+    if (productValue) {
+      productValue.size = isClick;
+      productValue.quantity = 0;
+      let itemsArray = JSON.parse(localStorage.getItem('cart')) || [];
+      itemsArray.push(productValue); 
+      localStorage.setItem('cart', JSON.stringify(itemsArray));
+      setSubmitted(true);
+    } else {
+      return <Loader />;
+    }
+  }
 
     return (
       <div className="mb-24">
@@ -38,12 +59,12 @@ const ProductDetail = () => {
               linkRoute={'/'}
               />
             <div className='flex items-center justify-center'>
-                <CarouselComponent
-                  image={productValue?.productGallery}
-                  value={false}
-                  mapCarosel={true}
-                  circleClick={true}
-                />
+              <CarouselComponent
+                image={productValue?.productGallery}
+                value={false}
+                mapCarosel={true}
+                circleClick={true}
+              />
             </div>
 
             <div className="flex flex-row items-center justify-between m-3">
@@ -51,18 +72,18 @@ const ProductDetail = () => {
               <img src={love} alt={love} className="w-7 h-7" />
             </div>
             
-              <Star
-                value={productValue?.ratingsAverage}
-                starSize={'h-6 w-6'}
-              />
+            <Star
+              value={productValue?.ratingsAverage}
+              starSize={'h-6 w-6'}
+            />
             <h1 className="font-bold text-2xl m-3 text-cyan-500">₦{productValue?.price}</h1>
 
             <p className="m-3 font-bold text-xl mt-6">Select Size</p>
-            <div className="flex flex-row m-3 items-start justify-start space-x-2 overflow-x-auto scrollbar-hide category">
+            <div className="flex flex-row m-3 items-start justify-start space-x-4 overflow-x-auto scrollbar-hide category">
               {productValue?.size.split(",").map((product, index) => (
                 <div key={index}>
                   <div>
-                    <button className="h-16 text-3xl w-16 border-2 rounded-full">
+                    <button onClick={() => setIsClick(product)} className="h-16 text-3xl w-16 border-2 rounded-full hover:bg-sky-500 hover:text-white">
                       {product}
                     </button>
                   </div>
@@ -155,7 +176,11 @@ const ProductDetail = () => {
 
             <Link to="/Cart">
               <div className='flex items-center justify-center'>
-                <Button text="Add To Cart"/>
+                <Button
+                  text="Add To Cart"
+                  onClick={onHandleSubmit} 
+                  disabled={submitted}
+                />
               </div>
             </Link>
             <Footer />
