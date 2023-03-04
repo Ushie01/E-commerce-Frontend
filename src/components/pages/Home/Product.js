@@ -35,7 +35,7 @@ const ProductDetail = () => {
   const onHandleSubmit = () => {
     if (productValue) {
       productValue.size = isClick;
-      productValue.quantity = 0;
+      productValue.quantity = 1;
       let itemsArray = JSON.parse(localStorage.getItem('cart')) || [];
       itemsArray.push(productValue); 
       localStorage.setItem('cart', JSON.stringify(itemsArray));

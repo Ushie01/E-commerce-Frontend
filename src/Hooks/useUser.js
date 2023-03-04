@@ -4,10 +4,9 @@ import { useEffect, useState } from "react";
 export const useUser = ({item}) => {
     const [user, setUser] = useState({});
     useEffect(() => {
-        const userDetail = localStorage.getItem(item);
-        const user = JSON.parse(userDetail);
-        if (user) {
-            setUser(user);
+        const userDetail = JSON.parse(localStorage.getItem(item));
+        if (userDetail) {
+            setUser(userDetail);
         }
     }, [item]);
 

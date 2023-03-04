@@ -8,7 +8,7 @@ import arrow from "./../../../assets/arrow.svg";
 const Cart = () => {
   const product = JSON.parse(localStorage.getItem('cart'));
   const productId = product.reverse().map(value => value._id)[0];
-  // console.log(product.productGallery)
+  // console.log(product.map(value => value.productGallery));
 
     return (
       <>
@@ -16,21 +16,9 @@ const Cart = () => {
           text="Your Cart"
           image={arrow}
           linkRoute={`/Product/${productId}`}
+          products={product}
         />
-          {
-          product.map((item, index) => (
-            <div key={index}>
-              <Counter 
-                image={item.productGallery[0]}
-                name={item.name}
-                price={item.price}
-                quantity={0}
-              />
-            </div>
-            ))
-          }
-        
-        
+        <Counter />        
 
         <div className="m-4 flex flex-col items-center justify-center space-y-8 ">
           <div className="flex flex-col items-center justify-center space-y-3 w-full border-gray border-2 p-3">
@@ -51,7 +39,7 @@ const Cart = () => {
               <p className="text-cyan-500 font-extrabold">₦240.00</p>
             </div>
           </div>
-          <Link to="/ShipTo" className="flex fixed left-0 right-0 bottom-6">
+          <Link to="/ShipTo" className="flex left-0 right-0 bottom-6">
             <Button text="Check Out" />
           </Link>
         </div>
