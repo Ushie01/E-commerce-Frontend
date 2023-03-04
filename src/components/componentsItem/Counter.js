@@ -1,6 +1,7 @@
 // import Loader from "./Loading/Loader";
 import deleteBin from "./../../assets/delete.svg";
 import favorite from "./../../assets/heart-fill.svg";
+import notFavorite from "./../../assets/love.svg"
 import dash from "./../../assets/dash.svg";
 import plus from "./../../assets/plus.svg";
 import { useState } from "react";
@@ -35,19 +36,29 @@ const Counter = () => {
     };
 
     // cart delete Item
-  const deleteItem = (id, size) => {
-    setProduct((prevProducts) =>
-      prevProducts.filter(
-        (item) => item._id !== id || item.size !== size
-      )
-    );
-    localStorage.setItem(
-      "cart",
-      JSON.stringify(
-        product.filter((item) => item._id !== id || item.size !== size)
-      )
-    );
-  };
+    const deleteItem = (id, size) => {
+        setProduct((prevProducts) =>
+        prevProducts.filter(
+            (item) => item._id !== id || item.size !== size
+        )
+        );
+        localStorage.setItem(
+        "cart",
+        JSON.stringify(
+            product.filter((item) => item._id !== id || item.size !== size)
+        )
+        );
+    };
+
+    // favorite product handle
+    const handleFavorite = (id) => {
+        const updatedProducts = product.map((item) =>
+        item._id === id ? { ...item, isFavorite: !item.isFavorite } : item
+        );
+        setProduct(updatedProducts);
+        localStorage.setItem("cart", JSON.stringify(updatedProducts));
+    };
+
 
     return (
         <>
@@ -71,7 +82,16 @@ const Counter = () => {
                         </div>
                         <div className="flex flex-col w-32 h-28 p-2 space-y-9">
                             <div className="flex flex-row items-center justify-end space-x-3">
-                                <img src={favorite} alt={favorite} className="h-6 w-6" />
+                                            {/* favorite button */}
+                                <button onClick={() => handleFavorite(_id)}>
+                                    {
+                                        item.isFavorite
+                                            ?
+                                            <img src={favorite} alt={favorite} className="h-7 w-7" />
+                                            :
+                                            <img src={notFavorite} alt={notFavorite} className="h-7 w-7" />
+                                    }
+                                </button>
                                 <img
                                     src={deleteBin}
                                     alt={deleteBin}
