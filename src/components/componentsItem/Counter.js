@@ -34,6 +34,20 @@ const Counter = () => {
         localStorage.setItem("cart", JSON.stringify(product));
     };
 
+    // cart delete Item
+  const deleteItem = (id, size) => {
+    setProduct((prevProducts) =>
+      prevProducts.filter(
+        (item) => item._id !== id || item.size !== size
+      )
+    );
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(
+        product.filter((item) => item._id !== id || item.size !== size)
+      )
+    );
+  };
 
     return (
         <>
@@ -51,14 +65,19 @@ const Counter = () => {
                                 alt={productGallery[0]}
                             />
                         </div>
-                        <div className="flex flex-col items-start justify-start space-y-5 p-2 w-36 h-28">
+                        <div className="flex flex-col items-start text-lg justify-start space-y-5 p-2 w-36 h-28">
                             <p className="text-sm">{name}</p>
                             <p className="text-cyan-500">{`₦${price}`}</p>
                         </div>
                         <div className="flex flex-col w-32 h-28 p-2 space-y-9">
                             <div className="flex flex-row items-center justify-end space-x-3">
                                 <img src={favorite} alt={favorite} className="h-6 w-6" />
-                                <img src={deleteBin} alt={deleteBin} className="h-7 w-7" />
+                                <img
+                                    src={deleteBin}
+                                    alt={deleteBin}
+                                    className="h-7 w-7"
+                                    onClick={() => deleteItem(_id, size)} 
+                                />
                             </div>
                             <div className="flex flex-row h-9 w-28 border-gray-100 border-2">
                                 <button
