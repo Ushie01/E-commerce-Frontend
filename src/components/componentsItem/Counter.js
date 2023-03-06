@@ -7,7 +7,7 @@ import Favorite from "../../utils/favorite";
 
 
 const Counter = () => {
-    const products = JSON.parse(localStorage.getItem('cart'));
+    const products = JSON.parse(localStorage.getItem('cart')) || [];
     const getFavProd = JSON.parse(localStorage.getItem('favorites')) || [];
     const [product, setProduct] = useState(products);
     const [favorite, setFavorite] = useState(getFavProd);
@@ -52,7 +52,6 @@ const Counter = () => {
         )
         );
     };
-
 
     return (
         <>

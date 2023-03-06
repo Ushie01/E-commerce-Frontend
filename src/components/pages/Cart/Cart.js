@@ -6,7 +6,7 @@ import arrow from "./../../../assets/arrow.svg";
 
 
 const Cart = () => {
-  const product = JSON.parse(localStorage.getItem('cart'));
+  const product = JSON.parse(localStorage.getItem('cart')) || [];
   const productId = product.reverse().map(value => value._id)[0];
   // console.log(product.map(value => value.productGallery));
 
