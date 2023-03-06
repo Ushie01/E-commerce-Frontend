@@ -1,15 +1,18 @@
-// import Loader from "./Loading/Loader";
+import { useState } from "react";
+import Loader from "./Loading/Loader";
 import deleteBin from "./../../assets/delete.svg";
-import favorite from "./../../assets/heart-fill.svg";
+import favoriteImage from "./../../assets/heart-fill.svg";
 import notFavorite from "./../../assets/love.svg"
 import dash from "./../../assets/dash.svg";
 import plus from "./../../assets/plus.svg";
-import { useState } from "react";
 
 
 const Counter = () => {
     const products = JSON.parse(localStorage.getItem('cart'));
+    const getFavProd = JSON.parse(localStorage.getItem('favorites')) || [];
     const [product, setProduct] = useState(products);
+    const [favorite, setFavorite] = useState(getFavProd);
+
 
     // cart qty increment handle
     const incrementCounter = (id, size) => {
@@ -51,13 +54,60 @@ const Counter = () => {
     };
 
     // favorite product handle
-    const handleFavorite = (id) => {
-        const updatedProducts = product.map((item) =>
-        item._id === id ? { ...item, isFavorite: !item.isFavorite } : item
-        );
-        setProduct(updatedProducts);
-        localStorage.setItem("cart", JSON.stringify(updatedProducts));
+    const favoriteHandle = (id) => {
+        if (getFavProd) {
+            const existingFav = JSON.parse(localStorage.getItem('favorites')) || [];
+            const updatedFavorites = existingFav.map((favorite) => {
+                if (favorite.productId === id) {
+                return { ...favorite, isFavorite: !favorite.isFavorite };
+                } else {
+                return favorite;
+                }
+            });
+            const isFav = { productId: id, isFavorite: true };
+            const newFavorites = existingFav.find((favorite) => favorite.productId === id)
+                ? updatedFavorites
+                : [...existingFav, isFav];
+            localStorage.setItem('favorites', JSON.stringify(newFavorites));
+            setFavorite(newFavorites);
+        } else {
+        <Loader />
+        }
     };
+
+    // const favoriteHandle = (id) => {
+    //     if (products) {
+    //     const existingFav = JSON.parse(localStorage.getItem('favorites')) || [];
+    //     const updatedFavorites = existingFav.map((favorite) => {
+    //         if (favorite.productId === id) {
+    //         return { ...favorite, isFavorite: !favorite.isFavorite };
+    //         } else {
+    //         return favorite;
+    //         }
+    //     });
+    //     const isFav = { productId: id, isFavorite: true };
+    //     const newFavorites = existingFav.find((favorite) => favorite.productId === id)
+    //         ? updatedFavorites
+    //         : [...existingFav, isFav];
+    //     localStorage.setItem('favorites', JSON.stringify(newFavorites));
+    //     const mainFav = newFavorites.find((favorite) => favorite.productId === id);
+    //     setFavorite(mainFav);
+    //     } else {
+    //     <Loader />
+    //     }
+    // };
+
+    //Access Fav Product
+  
+    console.log(getFavProd);
+    // useEffect(() => {
+    //     if (getFavProd) {
+    //     const mainFav = getFavProd.find((favorite) => favorite.productId === id);
+    //     setIsFavorite(mainFav);
+    //     } else {
+    //     <Loader />
+    //     }
+    // }, [id, products]);
 
 
     return (
@@ -83,13 +133,19 @@ const Counter = () => {
                         <div className="flex flex-col w-32 h-28 p-2 space-y-9">
                             <div className="flex flex-row items-center justify-end space-x-3">
                                             {/* favorite button */}
-                                <button onClick={() => handleFavorite(_id)}>
+                                <button onClick={() => favoriteHandle(_id)}>
                                     {
-                                        item.isFavorite
-                                            ?
-                                            <img src={favorite} alt={favorite} className="h-7 w-7" />
-                                            :
-                                            <img src={notFavorite} alt={notFavorite} className="h-7 w-7" />
+                                    favorite.length > 0 && favorite.find((f) => f.productId === _id)
+                                        ? <img
+                                            src={favorite.find((f) => f.productId === _id).isFavorite ? favoriteImage : notFavorite}
+                                            alt={favorite.find((f) => f.productId === _id).isFavorite ? favoriteImage : notFavorite}
+                                            className="h-7 w-7"
+                                        />  
+                                        : <img
+                                            src={notFavorite}
+                                            alt={notFavorite}
+                                            className="h-7 w-7" 
+                                        />
                                     }
                                 </button>
                                 <img

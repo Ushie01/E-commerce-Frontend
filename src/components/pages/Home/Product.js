@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import CarouselComponent from '../../Carousel/CarouselComponent';
 import { useAllProduct, useSingleProduct } from '../../../Hooks/useProduct';
+// import { handleFavorite } from './../../../utils/favorite';
+import CarouselComponent from '../../Carousel/CarouselComponent';
 import Star from '../../componentsItem/Star';
 import Loader from '../../componentsItem/Loading/Loader';
 import SaleSection from './SaleSection';
@@ -10,16 +11,18 @@ import Button from '../../componentsItem/Button';
 import arrow from '../../../assets/arrow.svg';
 import threeDots from '../../../assets/three-dots.svg';
 import search from '../../../assets/search_.svg';
-import love from '../../../assets/love_.svg';
+import notFavorite from '../../../assets/love.svg';
+import favoriteImage from '../../../assets/heart-fill.svg';
 import person from "./../../../assets/account.svg";
 import Navbar2 from '../../componentsItem/Navbar2';
 
 
-
 const ProductDetail = () => {
+  const existingFav = JSON.parse(localStorage.getItem('favorites')) || [];
   const { id } = useParams();
   const [submitted, setSubmitted] = useState(false);
   const [isClick, setIsClick] = useState('');
+  const [favorite, setFavorite] = useState(existingFav);
   const products = useAllProduct();
   const product = useSingleProduct(id);
   const productValue = product.product?.data?.product;
@@ -27,11 +30,31 @@ const ProductDetail = () => {
     ${productValue?.reviews[0]?.createdAt.split("T")[0]}
   `);
 
-  console.log(isClick);
-  if (!localStorage.getItem('cart')){
-    localStorage.setItem('cart', '[]')
-  }
+
+  // Accessing Favorite on a product
+  const favoriteHandle = (id) => {
+    if (productValue) {
+      const existingFav = JSON.parse(localStorage.getItem('favorites')) || [];
+      const updatedFavorites = existingFav.map((favorite) => {
+        if (favorite.productId === id) {
+          return { ...favorite, isFavorite: !favorite.isFavorite };
+        } else {
+          return favorite;
+        }
+      });
+      const isFav = { productId: id, isFavorite: true };
+      const newFavorites = existingFav.find((favorite) => favorite.productId === id)
+        ? updatedFavorites
+        : [...existingFav, isFav];
+      localStorage.setItem('favorites', JSON.stringify(newFavorites));
+      setFavorite(newFavorites);
+    } else {
+      <Loader />
+    }
+  };
+
   
+ //Handle Submit to Cart
   const onHandleSubmit = () => {
     if (productValue) {
       productValue.size = isClick;
@@ -69,7 +92,24 @@ const ProductDetail = () => {
 
             <div className="flex flex-row items-center justify-between m-3">
               <h1 className="text-2xl font-bold">{productValue?.name}</h1>
-              <img src={love} alt={love} className="w-7 h-7" />
+                <button
+                  onClick={() => favoriteHandle(productValue?._id)}
+                >
+
+                    {
+                      favorite.length > 0 && favorite.find((f) => f.productId === productValue._id)
+                        ? <img
+                            src={favorite.find((f) => f.productId === productValue._id).isFavorite ? favoriteImage : notFavorite}
+                            alt={favorite.find((f) => f.productId === productValue._id).isFavorite ? favoriteImage : notFavorite}
+                            className="h-7 w-7"
+                          />  
+                        : <img
+                            src={notFavorite}
+                            alt={notFavorite}
+                            className="h-7 w-7" 
+                          />
+                    }
+              </button>
             </div>
             
             <Star

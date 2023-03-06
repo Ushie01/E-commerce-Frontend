@@ -13,16 +13,12 @@ import collection from "../../../assets/collection.jpg";
 import love from "../../../assets/love.svg";
 import notificationBell from "../../../assets/notification-bell.svg";
 import empty from "../../../assets/x.svg";
-// import pic1 from "../../../assets/menu1.jpg";
-// import pic2 from "../../../assets/menu2.jpg";
-// import pic3 from "../../../"
 
 
 const Homepage = () => {
   const [inputValue, setInputValue] = useState('');
   const product = useAllProduct();
   const productImage = product.product?.data.products.slice(0, 4).map((value) => value?.productGallery[1]);
-
 
   return (
     <div>
