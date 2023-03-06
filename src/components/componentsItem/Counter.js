@@ -1,10 +1,9 @@
 import { useState } from "react";
 import Loader from "./Loading/Loader";
 import deleteBin from "./../../assets/delete.svg";
-import favoriteImage from "./../../assets/heart-fill.svg";
-import notFavorite from "./../../assets/love.svg"
 import dash from "./../../assets/dash.svg";
 import plus from "./../../assets/plus.svg";
+import Favorite from "../../utils/favorite";
 
 
 const Counter = () => {
@@ -14,6 +13,7 @@ const Counter = () => {
     const [favorite, setFavorite] = useState(getFavProd);
 
 
+    if (!products) return <Loader />;
     // cart qty increment handle
     const incrementCounter = (id, size) => {
         setProduct((prevProducts) =>
@@ -53,62 +53,6 @@ const Counter = () => {
         );
     };
 
-    // favorite product handle
-    const favoriteHandle = (id) => {
-        if (getFavProd) {
-            const existingFav = JSON.parse(localStorage.getItem('favorites')) || [];
-            const updatedFavorites = existingFav.map((favorite) => {
-                if (favorite.productId === id) {
-                return { ...favorite, isFavorite: !favorite.isFavorite };
-                } else {
-                return favorite;
-                }
-            });
-            const isFav = { productId: id, isFavorite: true };
-            const newFavorites = existingFav.find((favorite) => favorite.productId === id)
-                ? updatedFavorites
-                : [...existingFav, isFav];
-            localStorage.setItem('favorites', JSON.stringify(newFavorites));
-            setFavorite(newFavorites);
-        } else {
-        <Loader />
-        }
-    };
-
-    // const favoriteHandle = (id) => {
-    //     if (products) {
-    //     const existingFav = JSON.parse(localStorage.getItem('favorites')) || [];
-    //     const updatedFavorites = existingFav.map((favorite) => {
-    //         if (favorite.productId === id) {
-    //         return { ...favorite, isFavorite: !favorite.isFavorite };
-    //         } else {
-    //         return favorite;
-    //         }
-    //     });
-    //     const isFav = { productId: id, isFavorite: true };
-    //     const newFavorites = existingFav.find((favorite) => favorite.productId === id)
-    //         ? updatedFavorites
-    //         : [...existingFav, isFav];
-    //     localStorage.setItem('favorites', JSON.stringify(newFavorites));
-    //     const mainFav = newFavorites.find((favorite) => favorite.productId === id);
-    //     setFavorite(mainFav);
-    //     } else {
-    //     <Loader />
-    //     }
-    // };
-
-    //Access Fav Product
-  
-    console.log(getFavProd);
-    // useEffect(() => {
-    //     if (getFavProd) {
-    //     const mainFav = getFavProd.find((favorite) => favorite.productId === id);
-    //     setIsFavorite(mainFav);
-    //     } else {
-    //     <Loader />
-    //     }
-    // }, [id, products]);
-
 
     return (
         <>
@@ -132,22 +76,13 @@ const Counter = () => {
                         </div>
                         <div className="flex flex-col w-32 h-28 p-2 space-y-9">
                             <div className="flex flex-row items-center justify-end space-x-3">
-                                            {/* favorite button */}
-                                <button onClick={() => favoriteHandle(_id)}>
-                                    {
-                                    favorite.length > 0 && favorite.find((f) => f.productId === _id)
-                                        ? <img
-                                            src={favorite.find((f) => f.productId === _id).isFavorite ? favoriteImage : notFavorite}
-                                            alt={favorite.find((f) => f.productId === _id).isFavorite ? favoriteImage : notFavorite}
-                                            className="h-7 w-7"
-                                        />  
-                                        : <img
-                                            src={notFavorite}
-                                            alt={notFavorite}
-                                            className="h-7 w-7" 
-                                        />
-                                    }
-                                </button>
+                                {/* favorite button */}
+                                <Favorite
+                                    id={_id}
+                                    item={getFavProd}
+                                    favorite={favorite}
+                                    setFavorite={setFavorite}
+                                />
                                 <img
                                     src={deleteBin}
                                     alt={deleteBin}
