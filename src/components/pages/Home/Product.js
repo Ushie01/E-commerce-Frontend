@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-// import { Toast } from 'react-toastify/dist/components';
-// import 'react-toastify/dist/ReactToastify.css';
-// import { ToastContainer } from 'react-toastify';
+import { Toast } from '../../../Hooks/useToast';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useAllProduct, useSingleProduct } from '../../../Hooks/useProduct';
 import CarouselComponent from '../../Carousel/CarouselComponent';
 import Star from '../../componentsItem/Star';
@@ -31,7 +31,6 @@ const ProductDetail = () => {
     ${productValue?.reviews[0]?.createdAt.split("T")[0]}
   `);
 
-
   //Handle for selecting size
   const handleSizeClick = (productSize) => {
     setIsClick(productSize);
@@ -40,16 +39,24 @@ const ProductDetail = () => {
  //Handle Submit to Cart
   const onHandleSubmit = () => {
     if (productValue) {
-      productValue.size = isClick;
-      productValue.quantity = 1;
-      let itemsArray = JSON.parse(localStorage.getItem('cart')) || [];
-      itemsArray.push(productValue); 
-      localStorage.setItem('cart', JSON.stringify(itemsArray));
-      setSubmitted(true);
+      if (isClick) {
+        productValue.size = isClick;
+        productValue.quantity = 1;
+        let itemsArray = JSON.parse(localStorage.getItem('cart')) || [];
+        itemsArray.push(productValue);
+        localStorage.setItem('cart', JSON.stringify(itemsArray));
+        setSubmitted(true);
+        window.location = '/Cart';
+      } else {
+        Toast({
+          text: 'Please select your product size',
+          position: 'top-right'
+        });
+      }
     } else {
       return <Loader />;
     }
-  }
+  };
 
     return (
       <div className="mb-24">
@@ -105,11 +112,11 @@ const ProductDetail = () => {
                   </div>
                 </div>
               ))}
-              </div>
+            </div>
               
-            {/* <div>
+            <div>
               <ToastContainer />
-            </div> */}
+            </div>
               
             <p className="m-3 font-bold text-xl mt-6">Description</p>
               <p className="text-gray m-3">
@@ -194,7 +201,6 @@ const ProductDetail = () => {
               column={true}
             />
 
-            <Link to="/Cart">
               <div className='flex items-center justify-center'>
                 <Button
                   text="Add To Cart"
@@ -202,7 +208,6 @@ const ProductDetail = () => {
                   disabled={submitted}
                 />
               </div>
-            </Link>
             <Footer />
           </>
           :

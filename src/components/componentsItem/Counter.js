@@ -34,13 +34,18 @@ const Counter = () => {
 
     // cart delete Item
     const deleteItem = (id, size) => {
-        setProduct((prevProducts) =>
-            prevProducts.filter(
-                (item) => item._id !== id || item.size !== size
-            )
+        const updatedProducts = product.filter(
+        (item) => item._id !== id || item.size !== size
         );
-        window.location = "/Cart"
+        setProduct(updatedProducts);
     };
+
+    // reload dom when localStorage is set 0
+    useEffect(() => {
+        if (product.length === 0) {
+            window.location.reload();
+    }
+    }, [product]);
 
     // update localStorage when product state changes
     useEffect(() => {
