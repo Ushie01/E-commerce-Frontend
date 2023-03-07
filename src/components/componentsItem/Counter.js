@@ -6,10 +6,9 @@ import Favorite from "../../utils/favorite";
 
 
 const Counter = () => {
-    const products = JSON.parse(localStorage.getItem('cart')) || [];
-    const getFavProd = JSON.parse(localStorage.getItem('favorites')) || [];
-    const [product, setProduct] = useState(products);
-    const [favorite, setFavorite] = useState(getFavProd);
+    // initialize the product state from localStorage
+    const [product, setProduct] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+    const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
 
     // cart qty increment handle
     const incrementCounter = (id, size) => {
@@ -27,7 +26,7 @@ const Counter = () => {
         setProduct((prevProducts) =>
             prevProducts.map((item) =>
                 item._id === id && item.size === size
-                    ? { ...item, quantity: Math.max(0, item.quantity - 1) }
+                    ? { ...item, quantity: Math.max(1, item.quantity - 2) }
                     : item
             )
         );
@@ -40,6 +39,7 @@ const Counter = () => {
                 (item) => item._id !== id || item.size !== size
             )
         );
+        window.location = "/Cart"
     };
 
     // update localStorage when product state changes
@@ -50,7 +50,7 @@ const Counter = () => {
 
     return (
         <>
-            {products.map((item, index) => {
+            {product.map((item, index) => {
                 const { name, price, quantity, productGallery, _id, size } = item;
 
                 return (
@@ -73,7 +73,7 @@ const Counter = () => {
                                 {/* favorite button */}
                                 <Favorite
                                     id={_id}
-                                    item={getFavProd}
+                                    item={favorite}
                                     favorite={favorite}
                                     setFavorite={setFavorite}
                                 />
