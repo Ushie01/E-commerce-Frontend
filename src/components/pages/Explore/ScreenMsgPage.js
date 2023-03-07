@@ -1,4 +1,5 @@
 import Button from '../../componentsItem/Button';
+import { Link } from 'react-router-dom';
 
 const ScreenMsgPage = ({res, image, direction, button}) => {
     return (
@@ -14,7 +15,9 @@ const ScreenMsgPage = ({res, image, direction, button}) => {
           button
           ?
           <div className="flex items-center justify-center">
-            <Button text={direction} />
+            <Link to="/">
+              <Button text={direction} />
+            </Link>
           </div>
             :
           ""  

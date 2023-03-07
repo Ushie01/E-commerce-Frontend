@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Loader from "./Loading/Loader";
+import { useState, useEffect } from "react";
 import deleteBin from "./../../assets/delete.svg";
 import dash from "./../../assets/dash.svg";
 import plus from "./../../assets/plus.svg";
@@ -12,8 +11,6 @@ const Counter = () => {
     const [product, setProduct] = useState(products);
     const [favorite, setFavorite] = useState(getFavProd);
 
-
-    if (!products) return <Loader />;
     // cart qty increment handle
     const incrementCounter = (id, size) => {
         setProduct((prevProducts) =>
@@ -23,7 +20,6 @@ const Counter = () => {
                     : item
             )
         );
-        localStorage.setItem("cart", JSON.stringify(product));
     };
 
     // cart qty decrement handle
@@ -35,23 +31,22 @@ const Counter = () => {
                     : item
             )
         );
-        localStorage.setItem("cart", JSON.stringify(product));
     };
 
     // cart delete Item
     const deleteItem = (id, size) => {
         setProduct((prevProducts) =>
-        prevProducts.filter(
-            (item) => item._id !== id || item.size !== size
-        )
-        );
-        localStorage.setItem(
-        "cart",
-        JSON.stringify(
-            product.filter((item) => item._id !== id || item.size !== size)
-        )
+            prevProducts.filter(
+                (item) => item._id !== id || item.size !== size
+            )
         );
     };
+
+    // update localStorage when product state changes
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(product));
+    }, [product]);
+
 
     return (
         <>

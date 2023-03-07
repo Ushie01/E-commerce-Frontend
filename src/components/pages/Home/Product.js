@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+// import { Toast } from 'react-toastify/dist/components';
+// import 'react-toastify/dist/ReactToastify.css';
+// import { ToastContainer } from 'react-toastify';
 import { useAllProduct, useSingleProduct } from '../../../Hooks/useProduct';
 import CarouselComponent from '../../Carousel/CarouselComponent';
 import Star from '../../componentsItem/Star';
@@ -28,6 +31,11 @@ const ProductDetail = () => {
     ${productValue?.reviews[0]?.createdAt.split("T")[0]}
   `);
 
+
+  //Handle for selecting size
+  const handleSizeClick = (productSize) => {
+    setIsClick(productSize);
+  };
   
  //Handle Submit to Cart
   const onHandleSubmit = () => {
@@ -83,17 +91,26 @@ const ProductDetail = () => {
 
             <p className="m-3 font-bold text-xl mt-6">Select Size</p>
             <div className="flex flex-row m-3 items-start justify-start space-x-4 overflow-x-auto scrollbar-hide category">
-              {productValue?.size.split(",").map((product, index) => (
+              {productValue?.size.split(",").map((productSize, index) => (
                 <div key={index}>
                   <div>
-                    <button onClick={() => setIsClick(product)} className="h-16 text-3xl w-16 border-2 rounded-full hover:bg-sky-500 hover:text-white">
-                      {product}
+                    <button
+                      onClick={() => handleSizeClick(productSize)}
+                      className={`h-16 text-3xl w-16 border-2 rounded-full ${
+                        isClick === productSize ? 'bg-purple-500 text-white' : ''
+                      }`}
+                    >
+                      {productSize}
                     </button>
                   </div>
                 </div>
               ))}
-            </div>
-
+              </div>
+              
+            {/* <div>
+              <ToastContainer />
+            </div> */}
+              
             <p className="m-3 font-bold text-xl mt-6">Description</p>
               <p className="text-gray m-3">
                 {productValue?.description}
