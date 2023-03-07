@@ -44,7 +44,7 @@ const Counter = () => {
     useEffect(() => {
         if (product.length === 0) {
             window.location.reload();
-    }
+        }
     }, [product]);
 
     // update localStorage when product state changes
