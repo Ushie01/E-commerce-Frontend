@@ -203,6 +203,8 @@ const AddAddress = () => {
                         text={"Add Address"}
                         onClick={(e) => { handleSubmit(e) }}
                         disabled={isSubmitted}
+                        bgColor='red'
+                        textColor='white'
                     />
                 </div>
             </form>
