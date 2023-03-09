@@ -23,7 +23,6 @@ const AddAddress = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
-    console.log(id)
 
     useEffect(() => {
         if (id) {
@@ -98,7 +97,7 @@ const AddAddress = () => {
     return (
       <>
         <Navbar2
-            text={"Add Address"} 
+            text={id ? "Edit Address" : "Add Address"} 
             image={backArrow}
             linkRoute={'/ShipTo'}
         />
