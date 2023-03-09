@@ -7,10 +7,10 @@ const Input = ({
     width, placeholder,
     value, type,
     onChange, name,
-    testWidth 
+    testWidth, widthLength
 }) => {
     return (
-        <div className={`flex flex-row rounded-md h-12 items-center justify-start p-2 ${height} space-x-3 border-gray-200 border-2`}>
+        <div className={`flex flex-row rounded-md h-12 ${widthLength} items-center justify-start p-2 ${height} space-x-3 border-gray-200 border-2`}>
             {
                 image
                     ? 
@@ -25,7 +25,7 @@ const Input = ({
                 onKeyDown={handleKeyDown}
                 onBlur={handleKeyUp}
                 type={type}
-                className={`${width} ${testWidth} font-bold`}
+                className={`${width} ${testWidth} ${widthLength} font-bold`}
                 placeholder={placeholder}
                 value={value}
                 onChange={onChange}

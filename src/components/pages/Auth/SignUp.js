@@ -47,12 +47,12 @@ const SignUp = () => {
       } else {
         localStorage.setItem('user', JSON.stringify(payload));
         setIsSubmitted(false)
-        setConfirmPassword("");
-        setPassword("");
         Toast({
             text: 'Request successfull!! 🦅✨',
             position: 'top-right',
         });
+        setConfirmPassword("");
+        setPassword("");
         setErrMsg("");
         setEmail("");
         setName("");

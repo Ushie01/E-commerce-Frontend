@@ -67,3 +67,37 @@ export const validateCreateReview = (values) => {
 
     return errors;
 }
+
+export const validateAddress = (values) => {
+    let errors = {};
+
+    if (!values.country) {
+        errors.country = "Country Is Required"
+    }
+
+    if (!values.firstName) {
+        errors.firstName = "First Name Is Required"
+    }
+
+    if (!values.lastName) {
+        errors.lastName = "Last Name Is Required"
+    }
+
+    if (!values.address) {
+        errors.address = "Address Is Required"
+    }
+
+    if (!values.city) {
+        errors.city = "City Is Required"
+    }
+
+    if (!values.zipCode) {
+        errors.zipCode = "Zip Code Is Required"
+    }
+
+    if (!values.phoneNumber) {
+        errors.phoneNumber = "Phone Number Is Required "
+    }
+
+    return errors;
+}

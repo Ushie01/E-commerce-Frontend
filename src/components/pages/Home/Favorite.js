@@ -8,7 +8,7 @@ import image from '../../../assets/x.svg';
 
 const Favorite = () => {
   const productFromLocalStorage = JSON.parse(localStorage.getItem('cart')) || []; 
-  const favoriteProductLocalStorage = JSON.parse(localStorage.getItem('favorites'));
+  const favoriteProductLocalStorage = JSON.parse(localStorage.getItem('favorites')) || [];
   const uniqueProducts = [...new Map(productFromLocalStorage.map((product) => [product._id, product])).values()];
   const newFavArray = [];
 
@@ -28,7 +28,7 @@ const Favorite = () => {
       }
     }
   }
-  console.log(newFavArray.filter((fav) => fav.isFavorite === true));
+  
     return (
       <div className='h-max mb-20'>
         {

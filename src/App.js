@@ -63,6 +63,7 @@ const App = () => {
         <Route path='/Account/Order' element={<Order />} />
         <Route path='/Order/OrderDetails' element={<OrderDetails />} />
         <Route path='/Account/Address' element={<Address />} />
+        <Route path='AddAddress/:id' element={<AddAddress />} />
         <Route path='AddAddress' element={<AddAddress />} />
         <Route path="*" element={
           <main>
