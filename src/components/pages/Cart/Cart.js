@@ -53,7 +53,7 @@ const Cart = () => {
                   </div>
                 </div>
                 <Link to="/ShipTo" className="flex left-0 right-0 bottom-6 ">
-                  <Button text="Check Out" />
+                  <Button text="Check Out" bgColor='red' textColor='white' />
                 </Link>
               </div>
             </>
@@ -64,6 +64,7 @@ const Cart = () => {
                 direction='Return To Order'
                 image={image}
                 button={true}
+                linkRoute="/"
               />
             </div>
         }

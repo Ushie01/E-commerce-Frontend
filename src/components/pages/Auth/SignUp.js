@@ -144,6 +144,8 @@ const SignUp = () => {
               text="Sign Up"
               onClick={(e) => { handleSubmit(e) }}
               disabled={isSubmitted}
+              bgColor="red"
+              textColor="white"
             />
           </div>
 

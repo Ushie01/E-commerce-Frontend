@@ -87,3 +87,20 @@ export const userCreateReview = async (payload, id) => {
         console.error(error)
     }
 }
+
+export const postOrder = async (payload) => { 
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/orders`, {
+        method: 'POST',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        },
+        body: JSON.stringify(payload)
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}

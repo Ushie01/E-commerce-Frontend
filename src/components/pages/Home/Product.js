@@ -10,12 +10,13 @@ import Loader from '../../componentsItem/Loading/Loader';
 import SaleSection from './SaleSection';
 import Footer from '../../componentsItem/Footer';
 import Button from '../../componentsItem/Button';
+import Navbar2 from '../../componentsItem/Navbar2';
+import Favorite from '../../../utils/favorite';
 import arrow from '../../../assets/arrow.svg';
 import threeDots from '../../../assets/three-dots.svg';
 import search from '../../../assets/search_.svg';
 import person from "./../../../assets/account.svg";
-import Navbar2 from '../../componentsItem/Navbar2';
-import Favorite from '../../../utils/favorite';
+
 
 
 const ProductDetail = () => {
@@ -35,7 +36,9 @@ const ProductDetail = () => {
   const handleSizeClick = (productSize) => {
     setIsClick(productSize);
   };
-  
+
+  // if()
+
  //Handle Submit to Cart
   const onHandleSubmit = () => {
     if (productValue) {
@@ -69,8 +72,9 @@ const ProductDetail = () => {
               text={productValue?.name} 
               secondImage={search} 
               thirdImage={threeDots} 
-              linkRoute={'/'}
-              />
+              linkRoute='/'
+              secondLinkRoute='/Explore'
+            />
             <div className='flex items-center justify-center'>
               <CarouselComponent
                 image={productValue?.productGallery}
@@ -194,7 +198,9 @@ const ProductDetail = () => {
                   .product
                   ?.data
                   .products
-                  .filter(product => product.brand.toLowerCase().includes('euphorya'))
+                    .filter(
+                      prod => prod?.name.split(" ")[0] === productValue?.name.split(" ")[0]
+                    ).slice(0, 4)
               }
               discount={"25% off"}
               deleteBin={false}
@@ -206,6 +212,8 @@ const ProductDetail = () => {
                   text="Add To Cart"
                   onClick={onHandleSubmit} 
                   disabled={submitted}
+                  bgColor='red'
+                  textColor='white'
                 />
               </div>
             <Footer />

@@ -14,7 +14,6 @@ import Button from './../../componentsItem/Button'
 import envelope from './../../../assets/envelope.svg';
 
 
-
 const SignIn = () => {
   const [err, setError] = useState("");
   const [email, setEmail] = useState("");
@@ -22,7 +21,7 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [isSubmitted, setIsSubmited] = useState(false);
   // const navigate = useNavigate();
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -106,6 +105,8 @@ const SignIn = () => {
               text="Sign In" 
               onClick={(e) => { handleSubmit(e) }}
               disabled={isSubmitted}
+              bgColor="red"
+              textColor="white"
             />
           </div>
 

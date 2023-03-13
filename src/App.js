@@ -32,7 +32,7 @@ import MegaSale from './components/pages/Home/MegaSale';
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter className="mobile-only">
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='Notification' element={<Notification />} />

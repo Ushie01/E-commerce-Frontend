@@ -23,10 +23,12 @@ const AddAddress = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
+    // const index = 0;
 
     useEffect(() => {
         if (id) {
-            const addressResponse = savedAddresses.find((address) => address.phoneNumber === id);
+            const addressResponse = savedAddresses.find((address) => address.index === id);
+            console.log(addressResponse);
             if (addressResponse) {
                 const { country, firstName, lastName, address, city, zipCode, phoneNumber } = addressResponse;
                 setCountry(country);
@@ -75,15 +77,16 @@ const AddAddress = () => {
                 phoneNumber
             ) {
                 setIsSubmitted(true);
-                setSavedAddresses([...savedAddresses, values]);
-                localStorage.setItem('address', JSON.stringify([...savedAddresses, values]));
+                const newIndex = savedAddresses.length;
+                setSavedAddresses([...savedAddresses, { ...values, index: newIndex }]);
+                localStorage.setItem('address', JSON.stringify([...savedAddresses, { ...values, index: newIndex }]));
                 receivedResponse()
             } else {
                 setErr("Please fill in all fields");
             }
         } else {
             const updatedAddress = savedAddresses.map((address) =>
-            address.phoneNumber === id ? { ...address, ...values } : address
+                address.index === id ? { ...address, ...values } : address
             );
             setSavedAddresses(updatedAddress);
             localStorage.setItem('address', JSON.stringify(updatedAddress));

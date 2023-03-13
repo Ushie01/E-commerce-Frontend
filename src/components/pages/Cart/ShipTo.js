@@ -10,20 +10,27 @@ import add from "../../../assets/plus_.svg";
 import { Link } from "react-router-dom";
 
 const ShipTo = () => {
+  // const orderItem = JSON.parse(localStorage.getItem("cart"));
   const [addresses, setAddresses] = useState(JSON.parse(localStorage.getItem("address")) || []);
   const [click, setClick] = useState(false);
   const [deletePhoneNumber, setDeletePhoneNumber] = useState(null);
-  const [addressSelected, setAddressSelected] = useState(false);
+  const [addressSelected, setAddressSelected] = useState(0);
+  const [selectIndex, setSelectedIndex] = useState("");
 
   // delete address
   const handleDeleteAddress = (phoneNumber) => {
     setAddresses((prevAddresses) => {
-      const filteredAddresses = prevAddresses.filter((address) => address.phoneNumber !== phoneNumber);
+      const filteredAddresses = prevAddresses
+        .filter(
+          (address) => address.phoneNumber !== phoneNumber
+        );
       return filteredAddresses;
     });
-    window.location.reload(true);
+    // window.location.reload(true);
   };
 
+  const filteredAddresses = addresses.filter((address) => address.index === selectIndex);
+  console.log(filteredAddresses);
 
   useEffect(() => {
     localStorage.setItem("address", JSON.stringify(addresses));
@@ -45,10 +52,10 @@ const ShipTo = () => {
             {addresses.length > 0
               ? (
                 <>
-                  {addresses.map((address) => (
-                    <div className="m-5" key={address.phoneNumber}>
-                      <div className={`flex flex-col border-gray-100 border-2 ${addressSelected ? 'hover:border-yellow-500': ""} p-5 rounded-md space-y-3 `}
-                        onClick={() => setAddressSelected(true)}
+                  {addresses.reverse().map((address) => (
+                    <div className="m-5" key={address.index}>
+                      <div className={`flex flex-col border-gray-100 border-2 ${addressSelected ? 'hover:border-red-500': ""} p-5 rounded-md space-y-3 `}
+                        onClick={() => { setAddressSelected(true); setSelectedIndex(address.index); }}
                       >
                         <p className="text-md font-extrabold">
                           {address.firstName} {address.lastName}
@@ -56,7 +63,7 @@ const ShipTo = () => {
                         <p className="text-gray-500">{address.address}</p>
                         <p className="text-gray-500">{address.phoneNumber}</p>
                         <div className="flex flex-row items-center">
-                          <Link to={`/Addaddress/${address.phoneNumber}`}>
+                          <Link to={`/Addaddress/${address.index}`}>
                             <button className="h-12 w-28 text-white shadow-md bg-red-600 rounded-md font-extrabold text-md ">
                               Edit
                             </button>
@@ -65,7 +72,7 @@ const ShipTo = () => {
                             src={deleteBin}
                             alt="delete"
                             onClick={() => {
-                              setDeletePhoneNumber(address.phoneNumber);
+                              setDeletePhoneNumber(address.index);
                               setClick(true);
                             }}
                             className="ml-8 h-8 w-8"
