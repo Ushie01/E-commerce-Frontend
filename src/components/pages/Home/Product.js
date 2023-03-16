@@ -37,8 +37,6 @@ const ProductDetail = () => {
     setIsClick(productSize);
   };
 
-  // if()
-
  //Handle Submit to Cart
   const onHandleSubmit = () => {
     if (productValue) {

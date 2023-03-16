@@ -10,7 +10,13 @@ import search from '../../../assets/search_.svg';
 
 const FlashSale = () => {
   const product = useAllProduct();
-  const productImage = product.product?.data.products.slice(0, 4).reverse().map((value) => value?.productGallery[1]);
+  const productImage = product
+    .product
+    ?.data
+    .products
+    .slice(0, 4)
+    .reverse()
+    .map((value) => value?.productGallery[1]);
 
     return (
       <div className="mb-20">

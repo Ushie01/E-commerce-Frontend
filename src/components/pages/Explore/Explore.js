@@ -14,10 +14,7 @@ const Explore = () => {
   const product = useAllProduct();
   if (!product) return <Loader />;
   const productItems = product.product?.data.products;
-  console.log(productItems)
 
-  
-  
     return (
       <>
         {
