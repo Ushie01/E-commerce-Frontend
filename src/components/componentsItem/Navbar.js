@@ -14,6 +14,19 @@ const Navbar = ({
   const [isClick, setIsClick] = useState(false);
   const [inputText, setInputText] = useState('');
   const navigate = useNavigate();
+  const uniqueProducts = [];
+  
+  products.product?.data.products
+		?.filter((value) =>
+			value.name.toLowerCase().includes(inputText.toLowerCase())
+		)
+		.forEach((product) => {
+			const index = uniqueProducts.findIndex((p) => p.name === product.name);
+			if (index === -1) {
+				uniqueProducts.push(product);
+			}
+		});
+
 
   //Event listener for input key down
   const handleKeyDown = () => {
@@ -25,9 +38,8 @@ const Navbar = ({
     setIsClick(false);
   }
 
-  //Routing Search result click
+  //Handle for searching product base on input text
   const onHandleClick = (valueClick) => {
-    // window.location.href = `/SearchResult/${valueClick}`;
     navigate(`/SearchResult/${valueClick}`);
     setInputText('');
   }
@@ -84,7 +96,7 @@ const Navbar = ({
 			<>
 				{inputText ? (
 					<>
-						{products.product?.data.products
+						{uniqueProducts
 							?.filter((value) =>
 								value.name.toLowerCase().includes(inputText.toLowerCase())
 							)
