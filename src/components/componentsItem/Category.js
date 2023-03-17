@@ -15,7 +15,7 @@ const Category = ({ products, column }) => {
                 ?
                 products?.map((prod, index) => (
                     <div key={index}>
-                        <Link to={`Product/${prod?._id}`}>
+                        <Link to={`/Product/${prod?._id}`}>
                             <div>
                                 <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
                                     {prod?.collectionsData.split(" ")[0][0]}{prod?.collectionsData.split(" ")[1] ? prod?.collectionsData.split(" ")[1][0] : "" }

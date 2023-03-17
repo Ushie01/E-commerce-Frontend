@@ -17,7 +17,7 @@ const AddAddress = () => {
     const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
     const [city, setCity] = useState("");
-    const [zipCode, setZipCode] = useState("");
+    const [postalCode, setPostalCode] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
     const [err, setErr] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -30,13 +30,13 @@ const AddAddress = () => {
             const addressResponse = savedAddresses.find((address) => address.index === id);
             console.log(addressResponse);
             if (addressResponse) {
-                const { country, firstName, lastName, address, city, zipCode, phoneNumber } = addressResponse;
+                const { country, firstName, lastName, address, city, postalCode, phoneNumber } = addressResponse;
                 setCountry(country);
                 setFirstName(firstName);
                 setLastName(lastName);
                 setAddress(address);
                 setCity(city);
-                setZipCode(zipCode);
+                setPostalCode(postalCode);
                 setPhoneNumber(phoneNumber);
             }
         }
@@ -60,7 +60,7 @@ const AddAddress = () => {
             lastName,
             address,
             city,
-            zipCode,
+            postalCode,
             phoneNumber
         }
 
@@ -73,7 +73,7 @@ const AddAddress = () => {
                 lastName &&
                 address &&
                 city &&
-                zipCode &&
+                postalCode &&
                 phoneNumber
             ) {
                 setIsSubmitted(true);
@@ -91,128 +91,128 @@ const AddAddress = () => {
             setSavedAddresses(updatedAddress);
             localStorage.setItem('address', JSON.stringify(updatedAddress));
             receivedResponse();
-
         }
     };
 
 
 
     return (
-      <>
-        <Navbar2
-            text={id ? "Edit Address" : "Add Address"} 
-            image={backArrow}
-            linkRoute={'/ShipTo'}
-        />
-            
-        <div className="mb-12">
+        <>
             <div>
                 <ToastContainer />
             </div>
-            <form>
-                <div className="flex flex-col items-start justify-start space-y-3 p-4">
-                    <label className="text-md font-bold">Country</label>
-                        <Input
-                            placeholder={"Country"}
-                            type="text"
-                            widthLength={"w-full"}
-                            name="name"
-                            value={country}
-                            onChange={(e) => setCountry(e.target.value)}
-                        />
-                        {err.country && <p className='text-red-600 text-sm font-bold'>{err.country}</p>}
-                </div>
                 
-                <div className="flex flex-col items-start justify-start space-y-3 p-4">
-                    <label className="text-md font-bold">First Name</label>
-                        <Input
-                            placeholder={"First Name"}
-                            type="text"
-                            widthLength={"w-full"}
-                            name="name"
-                            value={firstName}
-                            onChange={(e) => setFirstName(e.target.value)}
-                        />
-                        {err.firstName && <p className='text-red-600 text-sm font-bold'>{err.firstName}</p>}
-                </div>
+            <Navbar2
+                text={id ? "Edit Address" : "Add Address"} 
+                image={backArrow}
+                linkRoute={'/ShipTo'}
+            />
                 
-                <div className="flex flex-col items-start justify-start space-y-3 p-4">
-                    <label className="text-md font-bold">Last Name</label>
-                        <Input
-                            placeholder={"Last Name"}
-                            type="text"
-                            widthLength={"w-full"}
-                            name="name"
-                            value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
+            <div className="mb-12">
+                <form>
+                    <div className="flex flex-col items-start justify-start space-y-3 p-4">
+                        <label className="text-md font-bold">Country</label>
+                            <Input
+                                placeholder={"Country"}
+                                type="text"
+                                widthLength={"w-full"}
+                                name="name"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                            />
+                            {err.country && <p className='text-red-600 text-sm font-bold'>{err.country}</p>}
+                    </div>
+                    
+                    <div className="flex flex-col items-start justify-start space-y-3 p-4">
+                        <label className="text-md font-bold">First Name</label>
+                            <Input
+                                placeholder={"First Name"}
+                                type="text"
+                                widthLength={"w-full"}
+                                name="name"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                            {err.firstName && <p className='text-red-600 text-sm font-bold'>{err.firstName}</p>}
+                    </div>
+                    
+                    <div className="flex flex-col items-start justify-start space-y-3 p-4">
+                        <label className="text-md font-bold">Last Name</label>
+                            <Input
+                                placeholder={"Last Name"}
+                                type="text"
+                                widthLength={"w-full"}
+                                name="name"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                            {err.lastName && <p className='text-red-600 text-sm font-bold'>{err.lastName}</p>}
+                    </div>
+                    
+                    <div className="flex flex-col items-start justify-start space-y-3 p-4">
+                        <label className="text-md font-bold">Street Address</label>
+                            <Input
+                                placeholder={"Street Address"}
+                                type="text"
+                                widthLength={"w-full"}
+                                name="name"
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                            />
+                            {err.address && <p className='text-red-600 text-sm font-bold'>{err.address}</p>}
+                    </div>
+                    
+                    <div className="flex flex-col items-start justify-start space-y-3 p-4">
+                        <label className="text-md font-bold">State/Province/Region</label>
+                            <Input
+                                placeholder={"State/Province/Region"}
+                                type="text"
+                                widthLength={"w-full"}
+                                name="name"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                            />
+                            {err.city && <p className='text-red-600 text-sm font-bold'>{err.city}</p>}
+                    </div>
+                    
+                    <div className="flex flex-col items-start justify-start space-y-3 p-4">
+                        <label className="text-md font-bold">Postal Code</label>
+                            <Input
+                                placeholder={"Zip Code"}
+                                type="number"
+                                widthLength={"w-full"}
+                                name="name"
+                                value={postalCode}
+                                onChange={(e) => setPostalCode(e.target.value)}
+                            />
+                            {err.postalCode && <p className='text-red-600 text-sm font-bold'>{err.postalCode}</p>}
+                    </div>
+                    
+                    <div className="flex flex-col items-start justify-start space-y-3 p-4">
+                        <label className="text-md font-bold">Phone Number</label>
+                            <Input
+                                placeholder={"Phone Number"}
+                                type="number"
+                                widthLength={"w-full"}
+                                name="name"
+                                value={phoneNumber}
+                                onChange={(e) => setPhoneNumber(e.target.value)}
+                            />
+                            {err.phoneNumber && <p className='text-red-600 text-sm font-bold'>{err.phoneNumber}</p>}
+                    </div>
+                    
+                    <div className="flex left-0 mt-16 right-0 bottom-5">
+                        <Button 
+                            text={"Add Address"}
+                            onClick={(e) => { handleSubmit(e) }}
+                            disabled={isSubmitted}
+                            bgColor='red'
+                            textColor='white'
                         />
-                        {err.lastName && <p className='text-red-600 text-sm font-bold'>{err.lastName}</p>}
-                </div>
-                
-                <div className="flex flex-col items-start justify-start space-y-3 p-4">
-                    <label className="text-md font-bold">Street Address</label>
-                        <Input
-                            placeholder={"Street Address"}
-                            type="text"
-                            widthLength={"w-full"}
-                            name="name"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
-                        />
-                        {err.address && <p className='text-red-600 text-sm font-bold'>{err.address}</p>}
-                </div>
-                
-                <div className="flex flex-col items-start justify-start space-y-3 p-4">
-                    <label className="text-md font-bold">State/Province/Region</label>
-                        <Input
-                            placeholder={"State/Province/Region"}
-                            type="text"
-                            widthLength={"w-full"}
-                            name="name"
-                            value={city}
-                            onChange={(e) => setCity(e.target.value)}
-                        />
-                        {err.city && <p className='text-red-600 text-sm font-bold'>{err.city}</p>}
-                </div>
-                
-                <div className="flex flex-col items-start justify-start space-y-3 p-4">
-                    <label className="text-md font-bold">Zip Code</label>
-                        <Input
-                            placeholder={"Zip Code"}
-                            type="number"
-                            widthLength={"w-full"}
-                            name="name"
-                            value={zipCode}
-                            onChange={(e) => setZipCode(e.target.value)}
-                        />
-                        {err.zipCode && <p className='text-red-600 text-sm font-bold'>{err.zipCode}</p>}
-                </div>
-                
-                <div className="flex flex-col items-start justify-start space-y-3 p-4">
-                    <label className="text-md font-bold">Phone Number</label>
-                        <Input
-                            placeholder={"Phone Number"}
-                            type="number"
-                            widthLength={"w-full"}
-                            name="name"
-                            value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
-                        />
-                        {err.phoneNumber && <p className='text-red-600 text-sm font-bold'>{err.phoneNumber}</p>}
-                </div>
-                
-                <div className="flex left-0 mt-16 right-0 bottom-5">
-                    <Button 
-                        text={"Add Address"}
-                        onClick={(e) => { handleSubmit(e) }}
-                        disabled={isSubmitted}
-                        bgColor='red'
-                        textColor='white'
-                    />
-                </div>
-            </form>
-        </div>
-      </>
+                    </div>
+                </form>
+            </div>
+        </>
     );
 }
 

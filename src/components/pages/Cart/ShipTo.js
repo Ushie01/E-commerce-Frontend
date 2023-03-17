@@ -1,4 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { postOrder } from "../../../helper/api";
+import { Toast } from "../../../Hooks/useToast";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import ScreenMsgPage from "../Explore/ScreenMsgPage";
 import Navbar2 from "../../componentsItem/Navbar2";
 import Button from "../../componentsItem/Button";
@@ -7,15 +12,16 @@ import arrow from "../../../assets/arrow.svg";
 import empty from "../../../assets/x.svg";
 import exclamation from "../../../assets/exclamation.svg"
 import add from "../../../assets/plus_.svg";
-import { Link } from "react-router-dom";
 
 const ShipTo = () => {
-  // const orderItem = JSON.parse(localStorage.getItem("cart"));
-  const [addresses, setAddresses] = useState(JSON.parse(localStorage.getItem("address")) || []);
-  const [click, setClick] = useState(false);
-  const [deletePhoneNumber, setDeletePhoneNumber] = useState(null);
+  const [addresses, setAddresses] = useState(JSON.parse(localStorage.getItem("address")) || []);  const [deletePhoneNumber, setDeletePhoneNumber] = useState(null);
   const [addressSelected, setAddressSelected] = useState(0);
   const [selectIndex, setSelectedIndex] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [click, setClick] = useState(false);
+  const [sum, setSum] = useState(Number);
+  const [cart, setCart] = useState([]);
+  const navigate = useNavigate();
 
   // delete address
   const handleDeleteAddress = (phoneNumber) => {
@@ -26,11 +32,49 @@ const ShipTo = () => {
         );
       return filteredAddresses;
     });
-    // window.location.reload(true);
   };
 
-  const filteredAddresses = addresses.filter((address) => address.index === selectIndex);
-  console.log(filteredAddresses);
+  const filteredAddresses = addresses
+    .filter((address) => address.index === selectIndex)[0];
+  if (filteredAddresses) {
+    delete filteredAddresses.index;
+  }
+
+  const onHandleSubmit = async () => {
+    if (!filteredAddresses) {
+      Toast({
+        text: 'Please select an address to proceed',
+        position: 'top-right'
+      })
+    } else {
+      const data = {
+        shippingAddress: filteredAddresses,
+        shippingPrice: cart.length * 1000,
+        totalPrice: sum,
+        paymentMethod: "flw",
+        orderItems: cart.map((c) => ({
+            qty: c.quantity,
+            price: c.price * c.quantity,
+            product: c._id
+        }))
+      }
+      const res = await postOrder(data);
+      setIsSubmitted(true);
+      console.log(res);
+      setTimeout(() => {
+          navigate("/ScreenPage")
+      }, 1000);
+    }
+  }
+
+  useEffect(() => {
+    const prod = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(prod)
+    const summationPrice = prod.reduce((acc, cur) => {
+      return acc + (cur.price * cur.quantity);
+    }, 0);
+    setSum(summationPrice)
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("address", JSON.stringify(addresses));
@@ -38,6 +82,9 @@ const ShipTo = () => {
 
   return (
     <>
+      <div>
+        <ToastContainer />
+      </div>
       {
         !click
           ?
@@ -52,8 +99,8 @@ const ShipTo = () => {
             {addresses.length > 0
               ? (
                 <>
-                  {addresses.reverse().map((address) => (
-                    <div className="m-5" key={address.index}>
+                  {addresses.reverse().map((address, index) => (
+                    <div className="m-5" key={index}>
                       <div className={`flex flex-col border-gray-100 border-2 ${addressSelected ? 'hover:border-red-500': ""} p-5 rounded-md space-y-3 `}
                         onClick={() => { setAddressSelected(true); setSelectedIndex(address.index); }}
                       >
@@ -79,9 +126,16 @@ const ShipTo = () => {
                           />
                         </div>
                       </div>
-                      <Link to="/ScreenPage" className="flex flex-auto mt-12 fixed left-0 right-0 bottom-5">
-                        <Button text="Next" className="m-auto" textColor='white' bgColor="red"  />
-                      </Link>
+                      <div className="flex flex-auto mt-12 fixed left-0 right-0 bottom-5">
+                        <Button
+                          text="Next"
+                          className="m-auto"
+                          textColor='white'
+                          bgColor="red"
+                          onClick={onHandleSubmit}
+                          disabled={isSubmitted}
+                        />
+                      </div>
                     </div>
                   ))}
                 </>

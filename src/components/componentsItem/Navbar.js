@@ -10,13 +10,13 @@ const Navbar = ({
   notificationBell,
   value
 }) => {
-  const products = useAllProduct();
-  const [isClick, setIsClick] = useState(false);
-  const [inputText, setInputText] = useState('');
-  const navigate = useNavigate();
-  const uniqueProducts = [];
+    const products = useAllProduct();
+    const [isClick, setIsClick] = useState(false);
+    const [inputText, setInputText] = useState('');
+    const navigate = useNavigate();
+    const uniqueProducts = [];
   
-  products.product?.data.products
+    products.product?.data.products
 		?.filter((value) =>
 			value.name.toLowerCase().includes(inputText.toLowerCase())
 		)
@@ -28,23 +28,23 @@ const Navbar = ({
 		});
 
 
-  //Event listener for input key down
-  const handleKeyDown = () => {
-    setIsClick(true);
-  };
+	//Event listener for input key down
+	const handleKeyDown = () => {
+		setIsClick(true);
+	};
 
-  //Event listener for input key up
-  const handleKeyUp = () => {
-    setIsClick(false);
-  }
+	//Event listener for input key up
+	const handleKeyUp = () => {
+		setIsClick(false);
+	}
 
-  //Handle for searching product base on input text
-  const onHandleClick = (valueClick) => {
-    navigate(`/SearchResult/${valueClick}`);
-    setInputText('');
-  }
+	//Handle for searching product base on input text
+	const onHandleClick = (valueClick) => {
+		navigate(`/SearchResult/${valueClick}`);
+		setInputText('');
+	}
 
-  return (
+    return (
 		<div className='flex flex-col'>
 			<nav className='flex flex-row border-gray-100 border-b-2 items-center justify-between w-98 p-3 h-20 bg-white'>
 				<Input

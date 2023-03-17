@@ -18,7 +18,7 @@ const Offer = () => {
         </div>
 
         <div className="m-3">
-          <div className="relative flex flex-row bg-gray-400 rounded-md">
+          <div className="relative flex flex-row rounded-md">
             <img src={five} alt={five} className="w-1/2 h-60 rounded-l-lg" />
             <img src={ten} alt={ten} className="w-1/2 h-60 rounded-r-lg" />
           </div>
@@ -33,7 +33,7 @@ const Offer = () => {
           </div>
         </div>
         <div className="m-3">
-          <div className="relative flex flex-row bg-gray-400 rounded-md">
+          <div className="relative flex flex-row rounded-md">
             <img src={eight} alt={eight} className="w-1/2 h-60 rounded-l-lg" />
             <img src={nine} alt={nine} className="w-1/2 h-60 rounded-r-lg" />
           </div>

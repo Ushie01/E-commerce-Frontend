@@ -7,7 +7,6 @@ import Navbar2 from "../../componentsItem/Navbar2";
 import arrow from "./../../../assets/arrow.svg";
 import image from "./../../../assets/x.svg";
 
-
 const Cart = () => {
   const [sum, setSum] = useState(Number);
   const [product, setProduct] = useState([]);
@@ -52,8 +51,15 @@ const Cart = () => {
                     <p className="text-cyan-500 font-extrabold">{(`₦${sum + 2000 * product.length}`).toLocaleString()}</p>
                   </div>
                 </div>
-                <Link to="/ShipTo" className="flex left-0 right-0 bottom-6 ">
-                  <Button text="Check Out" bgColor='red' textColor='white' />
+                <Link
+                  to="/ShipTo"
+                  className="flex left-0 right-0 bottom-6"
+                >
+                  <Button
+                    text="Check Out" 
+                    bgColor='red'
+                    textColor='white'
+                  />
                 </Link>
               </div>
             </>
