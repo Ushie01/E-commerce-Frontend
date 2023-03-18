@@ -13,6 +13,7 @@ const Navbar = ({
   thirdLink,
   filter,
   setFilter,
+  setIsSearch,
   image
 }) => {
     const products = useAllProduct();
@@ -36,6 +37,7 @@ const Navbar = ({
 	//Event listener for input key down
 	const handleKeyDown = () => {
 		setIsClick(true);
+		setIsSearch(uniqueProducts);
 	};
 
 	//Event listener for input key up

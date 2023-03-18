@@ -25,6 +25,9 @@ const Explore = () => {
             <>
             <Navbar
               love={love}
+              favorite={true}
+              secondLink={'/Favorite'}
+              thirdLink={'/Notification'}
               notificationBell={notificationBell}
               onChange={(e) => setInputValue(e.target.value)}
             />
