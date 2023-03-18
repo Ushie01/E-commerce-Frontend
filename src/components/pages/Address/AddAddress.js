@@ -7,8 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Navbar2 from "../../componentsItem/Navbar2";
 import Input from "../../componentsItem/Input";
 import Button from "../../componentsItem/Button";
-import backArrow from "./../../../assets/arrow.svg"
-
+import backArrow from "./../../../assets/arrow.svg";
 
 const AddAddress = () => {
     const [savedAddresses, setSavedAddresses] = useState(JSON.parse(localStorage.getItem('address')) || []);
@@ -23,12 +22,10 @@ const AddAddress = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
-    // const index = 0;
 
     useEffect(() => {
         if (id) {
             const addressResponse = savedAddresses.find((address) => address.index === id);
-            console.log(addressResponse);
             if (addressResponse) {
                 const { country, firstName, lastName, address, city, postalCode, phoneNumber } = addressResponse;
                 setCountry(country);

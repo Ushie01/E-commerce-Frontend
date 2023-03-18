@@ -8,7 +8,12 @@ import search from './../../assets/search.svg';
 const Navbar = ({
   love,
   notificationBell,
-  value
+  value,
+  secondLink,
+  thirdLink,
+  filter,
+  setFilter,
+  image
 }) => {
     const products = useAllProduct();
     const [isClick, setIsClick] = useState(false);
@@ -44,80 +49,101 @@ const Navbar = ({
 		setInputText('');
 	}
 
-    return (
-		<div className='flex flex-col'>
-			<nav className='flex flex-row border-gray-100 border-b-2 items-center justify-between w-98 p-3 h-20 bg-white'>
-				<Input
-					handleKeyDown={handleKeyDown}
-					handleKeyUp={handleKeyUp}
-					image={search}
-					placeholder={'Search Product'}
-					height={'h-12'}
-					width={'w-52'}
-					value={value}
-					onChange={(e) => setInputText(e.target.value)}
-				/>
+	//Toggling filter by price
+	const onHandleFilterClick = () => {
+		setFilter(!filter)
+	}
 
-				{isClick ? (
-					<div className='flex flex-row items-end justify-end space-x-4"'>
-						<Link to='/Favorite'>
-							<button>
-								<img
-									src={mic}
-									alt={mic}
-									className='h-7 w-7 delay-500 transition duration-700 ease-in-out'
-								/>
-							</button>
-						</Link>
-					</div>
-				) : (
-					<div className='flex flex-row items-end justify-end space-x-4'>
-						<Link to='/Favorite'>
-							<button>
-								<img
-									src={love}
-									alt={love}
-									className='h-7 w-7 transition duration-700'
-								/>
-							</button>
-						</Link>
-						<Link to='/Notification'>
-							<button>
-								<img
-									src={notificationBell}
-									alt={notificationBell}
-									className='h-7 w-7 ml-2 transition duration-700'
-								/>
-							</button>
-						</Link>
-					</div>
-				)}
-			</nav>
-			<>
-				{inputText ? (
-					<>
-						{uniqueProducts
-							?.filter((value) =>
-								value.name.toLowerCase().includes(inputText.toLowerCase())
-							)
-              .map((value, index) => (
-                <div key={index}>
-                  <div
-                    className='p-4 hover:bg-gray-100'
-                    onClick={() => onHandleClick(value?.name)}
-                  >
-                    <p className='text-md font-bold'>{value?.name}</p>
-                  </div>
-                  <hr className='border' />
-                </div>
-							))}
-					</>
-				) : (
-					''
-				)}
-			</>
-		</div>
-	);
+    return (
+			<div className='flex flex-col'>
+				<nav className='flex flex-row border-gray-100 border-b-2 items-center justify-between w-98 p-3 h-20 bg-white'>
+					<Input
+						handleKeyDown={handleKeyDown}
+						handleKeyUp={handleKeyUp}
+						image={search}
+						placeholder={'Search Product'}
+						height={'h-12'}
+						width={'w-52'}
+						value={value}
+						onChange={(e) => setInputText(e.target.value)}
+					/>
+
+					{isClick ? (
+						<div className='flex flex-row items-end justify-end space-x-4"'>
+							<Link to='/Favorite'>
+								<button>
+									<img
+										src={mic}
+										alt={mic}
+										className='h-7 w-7 delay-500 transition duration-700 ease-in-out'
+									/>
+								</button>
+							</Link>
+						</div>
+					) : (
+						<div className='flex flex-row items-end justify-end space-x-4'>
+							<>
+								{image ? (
+									<>
+										<button
+											className='mb-2'
+										    onClick={onHandleFilterClick}	
+										>
+											<img
+												src={love}
+												alt={love}
+												className='h-7 w-7 transition duration-700'
+											/>
+										</button>
+									</>
+								) : (
+									<Link to={secondLink}>
+										<button>
+											<img
+												src={love}
+												alt={love}
+												className='h-7 w-7 transition duration-700'
+											/>
+										</button>
+									</Link>
+								)}
+							</>
+							<Link to={thirdLink}>
+								<button>
+									<img
+										src={notificationBell}
+										alt={notificationBell}
+										className='h-7 w-7 ml-2 transition duration-700'
+									/>
+								</button>
+							</Link>
+						</div>
+					)}
+				</nav>
+				<>
+					{inputText ? (
+						<>
+							{uniqueProducts
+								?.filter((value) =>
+									value.name.toLowerCase().includes(inputText.toLowerCase())
+								)
+								.map((value, index) => (
+									<div key={index}>
+										<div
+											className='p-4 hover:bg-gray-100'
+											onClick={() => onHandleClick(value?.name)}>
+											<p className='text-md font-bold'>{value?.name}</p>
+										</div>
+										<hr className='border' />
+									</div>
+								))}
+						</>
+					) : (
+						''
+					)}
+				</>
+			</div>
+		);
 }
 
 export default Navbar;

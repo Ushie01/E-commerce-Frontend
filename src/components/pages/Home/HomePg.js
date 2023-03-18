@@ -24,6 +24,8 @@ const Homepage = () => {
         <div>
             <Navbar
                 love={love}
+                secondLink="/Favorite"
+                thirdLink="/Notification"
                 notificationBell={notificationBell}
                 onChange={(e) => setInputValue(e.target.value)}
             />
