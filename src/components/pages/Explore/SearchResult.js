@@ -11,12 +11,19 @@ import SaleSection from '../Home/SaleSection';
 const SearchResult = () => {
   const { prod } = useParams();
   const products = useAllProduct();
-  const [, setSortBy] = useState('name'); 
+  const [, setSortBy] = useState('name');
   const [filter, setFilter] = useState(false);
   const [isSearch, setIsSearch] = useState('');
-  console.log(isSearch);
+
 
   let productValue;
+
+  const product = (inputValue) => {
+    productValue = products.product?.data.products.filter(
+      (value) =>
+        value.name.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  }
 
   // Check if parameter is a range of prices
   const priceRange = prod.split(',');
@@ -26,14 +33,12 @@ const SearchResult = () => {
     productValue = products.product?.data.products.filter(
       (value) => value.price >= minPrice && value.price <= maxPrice
     );
+  } else if (isSearch) {
+    product(isSearch)
   } else {
-    // Parameter is a product name
-    productValue = products.product?.data.products.filter(
-      (value) =>
-        value.name.toLowerCase().includes(prod.toLowerCase())
-    );
+    product(prod)
   }
-
+  
   // Function to update the sorting order
   const handleSortChange = (event) => {
     setSortBy(event.target.value);
@@ -61,24 +66,26 @@ const SearchResult = () => {
           }}
         />
         <div className='flex flex-row items-center justify-between m-3 '>
-          <p className='text-gray-400 font-bold'>{`${isSearch.length === 0 ? '0' : productValue.length} Result`}</p>
+          <p className='text-gray-400 font-bold'>{`${productValue?.length > 0 ? productValue?.length : '0'} Result`}</p>
           <select name='sort-by' id='sort-by' onChange={handleSortChange}>
             <option value='price-asc'>Sort by brand (asc)</option>
             <option value='price-desc'>Sort by brand (desc)</option>
           </select>
         </div>
         {
-          isSearch.length === 0
-          ?
-            <ScreenMsgPage
-              image={image}
-              res='No Product Found'
-            />
-          :
-            <SaleSection
-              products={productValue}
-              column={true}
-            /> 
+          productValue
+            ?
+            <>
+              {
+                productValue?.length > 0
+                  ?
+                  <SaleSection products={productValue} column={true} />
+                  :
+                  <ScreenMsgPage image={image} res={"No product found"} />  
+              }
+            </>
+            :
+            ""
         }
       </>
     </div>

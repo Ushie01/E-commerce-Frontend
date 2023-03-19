@@ -35,9 +35,9 @@ const Navbar = ({
 
 
 	//Event listener for input key down
-	const handleKeyDown = () => {
+	const handleKeyDown = (uniqueProducts) => {
 		setIsClick(true);
-		setIsSearch(uniqueProducts);
+		setIsSearch(inputText);
 	};
 
 	//Event listener for input key up
@@ -60,8 +60,8 @@ const Navbar = ({
 			<div className='flex flex-col'>
 				<nav className='flex flex-row border-gray-100 border-b-2 items-center justify-between w-98 p-3 h-20 bg-white'>
 					<Input
-						handleKeyDown={handleKeyDown}
-						handleKeyUp={handleKeyUp}
+						handleKeyDown={() => {handleKeyDown(uniqueProducts);}}
+					    handleKeyUp={handleKeyUp}
 						image={search}
 						placeholder={'Search Product'}
 						height={'h-12'}

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../../Hooks/useProduct";
 import ScreenMsgPage from "../Explore/ScreenMsgPage";
 import Button from "./../../componentsItem/Button";
 import Counter from "../../componentsItem/Counter";
@@ -8,18 +8,8 @@ import arrow from "./../../../assets/arrow.svg";
 import image from "./../../../assets/x.svg";
 
 const Cart = () => {
-  const [sum, setSum] = useState(Number);
-  const [product, setProduct] = useState([]);
+  const { product, sum } = useCart();
   const productId = product.reverse().map(value => value._id)[0];
-
-  useEffect(() => {
-    const prod = JSON.parse(localStorage.getItem('cart')) || [];
-    setProduct(prod)
-    const summationPrice = prod.reduce((acc, cur) => {
-      return acc + cur.price;
-    }, 0);
-    setSum(summationPrice)
-  }, []);
 
     return (
       <>
@@ -34,7 +24,7 @@ const Cart = () => {
                 products={product}
               />
 
-              <Counter products={product} />        
+              <Counter/>        
 
               <div className="m-4 flex flex-col items-center justify-center space-y-8 ">
                 <div className="flex flex-col items-center justify-center space-y-3 w-full border-gray border-2 p-3">
@@ -67,7 +57,7 @@ const Cart = () => {
             <div className="flex items-center justify-center mt-48">
               <ScreenMsgPage
                 res="You have no product selected"
-                direction='Return To Order'
+                direction='Return To Home'
                 image={image}
                 button={true}
                 linkRoute="/"

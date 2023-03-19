@@ -37,7 +37,10 @@ const Counter = () => {
         const updatedProducts = product.filter(
         (item) => item._id !== id || item.size !== size
         );
+        const updatedFavorite = product.filter(
+        (item) => item._id !== id);
         setProduct(updatedProducts);
+        setFavorite(updatedFavorite);
     };
 
     // reload dom when localStorage is set 0
@@ -47,10 +50,11 @@ const Counter = () => {
         }
     }, [product]);
 
-    // update localStorage when product state changes
+    // update localStorage when product & favorite state changes
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(product));
-    }, [product]);
+        localStorage.setItem("favorites", JSON.stringify(favorite));
+    }, [product, favorite]);
 
 
     return (

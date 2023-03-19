@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 const Input = ({
     handleKeyDown,
     handleKeyUp,
@@ -14,11 +12,9 @@ const Input = ({
             {
                 image
                     ? 
-                    <Link to="/">
-                        <img src={image} alt={image} className="h-5 w-5 m-3"/>
-                    </Link>
+                    <img src={image} alt={image} className="h-5 w-5 m-3"/>
                     :
-                ""
+                     ""
             }
 
             <input

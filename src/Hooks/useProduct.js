@@ -22,3 +22,19 @@ export const useAllProduct = () => {
     }, []);
     return { product };
 }; 
+
+export function useCart() {
+  const [product, setProduct] = useState([]);
+  const [sum, setSum] = useState(0);
+
+  useEffect(() => {
+    const prod = JSON.parse(localStorage.getItem('cart')) || [];
+    setProduct(prod);
+    const summationPrice = prod.reduce((acc, cur) => {
+      return acc + cur.price;
+    }, 0);
+    setSum(summationPrice);
+  }, []);
+
+  return { product, sum };
+}
