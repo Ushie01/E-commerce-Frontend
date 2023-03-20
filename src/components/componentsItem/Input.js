@@ -14,7 +14,7 @@ const Input = ({
                     ? 
                     <img src={image} alt={image} className="h-5 w-5 m-3"/>
                     :
-                     ""
+                    ""
             }
 
             <input

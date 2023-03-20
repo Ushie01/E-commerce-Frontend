@@ -79,7 +79,7 @@ const Footer = () => {
 					<div className='text-center'>
 						<button>
 							<div className='flex items-center justify-center absolute w-6 h-6 rounded-full bg-black text-white bottom-4 left-5'>
-                <p className='text-xs font-extrabold'>{product.length}</p>
+                               <p className='text-xs font-extrabold'>{product.length}</p>
 							</div>
 							<img
 								src={cart1}
@@ -95,7 +95,7 @@ const Footer = () => {
 					<div className='text-center'>
 						<button className='relative'>
 							<div className='flex items-center justify-center absolute w-6 h-6 rounded-full bg-black text-white bottom-4 left-5'>
-                  <p className='text-xs font-extrabold'>{product.length}</p>
+                                <p className='text-xs font-extrabold'>{product.length}</p>
 							</div>
 							<img
 								src={cart}

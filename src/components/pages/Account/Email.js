@@ -11,16 +11,22 @@ const Email = () => {
         <div className="">
           <Navbar2 text="Account/Email" image={arrow} linkRoute='/Account'/>
           <div className="flex flex-col items-start justify-start space-y-6 p-4">
-              <label className="text-md font-bold">Email</label>
-                  <Input
-                      placeholder={"Email"}
-                      image={email}
-                      type="email"
-                      width={"w-full"}
-                  />
+            <label className="text-md font-bold">Email</label>
+              <Input
+                placeholder={"Email"}
+                image={email}
+                type="email"
+                width={"w-72"}
+                height={"h-12"}
+              />
           </div>
           <div className="flex flex-auto fixed left-0 right-0 bottom-5">
-            <Button text={"SAVE"} className="m-auto" />
+            <Button 
+              text={"SAVE"}
+              className="m-auto"
+              bgColor={"red"}
+              textColor={"white"}
+            />
           </div>
         </div>
       </>

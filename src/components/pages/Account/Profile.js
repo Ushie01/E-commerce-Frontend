@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import Navbar2 from "../../componentsItem/Navbar2";
 import arrow from "./../../../assets/arrow.svg";
 import rigthArrow from "./../../../assets/right-arrow.svg";
-import gender from "./../../../assets/female.svg";
-import calendar from "./../../../assets/calendar.svg";
+// import gender from "./../../../assets/female.svg";
+// import calendar from "./../../../assets/calendar.svg";
 import email from "./../../../assets/envelope.svg";
 import phone from "./../../../assets/phone.svg";
 import lock from "./../../../assets/lock.svg";
@@ -25,30 +25,6 @@ const Profile = () => {
               </div>
             </div>
           </div>
-          <Link to="/Account/Gender">
-            <div className="flex flex-row items-center justify-between text-black hover:bg-cyan-100 font-extrabold text-md p-6 space-x-3">
-              <div className="flex flex-row items-center justify-start space-x-5">
-                <img src={gender} alt={gender} className="h-5 w-5 " />
-                <p className="text-sm">Gender</p>
-              </div>
-              <div className="flex flex-row items-center justify-end space-x-5">
-                <p className="text-xs text-gray-300">Male</p>
-                <img src={rigthArrow} alt={rigthArrow} className="h-6 w-6 " />
-              </div>
-            </div>
-          </Link>
-          <Link to="/Account/Birthday">
-            <div className="flex flex-row items-center justify-between text-black hover:bg-cyan-100 font-extrabold text-md p-6 space-x-3">
-              <div className="flex flex-row items-center justify-start space-x-5">
-                <img src={calendar} alt={calendar} className="h-5 w-5 " />
-                <p className="text-sm">Birthday</p>
-              </div>
-              <div className="flex flex-row items-center justify-end space-x-5">
-                <p className="text-xs text-gray-300">20-02-2023</p>
-                <img src={rigthArrow} alt={rigthArrow} className="h-6 w-6 " />
-              </div>
-            </div>
-          </Link>
           <Link to="/Account/Email">
             <div className="flex flex-row items-center justify-between text-black hover:bg-cyan-100 font-extrabold text-md p-6 space-x-3">
               <div className="flex flex-row items-center justify-start space-x-5">

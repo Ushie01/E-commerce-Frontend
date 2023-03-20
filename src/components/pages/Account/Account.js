@@ -21,10 +21,10 @@ const Account = () => {
           <Link to="/Account/Order">
             <div className="flex flex-row items-start justify-start text-black hover:bg-cyan-100 font-extrabold text-md p-6 space-x-3">
               <img src={box} alt={box} className="h-7 w-7 " />
-              <p>Box</p>
+              <p>Order</p>
             </div>
           </Link>
-          <Link to="/Account/Address">
+          <Link to="/AddAddress">
             <div className="flex flex-row items-start justify-start text-black hover:bg-cyan-100 font-extrabold text-md p-6 space-x-3">
               <img src={location} alt={location} className="h-7 w-7 " />
               <p>Address</p>

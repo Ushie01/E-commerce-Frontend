@@ -72,8 +72,7 @@ const SignIn = () => {
           <div className="space-y-2">
             <Input
               placeholder="Your Email"
-              width="w-80"
-              height="h-12"
+              widthLength={"w-full"}
               image={envelope}
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -84,7 +83,7 @@ const SignIn = () => {
 
             <Input
               placeholder="Password"
-              width="w-80"
+              width="w-full"
               height="h-12"
               image={lock}
               onChange={(e) => setPassword(e.target.value)}
@@ -121,7 +120,9 @@ const SignIn = () => {
           </div>
           
           <div className="items-center text-center ">
-            <p className="text-cyan-500 font-bold">Forget Password?</p>
+            <Link to='/ForgetPassword'>
+              <p className="text-cyan-500 font-bold">Forget Password?</p>
+            </Link>
             <div className="flex flex-row items-center justify-between space-x-1">
               <p className="font-thin">Don't have a account?</p>
               <Link to="/SignUp">

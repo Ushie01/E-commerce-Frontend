@@ -104,3 +104,19 @@ export const postOrder = async (payload) => {
         console.error(error)
     }
 }
+
+export const forgetPassword = async (payload) => {
+    try {
+        return await (await fetch(`${baseUrl}/users/forgotPassword`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        })).json()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+

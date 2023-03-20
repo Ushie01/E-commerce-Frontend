@@ -29,6 +29,8 @@ import OrderDetails from './components/pages/Order/OrderDetails';
 import Address from './components/pages/Address/Address';
 import AddAddress from './components/pages/Address/AddAddress';
 import MegaSale from './components/pages/Home/MegaSale';
+import ForgetPassword from './components/pages/Account/ForgetPassword';
+import ResetPasswordToken from './components/pages/Account/ResetPasswordToken';
 
 const App = () => {
   return (
@@ -65,6 +67,8 @@ const App = () => {
         <Route path='/Account/Address' element={<Address />} />
         <Route path='AddAddress/:id' element={<AddAddress />} />
         <Route path='AddAddress' element={<AddAddress />} />
+        <Route path='/ForgetPassword' element={<ForgetPassword />} />
+        <Route path="/resetPassword/:token" element={<ResetPasswordToken />} />
         <Route path="*" element={
           <main>
             <h1 className='text-lg font-extrabold m-5'>
