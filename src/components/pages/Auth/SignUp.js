@@ -46,7 +46,7 @@ const SignUp = () => {
         setErrMsg("Email already in used");
       } else {
         localStorage.setItem('user', JSON.stringify(payload));
-        setIsSubmitted(false)
+        setIsSubmitted(true)
         Toast({
             text: 'Request successfull!! 🦅✨',
             position: 'top-right',

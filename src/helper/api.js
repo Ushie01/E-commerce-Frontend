@@ -119,4 +119,16 @@ export const forgetPassword = async (payload) => {
     }
 }
 
-
+export const resetPassword = async({payload, token}) => {
+    try {
+        return await (await fetch(`${baseUrl}/users/resetPassword/${token}`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        })).json()
+    } catch (error) {
+        console.log(error)
+    }
+}

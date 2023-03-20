@@ -20,9 +20,7 @@ const ForgetPassword = () => {
   
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const value = {
-      email
-    }
+    const value = { email }
 
     if (email) {
       setIsSubmited(true);
@@ -40,7 +38,7 @@ const ForgetPassword = () => {
           position: 'top-right',
         });
         setTimeout(() => {
-          navigate('/resetPassword')
+          navigate('/Forgetpassword/Msg/sent')
         }, 2000);
       }
     }

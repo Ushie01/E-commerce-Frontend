@@ -102,3 +102,19 @@ export const validateAddress = (values) => {
     return errors;
 }
 
+export const validateResetPassword = (values) => {
+    let errors = {};
+
+    if (!values.password) {
+        errors.password = "Password is Required"
+    } else if (values.password.length < 8) {
+        errors.password = "Password need to be 8 characters and above"
+    }
+    
+    if (!values.confirmPassword) {
+        errors.confirmPassword = "Password is Required"
+    } else if (values.confirmPassword !== values.password) {
+        errors.confirmPassword = "Passwords don't match"
+    }
+    return errors;
+}
