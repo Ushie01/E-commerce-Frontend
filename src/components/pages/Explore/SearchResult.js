@@ -13,9 +13,8 @@ const SearchResult = () => {
   const products = useAllProduct();
   const [, setSortBy] = useState('name');
   const [filter, setFilter] = useState(false);
+  const [, setIsEnter] = useState('');
   const [isSearch, setIsSearch] = useState('');
-  console.log(isSearch);
-
 
   let productValue;
 
@@ -61,6 +60,7 @@ const SearchResult = () => {
           image={true}
           filter={filter}
           setFilter={setFilter}
+          setIsEnter={setIsEnter}
           setIsSearch={setIsSearch}
           onImageClick={() => {
             setSortBy('price-asc'); // set the default sorting order to ascending price
