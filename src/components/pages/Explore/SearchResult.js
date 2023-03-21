@@ -14,6 +14,7 @@ const SearchResult = () => {
   const [, setSortBy] = useState('name');
   const [filter, setFilter] = useState(false);
   const [isSearch, setIsSearch] = useState('');
+  console.log(isSearch);
 
 
   let productValue;

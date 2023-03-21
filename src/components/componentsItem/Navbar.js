@@ -14,13 +14,14 @@ const Navbar = ({
   filter,
   setFilter,
   setIsSearch,
+  setIsEnter,
   image
 }) => {
     const products = useAllProduct();
     const [isClick, setIsClick] = useState(false);
     const [inputText, setInputText] = useState('');
     const navigate = useNavigate();
-    const uniqueProducts = [];
+	const uniqueProducts = [];
   
     products.product?.data.products
 		?.filter((value) =>
@@ -33,11 +34,17 @@ const Navbar = ({
 			}
 		});
 
-
+	// const handleKeyDownEnter = (event) => {
+	// 	if (event.key === 'Enter') {
+	// 	// do something with the input value
+	// 		setIsEnter(uniqueProducts);
+	// 	}
+	// };
+	
 	//Event listener for input key down
-	const handleKeyDown = (uniqueProducts) => {
+	const handleKeyDown = () => {
 		setIsClick(true);
-		setIsSearch(inputText);
+
 	};
 
 	//Event listener for input key up
@@ -60,7 +67,13 @@ const Navbar = ({
 			<div className='flex flex-col'>
 				<nav className='flex flex-row border-gray-100 border-b-2 items-center justify-between w-98 p-3 h-20 bg-white'>
 					<Input
-						handleKeyDown={() => {handleKeyDown(uniqueProducts);}}
+						handleKeyDown={(e) => {
+						handleKeyDown(uniqueProducts); 	
+						setIsEnter(uniqueProducts);
+						setIsSearch(inputText);
+						
+						// handleKeyDownEnter(e);
+					    }}
 					    handleKeyUp={handleKeyUp}
 						image={search}
 						placeholder={'Search Product'}

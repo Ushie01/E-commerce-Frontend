@@ -15,42 +15,42 @@ const ResetPasswordToken = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [err, setErr] = useState("");
+  const [error, setError] = useState("");
   const { token } = useParams();
   const navigate = useNavigate();
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const values = {
-      password,
-      confirmPassword
-    }
-
-      console.log(token)
+    const values = { password, confirmPassword }
 
     setErr(validateResetPassword(values));
-      if (password && confirmPassword) {
-          setIsSubmitted(true);
-          const payload = await resetPassword(values, token);
-          if (payload.error) {
-              setIsSubmitted(false)
-              Toast({
-                  text: 'Request failed!! 💥💥',
-                  position: 'top-left',
-              });
-        } else {
-            setIsSubmitted(true)
-            Toast({
-                text: 'Request successfull!! 🦅✨',
-                position: 'top-right',
-            });
-            setConfirmPassword("");
-            setPassword("");
-            setTimeout(() => {
-            navigate("/")
-            }, 2000);
-        }
+    if (password && confirmPassword) {
+      setIsSubmitted(true);
+      const payload = await resetPassword({
+        payload: values, tokenRes: token
+      }); // pass the token parameter
+      if (payload.error) {
+        setIsSubmitted(false)
+        Toast({
+          text: 'Request failed!! 💥💥',
+          position: 'top-left',
+        });
+        setError(payload.message);
+      } else {
+        setIsSubmitted(true)
+        Toast({
+          text: 'Request successfull!! 🦅✨',
+          position: 'top-right',
+        });
+        setConfirmPassword("");
+        setPassword("");
+        setTimeout(() => {
+          navigate("/")
+        }, 2000);
+      }
     }
   }
+
   
     return (
       <>
@@ -65,29 +65,29 @@ const ResetPasswordToken = () => {
             />
             <div className="flex flex-col items-start justify-start space-y-3 p-4">
                 <label className="text-md font-bold">Password</label>
-                    <Input
-                        placeholder={"password"}
-                        type="password"
-                        widthLength={"w-full"}
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                  <Input
+                      placeholder={"password"}
+                      type="password"
+                      widthLength={"w-full"}
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                  />
                 {err.password && <p className='text-red-600 text-sm font-bold'>{err.password}</p>}
 
             </div>
             <div className="flex flex-col items-start justify-start space-y-3 p-4">
                 <label className="text-md font-bold">Confirm Password</label>
-                    <Input
-                        placeholder={"Confirm Password"}
-                        type="password"
-                        widthLength={"w-full"}
-                        name="confirmPassword"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-               {err.confirmPassword && <p className='text-red-600 text-sm font-bold'>{err.confirmPassword}</p>}
-                
+                  <Input
+                      placeholder={"Confirm Password"}
+                      type="password"
+                      widthLength={"w-full"}
+                      name="confirmPassword"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                {err.confirmPassword && <p className='text-red-600 text-sm font-bold'>{err.confirmPassword}</p>}
+                {error && <p className='text-red-600 text-sm font-bold'>{error}</p>}
             </div>
           <div className="flex flex-auto fixed left-0 right-0 bottom-5">
             <Button 
@@ -95,7 +95,7 @@ const ResetPasswordToken = () => {
               className="m-auto"
               bgColor={"red"}
               textColor={"white"}
-              onClick={(e) => { handleSubmit(e) }}
+              onClick={handleSubmit}
               disabled={isSubmitted}
             />
           </div>

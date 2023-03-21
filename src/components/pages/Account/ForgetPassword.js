@@ -16,7 +16,6 @@ const ForgetPassword = () => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmited] = useState(false);
   const navigate = useNavigate();
-  console.log(email);
   
   const handleSubmit = async (e) => {
     e.preventDefault()
