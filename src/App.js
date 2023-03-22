@@ -1,4 +1,6 @@
-import {BrowserRouter, Routes, Route, Link} from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import ScreenMsgPage from './components/pages/Explore/ScreenMsgPage';
 import Homepage from './components/pages/Home/HomePg';
 import FlashSale from './components/pages/Home/FlashSale';
 import Notification from './components/pages/Notification/Notification';
@@ -32,59 +34,182 @@ import MegaSale from './components/pages/Home/MegaSale';
 import ForgetPassword from './components/pages/Account/ForgetPassword';
 import ResetPasswordToken from './components/pages/Account/ResetPasswordToken';
 import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
+import empty from './assets/x.svg'
 
 const App = () => {
+   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   return (
-    <BrowserRouter className="mobile-only">
-      <Routes>
-        <Route path='/' element={<Homepage />} />
-        <Route path='Notification' element={<Notification />} />
-        <Route path='Favorite' element={<Favorite />} />
-        <Route path='FlashSale' element={<FlashSale />} /> 
-        <Route path='MegaSale' element={<MegaSale />} />
-        <Route path='Product/:id' element={<Product />} />
-        <Route path='ProductReviews/:id' element={<ProductReviews />}/>
-        <Route path="WriteReview/:id" element={<WriteReview />} />
-        <Route path='Explore' element={<Explore/>} />
-        <Route path='SearchResult/:prod' element={<SearchResult />} />
-        <Route path='Category' element={<Category />} />
-        <Route path='Filter' element={<Filter />} />
-        <Route path='SignIn' element={<SignIn />}/>
-        <Route path='SignUp' element={<SignUp/>}/>
-        <Route path='Cart' element={<Cart />}/>
-        <Route path='ShipTo' element={<ShipTo/>}/>
-        <Route path='ScreenPage' element={<ScreenMsg />}/>
-        <Route path="Offer" element={<Offer />} />
-        <Route path="Account" element={<Account />} />
-        <Route path="/Account/Profile" element={<Profile />} />
-        <Route path='/Account/ChangeName' element={<ChangeName />} />
-        <Route path="/Account/Gender" element={<Gender />} />
-        <Route path='/Account/Birthday' element={<Birthday />} />
-        <Route path='/Account/Email' element={<Email />} />
-        <Route path='/Account/PhoneNumber' element={<PhoneNumber />} />
-        <Route path='/Account/ChangePassword' element={<ChangePassword />} />
-        <Route path='/Account/Order' element={<Order />} />
-        <Route path='/Order/OrderDetails' element={<OrderDetails />} />
-        <Route path='/Account/Address' element={<Address />} />
-        <Route path='AddAddress/:id' element={<AddAddress />} />
-        <Route path='AddAddress' element={<AddAddress />} />
-        <Route path='/ForgetPassword' element={<ForgetPassword />} />
-        <Route path="/resetPassword/:token" element={<ResetPasswordToken />} />
-        <Route path="/Forgetpassword/Msg/sent" element={<ForgetPasswordRes />} />
-        <Route path="*" element={
-          <main>
-            <h1 className='text-lg font-extrabold m-5'>
-              There's nothing here! <br />
-              <Link to="/" className='text-cyan-600 underline'>
-                Click here
-              </Link> <br />
-              to return to home page.
-            </h1>
-          </main>
-        } />
-      </Routes>
-    </BrowserRouter>
-  )
+		<>
+			{isMobile ? (
+				<>
+					<BrowserRouter className='mobile-only'>
+						<Routes>
+							<Route
+								path='/'
+								element={<Homepage />}
+							/>
+							<Route
+								path='Notification'
+								element={<Notification />}
+							/>
+							<Route
+								path='Favorite'
+								element={<Favorite />}
+							/>
+							<Route
+								path='FlashSale'
+								element={<FlashSale />}
+							/>
+							<Route
+								path='MegaSale'
+								element={<MegaSale />}
+							/>
+							<Route
+								path='Product/:id'
+								element={<Product />}
+							/>
+							<Route
+								path='ProductReviews/:id'
+								element={<ProductReviews />}
+							/>
+							<Route
+								path='WriteReview/:id'
+								element={<WriteReview />}
+							/>
+							<Route
+								path='Explore'
+								element={<Explore />}
+							/>
+							<Route
+								path='SearchResult/:prod'
+								element={<SearchResult />}
+							/>
+							<Route
+								path='Category'
+								element={<Category />}
+							/>
+							<Route
+								path='Filter'
+								element={<Filter />}
+							/>
+							<Route
+								path='SignIn'
+								element={<SignIn />}
+							/>
+							<Route
+								path='SignUp'
+								element={<SignUp />}
+							/>
+							<Route
+								path='Cart'
+								element={<Cart />}
+							/>
+							<Route
+								path='ShipTo'
+								element={<ShipTo />}
+							/>
+							<Route
+								path='ScreenPage'
+								element={<ScreenMsg />}
+							/>
+							<Route
+								path='Offer'
+								element={<Offer />}
+							/>
+							<Route
+								path='Account'
+								element={<Account />}
+							/>
+							<Route
+								path='/Account/Profile'
+								element={<Profile />}
+							/>
+							<Route
+								path='/Account/ChangeName'
+								element={<ChangeName />}
+							/>
+							<Route
+								path='/Account/Gender'
+								element={<Gender />}
+							/>
+							<Route
+								path='/Account/Birthday'
+								element={<Birthday />}
+							/>
+							<Route
+								path='/Account/Email'
+								element={<Email />}
+							/>
+							<Route
+								path='/Account/PhoneNumber'
+								element={<PhoneNumber />}
+							/>
+							<Route
+								path='/Account/ChangePassword'
+								element={<ChangePassword />}
+							/>
+							<Route
+								path='/Account/Order'
+								element={<Order />}
+							/>
+							<Route
+								path='/Order/OrderDetails'
+								element={<OrderDetails />}
+							/>
+							<Route
+								path='/Account/Address'
+								element={<Address />}
+							/>
+							<Route
+								path='AddAddress/:id'
+								element={<AddAddress />}
+							/>
+							<Route
+								path='AddAddress'
+								element={<AddAddress />}
+							/>
+							<Route
+								path='/ForgetPassword'
+								element={<ForgetPassword />}
+							/>
+							<Route
+								path='/resetPassword/:token'
+								element={<ResetPasswordToken />}
+							/>
+							<Route
+								path='/Forgetpassword/Msg/sent'
+								element={<ForgetPasswordRes />}
+							/>
+							<Route
+								path='*'
+								element={
+									<main>
+										<h1 className='text-lg font-extrabold m-5'>
+											There's nothing here! <br />
+											<Link
+												to='/'
+												className='text-cyan-600 underline'>
+												Click here
+											</Link>{' '}
+											<br />
+											to return to home page.
+										</h1>
+									</main>
+								}
+							/>
+						</Routes>
+					</BrowserRouter>
+				</>
+			) : (
+				<div className='mt-24'>
+					<ScreenMsgPage
+						image={empty}
+						res={'This site can only be view on mobile devices'}
+					/>
+				</div>
+			)}
+		</>
+	);
 }
 
 export default App;
