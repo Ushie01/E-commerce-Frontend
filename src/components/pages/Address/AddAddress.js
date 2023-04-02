@@ -22,10 +22,11 @@ const AddAddress = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const navigate = useNavigate();
     const { id } = useParams();
-
+    
     useEffect(() => {
         if (id) {
-            const addressResponse = savedAddresses.find((address) => address.index === id);
+            const addressResponse = savedAddresses[id];
+            console.log(addressResponse);
             if (addressResponse) {
                 const { country, firstName, lastName, address, city, postalCode, phoneNumber } = addressResponse;
                 setCountry(country);
@@ -46,11 +47,19 @@ const AddAddress = () => {
         });
         setTimeout(() => {
             navigate("/ShipTo")
+            setCountry("");
+            setFirstName("");
+            setLastName("");
+            setAddress("");
+            setCity("");
+            setPostalCode("");
+            setPhoneNumber("");
         }, 3000);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        
         const values = {
             country,
             firstName,
@@ -61,10 +70,11 @@ const AddAddress = () => {
             phoneNumber
         }
 
-        setErr(validateAddress(values));
+        const errors = validateAddress(values);
+        setErr(errors);
 
         if (!id) {
-            if (
+            if (            
                 country &&
                 firstName &&
                 lastName &&
@@ -76,14 +86,12 @@ const AddAddress = () => {
                 setIsSubmitted(true);
                 const newIndex = savedAddresses.length;
                 setSavedAddresses([...savedAddresses, { ...values, index: newIndex }]);
-                localStorage.setItem('address', JSON.stringify([...savedAddresses, { ...values, index: newIndex }]));
+                localStorage.setItem('address', JSON.stringify([...savedAddresses, { ...values, index: newIndex }]));   
                 receivedResponse()
-            } else {
-                setErr("Please fill in all fields");
-            }
-        } else {
+            }  
+        } else {          
             const updatedAddress = savedAddresses.map((address) =>
-                address.index === id ? { ...address, ...values } : address
+                address?.index === Number(id) ? { ...address, ...values } : address
             );
             setSavedAddresses(updatedAddress);
             localStorage.setItem('address', JSON.stringify(updatedAddress));
@@ -117,7 +125,7 @@ const AddAddress = () => {
                                 value={country}
                                 onChange={(e) => setCountry(e.target.value)}
                             />
-                            {err.country && <p className='text-red-600 text-sm font-bold'>{err.country}</p>}
+                            {err?.country && <p className='text-red-600 text-sm font-bold'>{err.country}</p>}
                     </div>
                     
                     <div className="flex flex-col items-start justify-start space-y-3 p-4">
@@ -130,7 +138,7 @@ const AddAddress = () => {
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
-                            {err.firstName && <p className='text-red-600 text-sm font-bold'>{err.firstName}</p>}
+                            {err?.firstName && <p className='text-red-600 text-sm font-bold'>{err.firstName}</p>}
                     </div>
                     
                     <div className="flex flex-col items-start justify-start space-y-3 p-4">
@@ -143,7 +151,7 @@ const AddAddress = () => {
                                 value={lastName}
                                 onChange={(e) => setLastName(e.target.value)}
                             />
-                            {err.lastName && <p className='text-red-600 text-sm font-bold'>{err.lastName}</p>}
+                            {err?.lastName && <p className='text-red-600 text-sm font-bold'>{err.lastName}</p>}
                     </div>
                     
                     <div className="flex flex-col items-start justify-start space-y-3 p-4">
@@ -156,7 +164,7 @@ const AddAddress = () => {
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
                             />
-                            {err.address && <p className='text-red-600 text-sm font-bold'>{err.address}</p>}
+                            {err?.address && <p className='text-red-600 text-sm font-bold'>{err.address}</p>}
                     </div>
                     
                     <div className="flex flex-col items-start justify-start space-y-3 p-4">
@@ -169,7 +177,7 @@ const AddAddress = () => {
                                 value={city}
                                 onChange={(e) => setCity(e.target.value)}
                             />
-                            {err.city && <p className='text-red-600 text-sm font-bold'>{err.city}</p>}
+                            {err?.city && <p className='text-red-600 text-sm font-bold'>{err.city}</p>}
                     </div>
                     
                     <div className="flex flex-col items-start justify-start space-y-3 p-4">
@@ -182,7 +190,7 @@ const AddAddress = () => {
                                 value={postalCode}
                                 onChange={(e) => setPostalCode(e.target.value)}
                             />
-                            {err.postalCode && <p className='text-red-600 text-sm font-bold'>{err.postalCode}</p>}
+                            {err?.postalCode && <p className='text-red-600 text-sm font-bold'>{err.postalCode}</p>}
                     </div>
                     
                     <div className="flex flex-col items-start justify-start space-y-3 p-4">
@@ -195,7 +203,7 @@ const AddAddress = () => {
                                 value={phoneNumber}
                                 onChange={(e) => setPhoneNumber(e.target.value)}
                             />
-                            {err.phoneNumber && <p className='text-red-600 text-sm font-bold'>{err.phoneNumber}</p>}
+                            {err?.phoneNumber && <p className='text-red-600 text-sm font-bold'>{err.phoneNumber}</p>}
                     </div>
                     
                     <div className="flex left-0 mt-16 right-0 bottom-5">

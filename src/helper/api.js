@@ -135,3 +135,19 @@ export const resetPassword = async ({ payload, tokenRes }) => {
 };
 
 
+export const userUpdateProfile = async (payload) => { 
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/users/updateMe`, {
+        method: 'PATCH',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        },
+        body: JSON.stringify(payload)
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}

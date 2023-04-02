@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Navbar2 from "../../componentsItem/Navbar2";
+import { useUser } from "../../../Hooks/useUser";
 import arrow from "./../../../assets/arrow.svg";
 import rigthArrow from "./../../../assets/right-arrow.svg";
 // import gender from "./../../../assets/female.svg";
@@ -10,6 +11,11 @@ import lock from "./../../../assets/lock.svg";
 
 
 const Profile = () => {
+  const { user } = useUser('user');
+  const userDetail = user?.data?.user;
+  console.log(userDetail);
+ 
+
     return (
       <>
         <div className="">
@@ -19,9 +25,9 @@ const Profile = () => {
               <div className="h-20 w-20 bg-slate-500 rounded-full"></div>
               <div className="flex flex-col items-start justify-center ml-4">
                 <p className="text-md font-extrabold text-md">
-                  Rekureku Judith A.
+                  {userDetail?.name ? userDetail.name : 'Yet to sign up'}
                 </p>
-                <p className="text-xs text-gray-400">rekureku@gmail.com</p>
+                <p className="text-xs text-gray-400">{userDetail?.email}</p>
               </div>
             </div>
           </div>
@@ -32,7 +38,7 @@ const Profile = () => {
                 <p className="text-sm">Email</p>
               </div>
               <div className="flex flex-row items-center justify-end space-x-5">
-                <p className="text-xs text-gray-300">rekureku@mail.com</p>
+                <p className="text-xs text-gray-300">{userDetail?.email ? userDetail.email : 'Yet to sign up'}</p>
                 <img src={rigthArrow} alt={rigthArrow} className="h-6 w-6 " />
               </div>
             </div>
@@ -44,7 +50,7 @@ const Profile = () => {
                 <p className="text-sm">Phone Number</p>
               </div>
               <div className="flex flex-row items-center justify-end space-x-5">
-                <p className="text-xs text-gray-300">+97 444 555</p>
+                <p className="text-xs text-gray-300">{userDetail?.phoneNo ? userDetail.phoneNo : 'Yet to sign up'}</p>
                 <img src={rigthArrow} alt={rigthArrow} className="h-6 w-6 " />
               </div>
             </div>

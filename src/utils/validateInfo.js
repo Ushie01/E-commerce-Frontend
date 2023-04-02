@@ -91,8 +91,8 @@ export const validateAddress = (values) => {
         errors.city = "City Is Required"
     }
 
-    if (!values.zipCode) {
-        errors.zipCode = "Zip Code Is Required"
+    if (!values.postalCode) {
+        errors.postalCode = "Postal Code Is Required"
     }
 
     if (!values.phoneNumber) {
@@ -117,4 +117,27 @@ export const validateResetPassword = (values) => {
         errors.confirmPassword = "Passwords don't match"
     }
     return errors;
+}
+
+export const validateEmailUpdate = (value) => {
+    let error = {};
+
+    if (!value.email) {
+        error.email = "Email is Required*"
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value.email)) {
+        error.email = "Email is invalid*"
+    }
+    return error;
+}
+
+export const validatePhoneNoUpdate = (value) => {
+    let error = {};
+
+    if (!value.phone) {
+        error.phone = "Phone Is Required";
+    } else if (value.phone.length < 11) {
+        error.phone = "Phone Number Must Be At Least 11 Digits";
+    }
+
+    return error;
 }

@@ -14,7 +14,8 @@ import exclamation from "../../../assets/exclamation.svg"
 import add from "../../../assets/plus_.svg";
 
 const ShipTo = () => {
-  const [addresses, setAddresses] = useState(JSON.parse(localStorage.getItem("address")) || []);  const [deletePhoneNumber, setDeletePhoneNumber] = useState(null);
+  const [addresses, setAddresses] = useState(JSON.parse(localStorage.getItem("address")) || []);
+  const [deleteIndex, setDeleteIndex] = useState(null);
   const [addressSelected, setAddressSelected] = useState(0);
   const [selectIndex, setSelectedIndex] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,11 +25,11 @@ const ShipTo = () => {
   const navigate = useNavigate();
 
   // delete address
-  const handleDeleteAddress = (phoneNumber) => {
+  const handleDeleteAddress = (index) => {
     setAddresses((prevAddresses) => {
       const filteredAddresses = prevAddresses
         .filter(
-          (address) => address.phoneNumber !== phoneNumber
+          (address) => address.index !== index
         );
       return filteredAddresses;
     });
@@ -36,10 +37,9 @@ const ShipTo = () => {
 
   const filteredAddresses = addresses
     .filter((address) => address.index === selectIndex)[0];
-  if (filteredAddresses) {
-    delete filteredAddresses.index;
-  }
+  if (filteredAddresses) { delete filteredAddresses.index;}
 
+  // Handle to place order
   const onHandleSubmit = async () => {
     if (!filteredAddresses) {
       Toast({
@@ -98,7 +98,8 @@ const ShipTo = () => {
           />
             {addresses.length > 0
               ? (
-                <>
+                <> 
+                  <div>
                   {addresses.reverse().map((address, index) => (
                     <div className="m-5" key={index}>
                       <div className={`flex flex-col border-gray-100 border-2 ${addressSelected ? 'hover:border-red-500': ""} p-5 rounded-md space-y-3 `}
@@ -119,25 +120,26 @@ const ShipTo = () => {
                             src={deleteBin}
                             alt="delete"
                             onClick={() => {
-                              setDeletePhoneNumber(address.index);
+                              setDeleteIndex(address.index);
                               setClick(true);
                             }}
                             className="ml-8 h-8 w-8"
                           />
                         </div>
                       </div>
-                      <div className="flex flex-auto mt-12 fixed left-0 right-0 bottom-5">
-                        <Button
-                          text="Next"
-                          className="m-auto"
-                          textColor='white'
-                          bgColor="red"
-                          onClick={onHandleSubmit}
-                          disabled={isSubmitted}
-                        />
-                      </div>
                     </div>
                   ))}
+                  <div className="flex flex-auto mt-12 left-0 right-0 mb-9">
+                    <Button
+                      text="Next"
+                      className="m-auto"
+                      textColor='white'
+                      bgColor="red"
+                      onClick={onHandleSubmit}
+                      disabled={isSubmitted}
+                    />
+                  </div>
+                </div>
                 </>
               ) : (
                 <div className="mt-48">
@@ -162,7 +164,7 @@ const ShipTo = () => {
                 colorIcon='red'
                 button={true}
                 secondButton={true}
-                onClick={() => { handleDeleteAddress(deletePhoneNumber) }}
+                onClick={() => { handleDeleteAddress(deleteIndex) }}
                 linkRoute="/ShipTo"
               />
             </div>

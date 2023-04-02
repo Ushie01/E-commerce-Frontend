@@ -1,5 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
-import GoogleAuth from './GoogleAuth';
+// import GoogleAuth from './GoogleAuh';
 import { Link, useNavigate } from 'react-router-dom';
 import { Toast } from '../../../Hooks/useToast';
 import { signIn } from '../../../helper/api';
@@ -25,10 +25,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const values = {
-      email,
-      password
-    }
+    const values = { email, password };
 
     setError(validateSignIn(values));
     if (email && password) {
@@ -112,7 +109,7 @@ const SignIn = () => {
           <p className="text-gray-400 font-bold">OR</p>
           
           <div className="space-y-2 w-98">
-            <GoogleAuth />
+            {/* <GoogleAuth /> */}
             <button  className="flex flex-row bg-white rounded-md items-center justify-center space-x-2 border-gray-200 border-2 w-80 h-16 font-bold text-gray-400">
               <img src={apple} alt={apple} className="h-7 w-7" />
               <p>Login with Apple</p>
