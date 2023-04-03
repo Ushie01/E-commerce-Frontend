@@ -120,7 +120,6 @@ export const forgetPassword = async (payload) => {
 }
 
 export const resetPassword = async ({ payload, tokenRes }) => {
-
     try {
         return await (await fetch(`${baseUrl}/users/resetPassword/${tokenRes}`, {
         method: 'PATCH',
@@ -140,6 +139,24 @@ export const userUpdateProfile = async (payload) => {
         const userDetails = localStorage.getItem('user');
         const parsedDetails = JSON.parse(userDetails);
         return await( await fetch(`${baseUrl}/users/updateMe`, {
+        method: 'PATCH',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        },
+        body: JSON.stringify(payload)
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+export const userUpdatePassword = async (payload) => { 
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/users/updatePassword`, {
         method: 'PATCH',
             headers: {
             'Content-type': 'application/json',

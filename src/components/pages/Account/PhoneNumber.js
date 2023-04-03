@@ -21,15 +21,16 @@ const PhoneNumber = () => {
 
   const handleSubmit = async () => {
     const values = { id: userDetail._id, phone };
-    setErr(validatePhoneNoUpdate(values));
+    const validationError = validatePhoneNoUpdate(values);
+    setErr(validationError);
 
-    if (phone) {
+    if (!validationError && phone) {
       const payload = await userUpdateProfile(values);
       if (payload.status) {
         user.data.user.phoneNo = values.phone;
         localStorage.setItem("user", JSON.stringify(user));
         Toast({
-          text: 'Request successfull!! 🦅✨',
+          text: 'Request successful!! 🦅✨',
           position: 'top-right',
         });
         setPhone("");
@@ -37,8 +38,15 @@ const PhoneNumber = () => {
           navigate('/Account/Profile')
         }, 3000);
       }
+    } else {
+      // Display an error message to the user
+      Toast({
+        text: 'Request Failed',
+        position: 'top-right'
+      });
     }
   }
+
 
   return (
     <>

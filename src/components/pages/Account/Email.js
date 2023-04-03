@@ -22,9 +22,10 @@ const Email = () => {
 
   const handleSubmit = async () => {
     const values = { id: userDetail._id, email };
-    setErr(validateEmailUpdate(values));
+    const validationError = validateEmailUpdate(values);
+    setErr(validationError);
 
-    if (email) {
+    if (!validationError && email) {
       const payload = await userUpdateProfile(values);
       if (payload.status) {
         user.data.user.email = values.email;
@@ -38,6 +39,11 @@ const Email = () => {
           navigate('/Account/Profile')
         }, 3000);
       }
+    } else {
+      Toast({
+        text: 'Request Failed',
+        position: 'top-right'
+      });
     }
   }
 

@@ -126,18 +126,45 @@ export const validateEmailUpdate = (value) => {
         error.email = "Email is Required*"
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value.email)) {
         error.email = "Email is invalid*"
-    }
-    return error;
-}
-
-export const validatePhoneNoUpdate = (value) => {
-    let error = {};
-
-    if (!value.phone) {
-        error.phone = "Phone Is Required";
-    } else if (value.phone.length < 11) {
-        error.phone = "Phone Number Must Be At Least 11 Digits";
+    } else {
+        return "";
     }
 
     return error;
 }
+
+export const validatePhoneNoUpdate = (values) => {
+    const { phone } = values;
+    const phoneRegex = /^[0-9]{10,11}$/; // Regular expression for 10 or 11 digit phone numbers
+
+    if (!phone) {
+        return "Phone number is required";
+    } else if (!phoneRegex.test(phone)) {
+        return "Phone number must be a valid 10 or 11 digit number";
+    } else {
+        return ""; // No validation error
+    }
+};
+
+export const validateChangePassword = (values) => {
+  let errors = {};
+
+  if (!values.passwordCurrent) {
+    errors.passwordCurrent = "Your current password Is Required*"
+  }
+
+  if (!values.password) {
+    errors.password = "Password is Required"
+  } else if (values.password.length < 8) {
+    errors.password = "Password needs to be 8 characters or longer"
+  }
+
+  if (!values.confirmPassword) {
+    errors.confirmPassword = "Password is Required"
+  } else if (values.confirmPassword !== values.password) {
+    errors.confirmPassword = "Passwords don't match"
+  }
+
+  return errors;
+};
+
