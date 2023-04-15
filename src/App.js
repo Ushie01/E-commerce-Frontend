@@ -34,6 +34,7 @@ import MegaSale from './components/pages/Home/MegaSale';
 import ForgetPassword from './components/pages/Account/ForgetPassword';
 import ResetPasswordToken from './components/pages/Account/ResetPasswordToken';
 import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
+import AccountVerification from './components/pages/Auth/AccountVerification';
 import empty from './assets/x.svg'
 
 const App = () => {
@@ -149,11 +150,11 @@ const App = () => {
 								element={<ChangePassword />}
 							/>
 							<Route
-								path='/Account/Order'
+								path='/Order'
 								element={<Order />}
 							/>
 							<Route
-								path='/Order/OrderDetails'
+								path='/Order/OrderDetails/:id'
 								element={<OrderDetails />}
 							/>
 							<Route
@@ -179,6 +180,10 @@ const App = () => {
 							<Route
 								path='/Forgetpassword/Msg/sent'
 								element={<ForgetPasswordRes />}
+							/>
+							<Route
+								path='/AccountVerification'
+								element={<AccountVerification />}
 							/>
 							<Route
 								path='*'

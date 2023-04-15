@@ -28,10 +28,12 @@ const SignIn = () => {
     const values = { email, password };
 
     setError(validateSignIn(values));
+
     if (email && password) {
       setIsSubmited(true);
       const payload = await signIn(values);
-      if (payload.message) {
+
+      if (!payload.status.includes('success')) {
         setIsSubmited(false);
         Toast({
           text: 'Incorrect email or password 😥😪',
@@ -59,7 +61,7 @@ const SignIn = () => {
         <div className="flex flex-col items-center justify-center space-y-4 mt-10">
           
           <div className="flex flex-col items-center justify-center space-y-3">
-            <img src={logo} alt={logo} className="h-16 w-48" />
+            <img src={logo} alt={logo} className="h-24 w-48" />
             <p className="text-orange-400 font-bold text-2xl">
               Welcome to Euphorya
             </p>

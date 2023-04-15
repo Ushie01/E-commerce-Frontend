@@ -57,6 +57,7 @@ const Favorite = () => {
                 direction='Return To Home'
                 image={image}
                 button={true}
+                linkRoute={"/"}
               />
             </div>
         }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import deleteBin from "./../../assets/delete.svg";
 import dash from "./../../assets/dash.svg";
 import plus from "./../../assets/plus.svg";
@@ -61,18 +62,20 @@ const Counter = () => {
         <>
             {product.map((item, index) => {
                 const { name, price, quantity, productGallery, _id, size } = item;
-
+                
                 return (
                     <div
                         key={index}
                         className="flex flex-row items-center justify-between rounded-lg m-4 p-3 border-gray-100 border-2"
                     >
-                        <div className="w-28">
-                            <img
-                                src={`http://localhost:5000/api/v1/products/${productGallery[0]}`}
-                                alt={productGallery[0]}
-                            />
-                        </div>
+                        <Link to={`http://localhost:5000/api/v1/products/${productGallery[0]}`}>
+                            <div className="w-28">
+                                <img
+                                    src={`http://localhost:5000/api/v1/products/${productGallery[0]}`}
+                                    alt={productGallery[0]}
+                                />
+                            </div>
+                        </Link>
                         <div className="flex flex-col items-start text-lg justify-start space-y-5 p-2 w-36 h-28">
                             <p className="text-sm">{name}</p>
                             <p className="text-cyan-500">{`₦${price}`}</p>

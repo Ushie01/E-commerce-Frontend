@@ -3,7 +3,7 @@ import Navbar2 from "../../componentsItem/Navbar2";
 import { useUser } from "../../../Hooks/useUser";
 import arrow from "./../../../assets/arrow.svg";
 import rigthArrow from "./../../../assets/right-arrow.svg";
-// import gender from "./../../../assets/female.svg";
+import account from "./../../../assets/account_.svg";
 // import calendar from "./../../../assets/calendar.svg";
 import email from "./../../../assets/envelope.svg";
 import phone from "./../../../assets/phone.svg";
@@ -13,8 +13,6 @@ import lock from "./../../../assets/lock.svg";
 const Profile = () => {
   const { user } = useUser('user');
   const userDetail = user?.data?.user;
-  console.log(userDetail);
- 
 
     return (
       <>
@@ -22,7 +20,7 @@ const Profile = () => {
           <Navbar2 text={"Account/Profile"} image={arrow} linkRoute='/Account' />
           <div className="m-4">
             <div className="flex flex-row items-center justify-start">
-              <div className="h-20 w-20 bg-slate-500 rounded-full"></div>
+              <img src={account} alt="" className="h-20 w-20 border-2 rounded-full" />
               <div className="flex flex-col items-start justify-center ml-4">
                 <p className="text-md font-extrabold text-md">
                   {userDetail?.name ? userDetail.name : 'Yet to sign up'}

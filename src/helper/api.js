@@ -168,3 +168,49 @@ export const userUpdatePassword = async (payload) => {
         console.error(error)
     }
 }
+
+export const getUserOrder = async (userId) => { 
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/users/${userId}/orders`, {
+        method: 'GET',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        }
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const accountVerification = async (payload) => {
+    try {
+        return await (await fetch(`${baseUrl}/users/emailVerification`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        })).json()
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getSingleUserOrder = async (orderId) => { 
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/orders/userOrder/${orderId}`, {
+        method: 'GET',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        }
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
