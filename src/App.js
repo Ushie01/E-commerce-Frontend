@@ -35,11 +35,17 @@ import ForgetPassword from './components/pages/Account/ForgetPassword';
 import ResetPasswordToken from './components/pages/Account/ResetPasswordToken';
 import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
 import AccountVerification from './components/pages/Auth/AccountVerification';
-import empty from './assets/x.svg'
+import empty from './assets/x.svg';
+// Admin
+import Admin from './components/pages/Admin/AdminHome';
+import Products from './components/pages/Admin/Products';
+import Users from './components/pages/Admin/Users';
+import AdminOrders from './components/pages/Order/Order';
+
 
 const App = () => {
-   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
-  return (
+	const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+	return (
 		<>
 			{isMobile ? (
 				<>
@@ -202,6 +208,26 @@ const App = () => {
 									</main>
 								}
 							/>
+							<Route
+								path='/Admin'
+								element={<Admin />}>
+								<Route
+									index='Products'
+									element={<Products />}
+								/>
+								<Route
+									path='Products'
+									element={<Products />}
+								/>
+								<Route
+									path='Users'
+									element={<Users />}
+								/>
+								<Route
+									path='Orders'
+									element={<AdminOrders />}
+								/>
+							</Route>
 						</Routes>
 					</BrowserRouter>
 				</>
@@ -215,8 +241,6 @@ const App = () => {
 			)}
 		</>
 	);
-}
+};
 
 export default App;
-
-
