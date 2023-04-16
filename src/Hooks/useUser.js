@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { getAllUser } from "../helper/api";
 
 export const useUser = (item) => {
     const [user, setUser] = useState({});
@@ -10,5 +10,14 @@ export const useUser = (item) => {
         }
     }, [item]);
 
+    return { user };
+}; 
+
+export const useAllUser = () => {
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+        getAllUser()
+        .then((data) => setUser(data))
+    }, []);
     return { user };
 }; 

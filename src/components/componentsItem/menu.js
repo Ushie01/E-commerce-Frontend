@@ -33,7 +33,7 @@ const Menu = ({onClick}) => {
 						</Link>
 						<hr className='border-white w-96' />
 						<p>Reviews</p>
-						<hr className='border-white w-96' />
+						{/* <hr className='border-white w-96' /> */}
 					</div>
 				</div>
 			</>

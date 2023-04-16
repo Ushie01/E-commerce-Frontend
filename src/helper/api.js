@@ -214,3 +214,19 @@ export const getSingleUserOrder = async (orderId) => {
         console.error(error)
     }
 }
+
+export const getAllUser = async () => { 
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/users`, {
+        method: 'GET',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        }
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
