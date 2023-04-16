@@ -22,6 +22,7 @@ const Navbar = ({
     const [inputText, setInputText] = useState('');
     const navigate = useNavigate();
 	const uniqueProducts = [];
+	
   
     products.product?.data.products
 		?.filter((value) =>
@@ -33,7 +34,7 @@ const Navbar = ({
 				uniqueProducts.push(product);
 			}
 		});
-
+    console.log(uniqueProducts);
 	// const handleKeyDownEnter = (event) => {
 	// 	if (event.key === 'Enter') {
 	// 	// do something with the input value

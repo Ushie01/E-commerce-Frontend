@@ -1,20 +1,58 @@
+import { useState } from 'react';
 import { useAllProduct } from '../../../Hooks/useProduct';
 import { Link } from 'react-router-dom';
+// import Loader from '../../componentsItem/Loading/Loader';
+import Input from '../../componentsItem/Input';
 
 const Products = () => {
 	const allProduct = useAllProduct();
+    const [inputText, setInputText] = useState("");
+    const uniqueProducts = [];
 	const products = allProduct?.product?.data?.products;
-    console.log(products);
+    // uniqueProducts.push(products);
+
+    products?.forEach((product) => {
+        if (
+					product.name.toLowerCase().includes(inputText.toLowerCase()) ||
+					product.brand.toLowerCase().includes(inputText.toLowerCase()) ||
+					product.collectionsData
+						.toLowerCase()
+						.includes(inputText.toLowerCase()) ||
+					product._id
+						.toLowerCase()
+						.includes(inputText.toLowerCase()) 
+				) {
+					const index = uniqueProducts.findIndex(
+						(p) => p.name === product.name
+					);
+					if (index === -1) {
+						uniqueProducts.push(product);
+					}
+				}
+    });
+    console.log(uniqueProducts);
+
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
     return (
 			<div className='p-4'>
-                <input type="text" className='' />
 				<div className='flex flex-row items-center justify-between'>
 					<p className='text-2xl font-bold mt-3'>Products:</p>
 					<button className='bg-orange-300 p-3 rounded-lg shadow-lg text-white font-bold'>
 						Create Product
 					</button>
 				</div>
+
+				<div className='mt-8'>
+					<Input
+						placeholder={'Search Product By id, name and brand'}
+						type='text'
+						widthLength={'w-full'}
+						name='inputText'
+						value={inputText}
+						onChange={(e) => setInputText(e.target.value)}
+					/>
+				</div>
+
 				<div className='overflow-x-auto mt-3'>
 					<table className=''>
 						<thead className=''>
@@ -23,7 +61,7 @@ const Products = () => {
 									No.
 								</th>
 								<th className='p-5 bg-gray-200 border-spacing-2 border border-white'>
-									UserId
+									ProductId
 								</th>
 								<th className='p-5 bg-gray-200 border-spacing-2 border border-white'>
 									Brand
@@ -66,71 +104,143 @@ const Products = () => {
 								</th>
 							</tr>
 						</thead>
-						<tbody>
-							{products?.map((product, index) => (
-								<tr key={index}>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{index}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product._id}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product.brand}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product.category}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product.collectionsData}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{new Date(
-											product?.createAt.split('T')[0]
-										).toLocaleDateString('en-US', options)}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product.description}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product.name}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product.price}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										<Link
-											to={`http://localhost:5000/api/v1/products/${product.productGallery[0]}`}>
-											<div className='w-28'>
-												<img
-													src={`http://localhost:5000/api/v1/products/${product.productGallery[0]}`}
-													alt={product.productGallery[0]}
-												/>
-											</div>
-										</Link>
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product.ratingsAverage}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product.ratingsQuantity}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										{product.size}
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										<button className='bg-green-600 pt-3 pb-3 pl-4 pr-4 ml-2 text-white rounded-lg font-bold shadow-2xl'>
-											Edit
-										</button>
-									</td>
-									<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-										<button className='bg-red-600 p-3 text-white rounded-lg shadow-2xl font-bold'>
-											Delete
-										</button>
-									</td>
-								</tr>
-							))}
-						</tbody>
+						{!uniqueProducts ? (
+							<tbody>
+								{products?.map((product, index) => (
+									<tr
+										key={index}
+										className=''>
+										<td className='p-2 bg-slate-100 border-spacing-2 border border-white'>
+											{index}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product._id}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.brand}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.category}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.collectionsData}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{new Date(
+												product?.createAt.split('T')[0]
+											).toLocaleDateString('en-US', options)}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.description}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.name}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.price}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											<Link
+												to={`http://localhost:5000/api/v1/products/${product.productGallery[0]}`}>
+												<div className='w-28'>
+													<img
+														src={`http://localhost:5000/api/v1/products/${product.productGallery[0]}`}
+														alt={product.productGallery[0]}
+													/>
+												</div>
+											</Link>
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.ratingsAverage}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.ratingsQuantity}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.size}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											<button className='bg-green-600 pt-3 pb-3 pl-4 pr-4 ml-2 text-white rounded-lg font-bold shadow-2xl'>
+												Edit
+											</button>
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											<button className='bg-red-600 p-3 text-white rounded-lg shadow-2xl font-bold'>
+												Delete
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						) : (
+							<tbody>
+								{uniqueProducts?.map((product, index) => (
+									<tr
+										key={index}
+										className=''>
+										<td className='p-2 bg-slate-100 border-spacing-2 border border-white'>
+											{index}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product._id}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.brand}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.category}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.collectionsData}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{new Date(
+												product?.createAt.split('T')[0]
+											).toLocaleDateString('en-US', options)}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.description}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.name}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.price}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											<Link
+												to={`http://localhost:5000/api/v1/products/${product.productGallery[0]}`}>
+												<div className='w-28'>
+													<img
+														src={`http://localhost:5000/api/v1/products/${product.productGallery[0]}`}
+														alt={product.productGallery[0]}
+													/>
+												</div>
+											</Link>
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.ratingsAverage}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.ratingsQuantity}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											{product.size}
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											<button className='bg-green-600 pt-3 pb-3 pl-4 pr-4 ml-2 text-white rounded-lg font-bold shadow-2xl'>
+												Edit
+											</button>
+										</td>
+										<td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
+											<button className='bg-red-600 p-3 text-white rounded-lg shadow-2xl font-bold'>
+												Delete
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						)}
 					</table>
 				</div>
 			</div>
