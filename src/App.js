@@ -38,9 +38,11 @@ import AccountVerification from './components/pages/Auth/AccountVerification';
 import empty from './assets/x.svg';
 // Admin
 import Admin from './components/pages/Admin/AdminHome';
-import Products from './components/pages/Admin/Products';
+import Products from './components/pages/Admin/Products/Products';
 import Users from './components/pages/Admin/Users';
-import AdminOrders from './components/pages/Order/Order';
+import AdminOrders from './components/pages/Admin/Order';
+import EditProduct from './components/pages/Admin/Products/EditProduct';
+import CreateProduct from './components/pages/Admin/Products/CreateProduct';;
 
 
 const App = () => {
@@ -226,6 +228,14 @@ const App = () => {
 								<Route
 									path='Orders'
 									element={<AdminOrders />}
+								/>
+								<Route
+									path='EditProduct'
+									element={<EditProduct />}
+								/>
+								<Route
+									path='CreateProduct'
+									element={<CreateProduct />}
 								/>
 							</Route>
 						</Routes>

@@ -38,32 +38,32 @@ const SignUp = () => {
     setErr(validateSignUp(values));
 
     if (name && email && phoneNo && password && confirmPassword) {
-      setIsSubmitted(true);
-      const payload = await signUp(values);
+		setIsSubmitted(true);
+		const payload = await signUp(values);
 
       if (!payload.status.includes('success')) {
-        setIsSubmitted(false)
-        Toast({
-            text: 'Request failed!! 💥💥',
-            position: 'top-left',
-        });
-        setErrMsg("Email already in used");
-      } else {
-        localStorage.setItem('user', JSON.stringify(payload));
-        setIsSubmitted(true)
-        Toast({
-            text: 'Request successfull!! 🦅✨',
-            position: 'top-right',
-        });
-        setConfirmPassword("");
-        setPassword("");
-        setErrMsg("");
-        setEmail("");
-        setName("");
-        setTimeout(() => {
-          navigate("/AccountVerification")
-        }, 6000);
-      }
+			setIsSubmitted(false)
+			Toast({
+				text: 'Request failed!! 💥💥',
+				position: 'top-left',
+			});
+			setErrMsg("Email already in used");
+		} else {
+			localStorage.setItem('user', JSON.stringify(payload));
+			setIsSubmitted(true)
+			Toast({
+				text: 'Request successfull!! 🦅✨',
+				position: 'top-right',
+			});
+			setConfirmPassword("");
+			setPassword("");
+			setErrMsg("");
+			setEmail("");
+			setName("");
+			setTimeout(() => {
+			navigate("/AccountVerification")
+			}, 6000);
+		}
     }
   }
 

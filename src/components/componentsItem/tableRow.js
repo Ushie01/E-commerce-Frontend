@@ -5,7 +5,6 @@ const TableRow = ({ product, index }) => {
     
     return (
         <tr
-            // key={index}
             className=''>
             <td className='p-2 bg-slate-100 border-spacing-2 border border-white'>
                 {index}
@@ -57,9 +56,11 @@ const TableRow = ({ product, index }) => {
                 {product.size}
             </td>
             <td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-                <button className='bg-green-600 pt-3 pb-3 pl-4 pr-4 ml-2 text-white rounded-lg font-bold shadow-2xl'>
-                    Edit
-                </button>
+                <Link to={'/Admin/EditProduct'}>
+                    <button className='bg-green-600 pt-3 pb-3 pl-4 pr-4 ml-2 text-white rounded-lg font-bold shadow-2xl'>
+                        Edit
+                    </button>
+                </Link>
             </td>
             <td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
                 <button className='bg-red-600 p-3 text-white rounded-lg shadow-2xl font-bold'>

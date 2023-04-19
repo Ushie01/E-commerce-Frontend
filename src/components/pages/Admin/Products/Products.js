@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useAllProduct } from '../../../Hooks/useProduct';
-import Loader from '../../componentsItem/Loading/Loader';
-import Input from '../../componentsItem/Input';
-import TableRow from '../../componentsItem/tableRow';
+import { Link } from 'react-router-dom';
+import { useAllProduct } from '../../../../Hooks/useProduct';
+import Loader from '../../../componentsItem/Loading/Loader';
+import Input from '../../../componentsItem/Input';
+import TableRow from '../../../componentsItem/tableRow';
 
 const Products = () => {
 	const allProduct = useAllProduct();
@@ -34,9 +35,11 @@ const Products = () => {
 			<div className='p-4'>
 				<div className='flex flex-row items-center justify-between'>
 					<p className='text-2xl font-bold mt-3'>Products:</p>
-					<button className='bg-orange-300 p-3 rounded-lg shadow-lg text-white font-bold'>
-						Create Product
-					</button>
+					<Link to="/Admin/CreateProduct">
+						<button className='bg-orange-300 p-3 rounded-lg shadow-lg text-white font-bold'>
+							Create Product
+						</button>
+					</Link>	
 				</div>
 
 				<div className='mt-8'>

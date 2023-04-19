@@ -26,7 +26,6 @@ const AddAddress = () => {
     useEffect(() => {
         if (id) {
             const addressResponse = savedAddresses[id];
-            console.log(addressResponse);
             if (addressResponse) {
                 const { country, firstName, lastName, address, city, postalCode, phoneNumber } = addressResponse;
                 setCountry(country);

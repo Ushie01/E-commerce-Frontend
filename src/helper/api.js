@@ -73,7 +73,6 @@ export const getSingleProduct = async (id) => {
 export const userCreateReview = async (payload, id) => {
     const userDetails = localStorage.getItem('user');
     const parsedDetails = JSON.parse(userDetails);
-    console.log(parsedDetails);
     try {
         return await (await fetch(`${baseUrl}/products/${id}/reviews`, {
             method: 'POST',
@@ -228,5 +227,32 @@ export const getAllUser = async () => {
     })).json()
     } catch (error) {
         console.error(error)
+    }
+}
+
+//CREATE PRODUCT FUNCTION
+export const createProduct = async (formData) => {
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = userDetails ? JSON.parse(userDetails) : null;
+
+        const response = await fetch(`${baseUrl}/products`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${parsedDetails?.token}`
+            }
+        });
+
+        const responseData = await response.json();
+
+        if (response.ok) {
+            return responseData;
+        } else {
+            throw new Error(responseData.message);
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
     }
 }

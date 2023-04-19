@@ -171,3 +171,40 @@ export const validateChangePassword = (values) => {
   return errors;
 };
 
+export const validateCreateProduct = (values) => {
+    let errors = {};
+
+    if (!values.brand) {
+        errors.brand = "Brand Is Required"
+    }
+
+    if (!values.category) {
+        errors.category = "Category Is Required"
+    }
+
+    if (!values.collectionsData) {
+        errors.collectionsData = "Collection Is Required"
+    }
+
+    if (!values.description) {
+        errors.description = "Description Is Required"
+    }
+
+    if (!values.name) {
+        errors.name = "Name Is Required"
+    }
+
+    if (!values.price) {
+        errors.price = "Price Is Required"
+    }
+
+    if (!values.size) {
+        errors.size = "Size Is Required "
+    }
+
+    if (!values.productGallery) {
+        errors.productGallery = "Images For Product Required"
+    }
+
+    return errors;
+}
