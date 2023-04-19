@@ -56,7 +56,7 @@ const TableRow = ({ product, index }) => {
                 {product.size}
             </td>
             <td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-                <Link to={'/Admin/EditProduct'}>
+                <Link to={`/Admin/CreateProduct/${product._id}`}>
                     <button className='bg-green-600 pt-3 pb-3 pl-4 pr-4 ml-2 text-white rounded-lg font-bold shadow-2xl'>
                         Edit
                     </button>

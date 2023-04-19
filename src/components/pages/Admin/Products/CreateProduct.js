@@ -1,8 +1,13 @@
 import 'react-toastify/dist/ReactToastify.css';
 import { Toast } from '../../../../Hooks/useToast';
 import { ToastContainer } from 'react-toastify';
-import { useState } from "react";
-import { createProduct } from "../../../../helper/api";
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
+import {
+    createProduct,
+    getSingleProduct,
+    updateProduct
+} from "../../../../helper/api";
 import { validateCreateProduct } from "../../../../utils/validateInfo";
 import Input from "../../../componentsItem/Input";
 import add from "../../../../assets/add.svg"
@@ -15,11 +20,38 @@ const CreateProduct = () => {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
-    const [size, setSize] = useState('');
-    const [productGallery, setProductGallery] = useState([]);
-    const [fileName, setFileName] = useState('');
+    const [size, setSize] = useState([]);
+    const [productGallery, setProductGallery] = useState('');
     const [err, setErr] = useState('');
     const [error, setError] = useState('');
+    const [product, setProduct] = useState({});
+    const [previewUrl, setPreviewUrl] = useState([]);
+    const { id } = useParams();
+    console.log(id);
+       
+    useEffect(() => {
+        if (id) {
+            const singleProductApi = async (id) => {
+                const res = await getSingleProduct(id);
+                setProduct(res.data.product);
+            }
+            singleProductApi(id)   
+        }
+    }, [id]);
+
+    useEffect(() => {
+        if (product) {
+            const { brand, category, collectionsData, description, name, price, size, productGallery } = product;
+            setBrand(brand);
+            setCategory(category);
+            setCollectionsData(collectionsData);
+            setDescription(description);
+            setName(name);
+            setPrice(price);
+            setSize(size);
+            setProductGallery(productGallery)
+        }
+    }, [product]);
 
     const toggleSize = (event) => {
         const size = event.target.value;
@@ -30,7 +62,33 @@ const CreateProduct = () => {
         }
     };
 
-    const formattedSizes = size.split("").join(", ");
+    let formattedSizes;
+
+    if (typeof size === 'string') {
+        formattedSizes = size?.split("").join(",");
+  
+    }
+
+
+    const successRes = (res) => {
+        if (res.status.includes('success')) {
+            Toast({
+                text: 'Request successfull!! 🦅✨',
+                position: 'top-right',
+            });
+            setTimeout(() => {
+                setBrand('');
+                setCategory('');
+                setCategory('');
+                setDescription('');
+                setName('');
+                setPrice('');
+                setSize('');
+                setProductGallery('');
+                setPreviewUrl('');
+            }, 3000);
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -46,8 +104,6 @@ const CreateProduct = () => {
         for (let i = 0; i < productGallery.length; i++) {
             formData.append('gallery', productGallery[i]);
         }
-
-        console.log(formData);
         
         const values = {
             brand,
@@ -73,23 +129,12 @@ const CreateProduct = () => {
             productGallery
 		) {
             try {
-				const res = await createProduct(formData);
-				if (res.status.includes('success')) {
-					Toast({
-                        text: 'Request successfull!! 🦅✨',
-                        position: 'top-right',
-                    });
-                    setTimeout(() => {
-                        setBrand('');
-                        setCategory('');
-                        setCategory('');
-                        setDescription('');
-                        setName('');
-                        setPrice('');
-                        setSize('');
-                        setProductGallery('');
-                        setFileName('');
-                    }, 3000);
+                if (id) {
+                    const res = await updateProduct({ id, formData });
+                    successRes(res)   
+                } else {
+                    const res = await createProduct(formData);
+                    successRes(res)    
                 }
 			} catch (error) {
 				console.error(error)
@@ -118,12 +163,12 @@ const CreateProduct = () => {
                 setError(
                     `File type not supported for file ${i+1}. Please select a jpeg, png, jpg, or svg file.`
                 );
-                setProductGallery('');
+                setProductGallery(upDatedFile);
             } else {
                 upDatedFile.push(file);
                 nameFile.push(file.name);
-                setFileName(nameFile);
                 setProductGallery(upDatedFile);
+                setPreviewUrl(upDatedFile);
                 setError("")
             }
         }
@@ -132,7 +177,7 @@ const CreateProduct = () => {
     return (
         <div className="p-4">
             <div className='flex flex-row items-start'>
-                <p className='text-2xl font-bold mt-3'>Create Product:</p>
+                <p className='text-2xl font-bold mt-3'>{!id ? 'Create Product:' : 'Edit Product:'}</p>
             </div>
             <div>
                 <ToastContainer />
@@ -216,9 +261,12 @@ const CreateProduct = () => {
                     {err?.price && <p className='text-red-600 text-sm font-bold'>{err.price}</p>}
                 </div>
                 
-                
+                {product.name && <p className='text-xm font-bold text-red-600 border-2 p-1 rounded-lg'>Caution!! make sure you select
+                    an image and size while updating else an empty array will be sent to database in there filled
+                </p>}
+             
                 <div className="flex flex-col items-start justify-start space-y-2">
-                    <p className="font-bold text-xl">Selected sizes: {formattedSizes}</p>
+                    <p className="font-bold text-xl">Selected sizes: {id ? size : formattedSizes}</p>
                     <div className="space-x-3">
                         <label>
                             <input type="radio" name="size" value="S" onClick={toggleSize} /> S
@@ -259,16 +307,40 @@ const CreateProduct = () => {
                     </div>
                     {error && <p className='text-red-600 text-sm font-bold'>{error}</p>}
                     {err.productGallery && <p className='text-red-600 text-sm font-bold'>{err.productGallery}</p>}
-                    {fileName && fileName.map((value, index) => (
-                        <div key={index} className='flex flex-row items-start justify-start'>
-                            <p>{`${index + 1}. `}</p>
-                            <p className='text-black text-sm font-bold'>{value}</p>
-                        </div>
-                    ))}
+            
+                    {
+                        previewUrl.length > 0 ?
+                            <div className='grid grid-cols-2 gap-2 items-center justify-center mt-5'>
+                                {previewUrl && previewUrl.map((image, index) => (
+                                    <div key={index} className='flex flex-row'>
+                                        <p className='font-bold'>{`${index + 1}. `}</p>
+                                        <img
+                                            src={URL?.createObjectURL(image)}
+                                            alt={URL?.createObjectURL(image)}
+                                            className='h-28 w-20 rounded-lg shadow-lg'
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                            :
+                            <div className='grid grid-cols-2 gap-2 items-center justify-center mt-5'>
+                                {product && product.productGallery?.map((image, index) => (
+                                    <div key={index} className='flex flex-row'>
+                                        <p className='font-bold'>{`${index + 1}. `}</p>
+                                        <img
+                                            src={`http://localhost:5000/api/v1/products/${image}`}
+                                            alt={`http://localhost:5000/api/v1/products/${image}`}
+                                            className='h-28 w-20 rounded-lg shadow-lg'
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                            
+                    }
                 </div>
 
                 <div className="flex left-0 right-0 bottom-10">
-                    <button onClick={handleSubmit} className="w-full p-4 mt-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg font-bold text-white">Submit</button>
+                    <button onClick={handleSubmit} className="w-full p-4 mt-8 bg-gradient-to-r shadow-2xl from-cyan-500 to-blue-500 rounded-lg font-bold text-white">Submit</button>
                 </div>
             </form>
         </div>

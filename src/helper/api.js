@@ -256,3 +256,30 @@ export const createProduct = async (formData) => {
         throw error;
     }
 }
+
+//UPDATE PRODUCT FUNCTION
+export const updateProduct = async ({id, formData}) => {
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = userDetails ? JSON.parse(userDetails) : null;
+
+        const response = await fetch(`${baseUrl}/products/${id}`, {
+            method: 'PATCH',
+            body: formData,
+            headers: {
+                Authorization: `Bearer ${parsedDetails?.token}`
+            }
+        });
+
+        const responseData = await response.json();
+
+        if (response.ok) {
+            return responseData;
+        } else {
+            throw new Error(responseData.message);
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}

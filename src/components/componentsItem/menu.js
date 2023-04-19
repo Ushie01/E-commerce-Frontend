@@ -13,7 +13,7 @@ const Menu = ({onClick}) => {
 						/>
 					</div>
 					<p className='text-2xl text-white font-bold'>admin</p>
-					<div className='flex flex-col items-center justify-center space-y-5 font-bold text-3xl text-white mt-12'>
+					<div className='flex flex-col items-center justify-center p-6 space-y-5 font-bold text-3xl text-white mt-12'>
 						<Link
 							to='/Admin/Users'
 							onClick={onClick}>

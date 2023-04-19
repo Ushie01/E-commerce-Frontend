@@ -41,7 +41,7 @@ import Admin from './components/pages/Admin/AdminHome';
 import Products from './components/pages/Admin/Products/Products';
 import Users from './components/pages/Admin/Users';
 import AdminOrders from './components/pages/Admin/Order';
-import EditProduct from './components/pages/Admin/Products/EditProduct';
+// import EditProduct from './components/pages/Admin/Products/EditProduct';
 import CreateProduct from './components/pages/Admin/Products/CreateProduct';;
 
 
@@ -230,11 +230,11 @@ const App = () => {
 									element={<AdminOrders />}
 								/>
 								<Route
-									path='EditProduct'
-									element={<EditProduct />}
+									path='CreateProduct'
+									element={<CreateProduct />}
 								/>
 								<Route
-									path='CreateProduct'
+									path='createProduct/:id'
 									element={<CreateProduct />}
 								/>
 							</Route>
