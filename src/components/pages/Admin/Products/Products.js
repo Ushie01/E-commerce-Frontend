@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { deleteProduct } from '../../../../helper/api';
 import { useAllProduct } from '../../../../Hooks/useProduct';
 import Loader from '../../../componentsItem/Loading/Loader';
 import Input from '../../../componentsItem/Input';
@@ -30,6 +31,14 @@ const Products = () => {
                 }
             }
     });
+
+	const handleDelete = async (id) => {
+		const resMsg = window.confirm("Are you sure you want to delete this user document?!");
+		if (resMsg === true) {
+		    await deleteProduct(id);	
+		    window.location.reload('/')
+        }
+	}
 
     return (
 			<div className='p-4'>
@@ -124,7 +133,8 @@ const Products = () => {
 									<TableRow
 										product={product}
                                         key={index}
-                                        index={index}
+										index={index}
+										handleDelete={handleDelete}
 									/>
 								))}
 							</tbody>

@@ -283,3 +283,28 @@ export const updateProduct = async ({id, formData}) => {
         throw error;
     }
 }
+
+export const deleteProduct = async (id) => {
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = userDetails ? JSON.parse(userDetails) : null;
+
+        const response = await fetch(`${baseUrl}/products/${id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${parsedDetails?.token}`
+            }
+        });
+
+        const responseData = await response.json();
+
+        if (response.ok) {
+            return responseData;
+        } else {
+            throw new Error(responseData.message);
+        }
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}

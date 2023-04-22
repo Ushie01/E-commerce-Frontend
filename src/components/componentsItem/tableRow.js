@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 
-const TableRow = ({ product, index }) => {
+const TableRow = ({ product, index, handleDelete }) => {
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
     
     return (
         <tr
             className=''>
             <td className='p-2 bg-slate-100 border-spacing-2 border border-white'>
-                {index}
+                {index + 1}
             </td>
             <td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
                 {product._id}
@@ -63,7 +63,7 @@ const TableRow = ({ product, index }) => {
                 </Link>
             </td>
             <td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-                <button className='bg-red-600 p-3 text-white rounded-lg shadow-2xl font-bold'>
+                <button onClick={() => handleDelete(product._id)} className='bg-red-600 p-3 text-white rounded-lg shadow-2xl font-bold'>
                     Delete
                 </button>
             </td>

@@ -20,14 +20,15 @@ const CreateProduct = () => {
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
-    const [size, setSize] = useState([]);
+    const [, setSize] = useState([]);
     const [productGallery, setProductGallery] = useState('');
     const [err, setErr] = useState('');
     const [error, setError] = useState('');
     const [product, setProduct] = useState({});
     const [previewUrl, setPreviewUrl] = useState([]);
+    const [updatedSize, setUpdatedSize] = useState([]);
     const { id } = useParams();
-    console.log(id);
+    // console.log(size);
        
     useEffect(() => {
         if (id) {
@@ -53,22 +54,22 @@ const CreateProduct = () => {
         }
     }, [product]);
 
+   
     const toggleSize = (event) => {
-        const size = event.target.value;
-        if (event.target.checked) {
-            setSize((prevSizes) =>
-                prevSizes.includes(size) ? "" : prevSizes + size
-            );
+        const sizeValue = event.target.value;
+        const index = updatedSize.indexOf(sizeValue);
+        if (event.target.checked && index === -1) {
+            setUpdatedSize([...updatedSize, sizeValue]);
+        } else {
+            setUpdatedSize(updatedSize.filter((item) => item !== sizeValue));
         }
+        
     };
-
+   
     let formattedSizes;
-
-    if (typeof size === 'string') {
-        formattedSizes = size?.split("").join(",");
-  
+    if (updatedSize && updatedSize.length > 1) {
+        formattedSizes = updatedSize.join(",");
     }
-
 
     const successRes = (res) => {
         if (res.status.includes('success')) {
@@ -101,7 +102,7 @@ const CreateProduct = () => {
 		formData.append('name', name);
 		formData.append('price', price);
 		formData.append('size', formattedSizes);
-        for (let i = 0; i < productGallery.length; i++) {
+        for (let i = 0; i < productGallery?.length; i++) {
             formData.append('gallery', productGallery[i]);
         }
         
@@ -125,14 +126,16 @@ const CreateProduct = () => {
 			description &&
 			name &&
 			price &&
-			size &&
+			formattedSizes &&
             productGallery
-		) {
+        ) {
+            console.log(values);
             try {
                 if (id) {
                     const res = await updateProduct({ id, formData });
                     successRes(res)   
                 } else {
+                    console.log(values);
                     const res = await createProduct(formData);
                     successRes(res)    
                 }
@@ -266,7 +269,7 @@ const CreateProduct = () => {
                 </p>}
              
                 <div className="flex flex-col items-start justify-start space-y-2">
-                    <p className="font-bold text-xl">Selected sizes: {id ? size : formattedSizes}</p>
+                    <p className="font-bold text-xl">Selected sizes: {updatedSize ? updatedSize : ""}</p>
                     <div className="space-x-3">
                         <label>
                             <input type="radio" name="size" value="S" onClick={toggleSize} /> S
@@ -305,7 +308,7 @@ const CreateProduct = () => {
                             />
                         </label>
                     </div>
-                    {error && <p className='text-red-600 text-sm font-bold'>{error}</p>}
+                    
                     {err.productGallery && <p className='text-red-600 text-sm font-bold'>{err.productGallery}</p>}
             
                     {
@@ -338,7 +341,7 @@ const CreateProduct = () => {
                             
                     }
                 </div>
-
+                 {error && <p className='text-red-600 text-sm font-bold'>{error}</p>}
                 <div className="flex left-0 right-0 bottom-10">
                     <button onClick={handleSubmit} className="w-full p-4 mt-8 bg-gradient-to-r shadow-2xl from-cyan-500 to-blue-500 rounded-lg font-bold text-white">Submit</button>
                 </div>
