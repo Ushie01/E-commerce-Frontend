@@ -33,6 +33,7 @@ const ShipTo = () => {
         );
       return filteredAddresses;
     });
+    window.location.reload('/shipTo');
   };
 
   const filteredAddresses = addresses

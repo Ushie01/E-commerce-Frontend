@@ -37,11 +37,11 @@ import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
 import AccountVerification from './components/pages/Auth/AccountVerification';
 import empty from './assets/x.svg';
 // Admin
+import EditUser from './components/pages/Admin/User/EditUser';
 import Admin from './components/pages/Admin/AdminHome';
 import Products from './components/pages/Admin/Products/Products';
-import Users from './components/pages/Admin/Users';
-import AdminOrders from './components/pages/Admin/Order';
-// import EditProduct from './components/pages/Admin/Products/EditProduct';
+import Users from './components/pages/Admin/User/Users';
+import AdminOrders from './components/pages/Admin/Order/Order';
 import CreateProduct from './components/pages/Admin/Products/CreateProduct';;
 
 
@@ -236,6 +236,10 @@ const App = () => {
 								<Route
 									path='createProduct/:id'
 									element={<CreateProduct />}
+								/>
+								<Route
+									path='EditUser/:id'
+									element={<EditUser />}
 								/>
 							</Route>
 						</Routes>

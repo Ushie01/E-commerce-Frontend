@@ -129,7 +129,6 @@ const CreateProduct = () => {
 			formattedSizes &&
             productGallery
         ) {
-            console.log(values);
             try {
                 if (id) {
                     const res = await updateProduct({ id, formData });

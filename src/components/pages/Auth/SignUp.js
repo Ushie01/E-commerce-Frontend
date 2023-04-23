@@ -15,57 +15,62 @@ import envelope from './../../../assets/envelope.svg';
 
 
 const SignUp = () => {
-  const navigate = useNavigate();
-  const [err, setErr] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState("");
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const values = {
-      name,
-      email,
-      phoneNo,
-      password,
-      confirmPassword
-    }
-
-    setErr(validateSignUp(values));
-
-    if (name && email && phoneNo && password && confirmPassword) {
-		setIsSubmitted(true);
-		const payload = await signUp(values);
-
-      if (!payload.status.includes('success')) {
-			setIsSubmitted(false)
-			Toast({
-				text: 'Request failed!! 💥💥',
-				position: 'top-left',
-			});
-			setErrMsg("Email already in used");
-		} else {
-			localStorage.setItem('user', JSON.stringify(payload));
-			setIsSubmitted(true)
-			Toast({
-				text: 'Request successfull!! 🦅✨',
-				position: 'top-right',
-			});
-			setConfirmPassword("");
-			setPassword("");
-			setErrMsg("");
-			setEmail("");
-			setName("");
-			setTimeout(() => {
-			navigate("/AccountVerification")
-			}, 6000);
+	const navigate = useNavigate();
+	const [err, setErr] = useState("");
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [errMsg, setErrMsg] = useState("");
+	const [phoneNo, setPhoneNo] = useState("");
+	const [password, setPassword] = useState("");
+	const [isSubmitted, setIsSubmitted] = useState(false);
+	const [confirmPassword, setConfirmPassword] = useState("");
+	
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const values = {
+			name,
+			email,
+			phoneNo,
+			password,
+			confirmPassword
 		}
-    }
-  }
+
+		setErr(validateSignUp(values));
+
+		if (name && email && phoneNo && password && confirmPassword) {
+			setIsSubmitted(true);
+			const payload = await signUp(values);
+
+		    if (!payload.status.includes('success')) {
+				setIsSubmitted(false)
+				Toast({
+					text: 'Request failed!! 💥💥',
+					position: 'top-left',
+				});
+				if (payload.message.includes('phoneNo')) {
+					setErrMsg("Phone number already in used");
+				}
+				if (payload.message.includes('email')) {
+					setErrMsg("Email already in used")		
+				}
+			} else {
+				localStorage.setItem('user', JSON.stringify(payload));
+				setIsSubmitted(true)
+				Toast({
+					text: 'Request successfull!! 🦅✨',
+					position: 'top-right',
+				});
+				setConfirmPassword("");
+				setPassword("");
+				setErrMsg("");
+				setEmail("");
+				setName("");
+				setTimeout(() => {
+				navigate("/AccountVerification")
+				}, 6000);
+			}
+		}
+	}
 
 
     return (

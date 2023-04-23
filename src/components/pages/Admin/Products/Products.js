@@ -4,7 +4,7 @@ import { deleteProduct } from '../../../../helper/api';
 import { useAllProduct } from '../../../../Hooks/useProduct';
 import Loader from '../../../componentsItem/Loading/Loader';
 import Input from '../../../componentsItem/Input';
-import TableRow from '../../../componentsItem/tableRow';
+import TableRow from '../../../componentsItem/TableRow/tableRowProduct';
 
 const Products = () => {
 	const allProduct = useAllProduct();
@@ -123,7 +123,8 @@ const Products = () => {
 									<TableRow
 										product={product}
                                         key={index}
-                                        index={index}
+										index={index}
+										handleDelete={handleDelete}
 									/>
 								))}
 							</tbody>

@@ -308,3 +308,53 @@ export const deleteProduct = async (id) => {
         throw error;
     }
 }
+
+export const deleteUser = async (id) => { 
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/users/${id}`, {
+        method: 'DELETE',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        }
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const getSingleUser = async (id) => { 
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/users/${id}`, {
+        method: 'GET',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        }
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const updateSingleUser = async ({id, payload}) => { 
+    try {
+        console.log(id, payload)
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/users/${id}`, {
+        method: 'PATCH',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        },
+        body: JSON.stringify(payload)
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
