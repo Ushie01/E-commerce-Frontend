@@ -41,7 +41,7 @@ const Products = () => {
 	}
 
     return (
-			<div className='p-4'>
+			<div className='p-3'>
 				<div className='flex flex-row items-center justify-between'>
 					<p className='text-2xl font-bold mt-3'>Products:</p>
 					<Link to="/Admin/CreateProduct">

@@ -27,7 +27,7 @@ const Menu = ({onClick}) => {
 						</Link>
 						<hr className='border-white w-96' />
 						<Link
-							to='/Admin/Users'
+							to='/Admin/Orders'
 							onClick={onClick}>
 							<p>Orders</p>
 						</Link>

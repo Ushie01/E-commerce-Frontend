@@ -35,8 +35,9 @@ const Users = () => {
 		    window.location.reload('/')
         }
 	}
+
     return (
-			<div className='p-4'>
+			<div className='p-3'>
 				<p className='text-2xl font-bold mt-3'>Users:</p>
 				<div className='mt-8'>
 					<Input
@@ -54,8 +55,8 @@ const Users = () => {
 					} Available User`}
 				</p>
 				<div className='overflow-x-auto mt-3'>
-					<table className=''>
-						<thead className=''>
+					<table>
+						<thead>
 							<tr>
 								<th className='p-5 bg-gray-200 border-spacing-2 border border-white'>
 									No.

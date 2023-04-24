@@ -12,10 +12,9 @@ const EditUser = () => {
     const [email, setEmail] = useState('');
     const [phoneNo, setPhoneNo] = useState('');
     const [user, setUser] = useState('');
-    const [err, setErr] = useState('');
+    const [err,] = useState('');
     const [error, setError] = useState('');
     const { id } = useParams();
-    console.log(user);
 
     useEffect(() => {
         if (id) {
@@ -66,7 +65,7 @@ const EditUser = () => {
         <>
             <div className="p-4">
                 <div className='flex flex-row items-start'>
-                    <p className='text-2xl font-bold mt-3'>Edit Product:</p>
+                    <p className='text-2xl font-bold mt-3'>Edit User:</p>
                 </div>
                 <div>
                     <ToastContainer />
@@ -79,7 +78,7 @@ const EditUser = () => {
                             type="text"
                             widthLength={"w-full"}
                             name="name"
-                            value={name}
+                            value={name ? name : 'fetching..'}
                             onChange={(e) => setName(e.target.value)}
                         />
                         {err?.name && <p className='text-red-600 text-sm font-bold'>{err.brand}</p>}
@@ -92,7 +91,7 @@ const EditUser = () => {
                             type="text"
                             widthLength={"w-full"}
                             name="email"
-                            value={email}
+                            value={email ? email : 'fetching..'}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         {err?.email && <p className='text-red-600 text-sm font-bold'>{err.email}</p>}
@@ -101,11 +100,11 @@ const EditUser = () => {
                     <div className="flex flex-col items-start justify-start mt-4 space-y-3">
                         <label className="text-md font-bold">Phone Number</label>
                         <Input
-                            placeholder={"phoneNo"}
+                            placeholder={"phone number"}
                             type="text"
                             widthLength={"w-full"}
                             name="phoneNo"
-                            value={phoneNo}
+                            value={phoneNo ? phoneNo : 'fetching..'}
                             onChange={(e) => setPhoneNo(e.target.value)}
                         />
                         {err?.phoneNo && <p className='text-red-600 text-sm font-bold'>{err.phoneNo}</p>}

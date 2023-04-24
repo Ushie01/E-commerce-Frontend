@@ -37,6 +37,8 @@ import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
 import AccountVerification from './components/pages/Auth/AccountVerification';
 import empty from './assets/x.svg';
 // Admin
+import UserOrder1 from './components/pages/Admin/Order/UserOrder1';
+import UserOrder from './components/pages/Admin/Order/UserOrder';
 import EditUser from './components/pages/Admin/User/EditUser';
 import Admin from './components/pages/Admin/AdminHome';
 import Products from './components/pages/Admin/Products/Products';
@@ -240,6 +242,14 @@ const App = () => {
 								<Route
 									path='EditUser/:id'
 									element={<EditUser />}
+								/>
+								<Route
+									path='UserOrder/:id'
+									element={<UserOrder />}
+								/>
+								<Route
+									path='UserOrder1/:id'
+									element={<UserOrder1 />}
 								/>
 							</Route>
 						</Routes>

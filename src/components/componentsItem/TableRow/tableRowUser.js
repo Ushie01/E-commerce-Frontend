@@ -20,9 +20,11 @@ const TableRow = ({ index, user, handleDelete }) => {
                     {user.phoneNo}
                 </td>
                 <td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
-                    <button className='bg-yellow-300 p-3 text-white rounded-lg font-bold shadow-2xl'>
-                        Order
-                    </button>
+                    <Link to={`/Admin/UserOrder1/${user._id}`}>
+                        <button className='bg-yellow-300 p-3 text-white rounded-lg font-bold shadow-2xl'>
+                            Order
+                        </button>
+                    </Link>
                 </td>
                 <td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
                     <Link to={`/Admin/EditUser/${user._id}`}>

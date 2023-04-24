@@ -56,7 +56,8 @@ const ShipTo = () => {
         orderItems: cart.map((c) => ({
             qty: c.quantity,
             price: c.price * c.quantity,
-            product: c._id
+            product: c._id,
+            size: c.size
         }))
       }
       const res = await postOrder(data);
