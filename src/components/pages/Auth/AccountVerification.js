@@ -3,16 +3,32 @@ import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { Toast } from '../../../Hooks/useToast';
 import ReactInputVerificationCode from 'react-input-verification-code';
-import { accountVerification } from '../../../helper/api';
+import { accountVerification, resendToken } from '../../../helper/api';
 import { ToastContainer } from 'react-toastify';
 import  Button from '../../componentsItem/Button';
+import { useUser } from '../../../Hooks/useUser';
 import logo from './../../../assets/logo.jpeg';
 
 
 export default function AccountVerification() {
   const [value, setValue] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { user } = useUser('user');
+  const userEmail = user?.data?.user.email;
+
+  const handleResendToken = async (e) => {
+    e.preventDefault();
+      const res = await resendToken({email: userEmail});
+      if(res.status.includes('success')){
+        Toast({
+          text: 'A new Token has been sent to your email!! 🦅✨',
+          position: 'top-right',
+        });  
+      }
+  }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +53,7 @@ export default function AccountVerification() {
             text: 'Request failed!! 💥💥',
             position: 'top-left',
         });
+        setError(res.message);
       }
     } else {
       setIsSubmitted(false);
@@ -48,37 +65,30 @@ export default function AccountVerification() {
   };
   
   return (
-    <form>
+    <form className='p-4'>
       <div>
         <ToastContainer />
       </div>
-      <div className='flex flex-col items-center justify-center mt-10 space-y-3'>
-        <img
-          src={logo}
-          alt={logo}
-          className='h-24 w-48'
-        />
-        <p className='text-orange-400 font-bold text-2xl'>
-          Euphorya
-        </p>
-        <div className='flex flex-col items-center'>
-          <p className='text-orange-200'>Input The 4 Digit Sent To Email</p>
-          <p className='text-orange-200'>To Activate Your Account</p>
-        </div>
-        {/* <p className='text-orange-200'>To Activate Your Account</p> */}
-      </div>
+          <div className="flex flex-col items-center justify-center">
+            <img src={logo} alt={logo} className="h-40 w-72 p-3 shadow-md rounded-lg" />
+            <p className="text-gray-300 mt-3">Input the 4 digit sent to your email</p>
+          </div>
       <div className='flex items-center justify-center mt-10'>
         <ReactInputVerificationCode 
           onChange={setValue}
           value={value}
         />
       </div>
-      <div className='flex items-center justify-center fixed bottom-5 left-0 right-0'>
+      
+      {error && <p className='mt-3 text-center text-red-600 text-sm font-bold'>{error}</p>}
+      <div onClick={handleResendToken} className='flex items-center justify-center mt-5'>
+        <button className='bg-gray-400 text-white rounded-lg p-2 shadow-xl'>Resend otp</button>
+      </div> 
+
+      <div className='flex items-center p-3 fixed bottom-5 left-0 right-0'>
         <Button
           text='Submit'
-          onClick={(e) => {
-            handleSubmit(e);
-          }}
+          onClick={(e) => {handleSubmit(e);}}
           disabled={isSubmitted}
           bgColor='red'
           textColor='white'

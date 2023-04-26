@@ -8,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import { validateSignIn } from '../../../utils/validateInfo';
 import logo from './../../../assets/logo.jpeg'
 import lock from './../../../assets/lock.svg';
-import apple from "./../../../assets/apple.svg";
+// import apple from "./../../../assets/apple.svg";
 import Input from './../../componentsItem/Input';
 import Button from './../../componentsItem/Button'
 import envelope from './../../../assets/envelope.svg';
@@ -32,14 +32,14 @@ const SignIn = () => {
     if (email && password) {
       setIsSubmited(true);
       const payload = await signIn(values);
-
+      console.log(payload);
       if (!payload.status.includes('success')) {
         setIsSubmited(false);
         Toast({
           text: 'Incorrect email or password 😥😪',
           position: 'top-left'
         });
-        setErrMsg("Incorrent Email or Password")
+        setErrMsg(payload.message)
       } else {
         localStorage.setItem('user', JSON.stringify(payload));
         setIsSubmited(false);
@@ -50,27 +50,37 @@ const SignIn = () => {
         setErrMsg("");
         setPassword("");
         setEmail("");
-        setTimeout(() => {
-          navigate('/')
-        }, 5000);
+        if (payload?.data?.user?.role.includes('admin')) {
+          setTimeout(() => {
+            navigate('/Admin')
+          }, 3000);
+        }
+
+        if (payload?.data?.user?.role.includes('user')) {
+          setTimeout(() => {
+            navigate('/')
+          }, 3000);
+        }
       }
     }
   }
     return (
-      <>
-        <div className="flex flex-col items-center justify-center space-y-4 mt-10">
-          
-          <div className="flex flex-col items-center justify-center space-y-3">
-            <img src={logo} alt={logo} className="h-24 w-48" />
-            <p className="text-orange-400 font-bold text-2xl">
+      <div className='p-3'>
+          <div>
+              <ToastContainer />
+          </div>
+        
+          <div className="flex flex-col items-center justify-center">
+            <img src={logo} alt={logo} className="h-40 w-72 p-3 shadow-md rounded-lg" />
+            <p className="text-red-600 text-center font-bold text-2xl p-2 mt-5 rounded-lg">
               Welcome to Euphorya
             </p>
-            <p className="text-orange-200">Sign in to continue</p>
+            <p className="text-gray-300">Sign in to continue</p>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2 p-3 mt-3">
             <Input
-              placeholder="Your Email"
+              placeholder="Email"
               widthLength={"w-full"}
               image={envelope}
               onChange={(e) => setEmail(e.target.value)}
@@ -90,15 +100,11 @@ const SignIn = () => {
               name="password"
               type={"password"}
             />
-            {err.password && <p className='text-red-600 text-sm font-bold'>{err.password}</p>}
+            {err.password && <p className=' text-red-600 text-sm font-bold'>{err.password}</p>}
           </div>
-          {errMsg && <p className='text-red-600 text-sm font-bold'>{errMsg}</p>}
-          
-          <div>
-            <ToastContainer />
-          </div>
+          {errMsg && <p className='p-3 text-red-600 text-sm font-bold'>{errMsg}</p>}
 
-          <div className="">
+          <div className="flex items-center p-3">
             <Button
               text="Sign In" 
               onClick={(e) => { handleSubmit(e) }}
@@ -108,30 +114,29 @@ const SignIn = () => {
             />
           </div>
 
-          <p className="text-gray-400 font-bold">OR</p>
+          <p className="text-center text-gray-400 font-bold">OR</p>
           
-          <div className="space-y-2 w-98">
-            {/* <GoogleAuth /> */}
-            <button  className="flex flex-row bg-white rounded-md items-center justify-center space-x-2 border-gray-200 border-2 w-80 h-16 font-bold text-gray-400">
+          {/* <div className="flex items-center p-3 space-y-2 w-full">
+            <button  className="flex flex-row bg-white rounded-md items-center justify-center space-x-2 border-gray-200 border-2 w-full h-16 font-bold text-gray-400">
               <img src={apple} alt={apple} className="h-7 w-7" />
               <p>Login with Apple</p>
             </button>
-          </div>
+          </div> */}
           
-          <div className="items-center text-center ">
+          <div className="flex flex-col items-center justify-center text-center ">
             <Link to='/ForgetPassword'>
-              <p className="text-cyan-500 font-bold">Forget Password?</p>
+              <p className="text-red-600 font-bold">Forget Password?</p>
             </Link>
             <div className="flex flex-row items-center justify-between space-x-1">
               <p className="font-thin">Don't have a account?</p>
               <Link to="/SignUp">
-                <p className="text-cyan-500 font-bold">Register</p>
+                <p className="text-red-600 font-bold">Register</p>
               </Link>
             </div>
           </div>
 
-        </div>
-      </>
+
+      </div>
     );
 }
 

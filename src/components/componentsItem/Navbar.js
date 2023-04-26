@@ -34,15 +34,7 @@ const Navbar = ({
 				uniqueProducts.push(product);
 			}
 		});
-    console.log(uniqueProducts);
-	// const handleKeyDownEnter = (event) => {
-	// 	if (event.key === 'Enter') {
-	// 	// do something with the input value
-	// 		setIsEnter(uniqueProducts);
-	// 	}
-	// };
-	
-	//Event listener for input key down
+
 	const handleKeyDown = () => {
 		setIsClick(true);
 

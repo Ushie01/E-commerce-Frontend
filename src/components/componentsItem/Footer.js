@@ -23,7 +23,6 @@ const Footer = () => {
 	const navigate = useNavigate();
 	
 	const handleProfile = (user) => {
-		console.log(user);
 		if (user) {
 			navigate('/Account')
 		} else {

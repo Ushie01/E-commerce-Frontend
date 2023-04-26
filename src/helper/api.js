@@ -391,11 +391,44 @@ export const getUserOrderAdmin = async (id) => {
 }
 
 export const confirmDelivery = async ({ id, payload }) => { 
-    console.log(id, payload)
     try {
         const userDetails = localStorage.getItem('user');
         const parsedDetails = JSON.parse(userDetails);
         return await( await fetch(`${baseUrl}/orders/userOrder/${id}`, {
+        method: 'PATCH',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        },
+        body: JSON.stringify(payload)
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const getAllReview = async () => { 
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/reviews`, {
+        method: 'GET',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${parsedDetails?.token}`,
+        }
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const resendToken = async (payload) => { 
+    console.log(payload);
+    try {
+        const userDetails = localStorage.getItem('user');
+        const parsedDetails = JSON.parse(userDetails);
+        return await( await fetch(`${baseUrl}/users/resendToken`, {
         method: 'PATCH',
             headers: {
             'Content-type': 'application/json',

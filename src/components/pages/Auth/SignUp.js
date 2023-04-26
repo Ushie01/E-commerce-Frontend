@@ -61,6 +61,7 @@ const SignUp = () => {
 					position: 'top-right',
 				});
 				setConfirmPassword("");
+				setPhoneNo("");
 				setPassword("");
 				setErrMsg("");
 				setEmail("");
@@ -75,133 +76,124 @@ const SignUp = () => {
 
     return (
 			<>
-				<div className='flex bg-opacity-5 p-10 flex-col items-center justify-center space-y-4'>
+				<div className='p-3'>
 					<div>
 						<ToastContainer />
 					</div>
 
-					<div className='flex flex-col items-center justify-center space-y-3'>
-						<img
-							src={logo}
-							alt={logo}
-							className='h-24 w-48'
-						/>
-						<p className='text-orange-400 font-bold text-2xl'>
-							Welcome to Euphorya
+					<div className="flex flex-col items-center justify-center">
+						<img src={logo} alt={logo} className="h-32 w-56 p-3 shadow-md rounded-lg" />
+						<p className="text-red-600 text-center font-bold text-2xl p-2 mt-5 rounded-lg">
+						    Welcome to Euphorya
 						</p>
-						<p className='text-orange-200'>Sign up to continue</p>
+						<p className="text-gray-300">Sign in to continue</p>
 					</div>
 
-					<div className='flex flex-col items-center justify-center'>
-						<div>
-							<div className='space-y-2'>
-								<Input
-									placeholder='Full Name'
-									width='w-80'
-									height='h-12'
-									image={account}
-									onChange={(e) => setName(e.target.value)}
-									value={name}
-									name='name'
-									type='text'
-									testWidth={'text-lg'}
-								/>
-								{err.name && (
-									<p className='text-red-600 text-sm font-bold'>{err.name}</p>
-								)}
+					<div className='space-y-2 p-3'>
+						<Input
+							placeholder='Full Name'
+							width='w-80'
+							height='h-12'
+							image={account}
+							onChange={(e) => setName(e.target.value)}
+							value={name}
+							name='name'
+							type='text'
+							testWidth={'text-lg'}
+						/>
+						{err.name && (
+							<p className='text-red-600 text-sm font-bold'>{err.name}</p>
+						)}
 
-								<Input
-									placeholder='Your Email'
-									width='w-80'
-									height='h-12'
-									image={envelope}
-									onChange={(e) => setEmail(e.target.value)}
-									value={email}
-									name='email'
-									type='email'
-									testWidth={'text-lg'}
-								/>
-								{err.email && (
-									<p className='text-red-600 text-sm font-bold'>{err.email}</p>
-								)}
+						<Input
+							placeholder='Your Email'
+							width='w-80'
+							height='h-12'
+							image={envelope}
+							onChange={(e) => setEmail(e.target.value)}
+							value={email}
+							name='email'
+							type='email'
+							testWidth={'text-lg'}
+						/>
+						{err.email && (
+							<p className='text-red-600 text-sm font-bold'>{err.email}</p>
+						)}
 
-								<Input
-									placeholder='Phone Number'
-									width='w-80'
-									height='h-12'
-									image={phone}
-									onChange={(e) => setPhoneNo(e.target.value)}
-									value={phoneNo}
-									name='phoneNo'
-									type='text'
-									testWidth={'text-lg'}
-								/>
-								{err.phoneNo && (
-									<p className='text-red-600 text-sm font-bold'>
-										{err.phoneNo}
-									</p>
-								)}
+						<Input
+							placeholder='Phone Number'
+							width='w-80'
+							height='h-12'
+							image={phone}
+							onChange={(e) => setPhoneNo(e.target.value)}
+							value={phoneNo}
+							name='phoneNo'
+							type='number'
+							testWidth={'text-lg'}
+						/>
+						{err.phoneNo && (
+							<p className='text-red-600 text-sm font-bold'>
+								{err.phoneNo}
+							</p>
+						)}
 
-								<Input
-									placeholder='Password'
-									width='w-80'
-									height='h-12'
-									image={lock}
-									onChange={(e) => setPassword(e.target.value)}
-									value={password}
-									name='password'
-									type='password'
-									testWidth={'text-lg'}
-								/>
-								{err.password && (
-									<p className='text-red-600 text-sm font-bold'>
-										{err.password}
-									</p>
-								)}
+						<Input
+							placeholder='Password'
+							width='w-80'
+							height='h-12'
+							image={lock}
+							onChange={(e) => setPassword(e.target.value)}
+							value={password}
+							name='password'
+							type='password'
+							testWidth={'text-lg'}
+						/>
+						{err.password && (
+							<p className='text-red-600 text-sm font-bold'>
+								{err.password}
+							</p>
+						)}
 
-								<Input
-									placeholder='Confirm Password'
-									width='w-80'
-									height='h-12'
-									image={lock}
-									onChange={(e) => setConfirmPassword(e.target.value)}
-									value={confirmPassword}
-									name='confirmPassword'
-									type='password'
-									testWidth={'text-lg'}
-								/>
-							</div>
-							{err.confirmPassword && (
-								<p className='text-red-600 text-sm font-bold'>
-									{err.confirmPassword}
-								</p>
-							)}
-							<div className='flex'>
-								{errMsg && (
-									<p className='text-red-600 mt-3 m-auto text-sm font-bold'>
-										{errMsg}
-									</p>
-								)}
-							</div>
-						</div>
-
-						<div className='mt-10'>
-							<Button
-								text='Sign Up'
-								onClick={(e) => {
-									handleSubmit(e);
-								}}
-								disabled={isSubmitted}
-								bgColor='red'
-								textColor='white'
-							/>
-						</div>
+						<Input
+							placeholder='Confirm Password'
+							width='w-80'
+							height='h-12'
+							image={lock}
+							onChange={(e) => setConfirmPassword(e.target.value)}
+							value={confirmPassword}
+							name='confirmPassword'
+							type='password'
+							testWidth={'text-lg'}
+						/>
+					</div>
+					{err.confirmPassword && (
+						<p className='text-red-600 text-sm font-bold'>
+							{err.confirmPassword}
+						</p>
+					)}
+					<div className='flex'>
+						{errMsg && (
+							<p className='text-red-600 mt-3 m-auto text-sm font-bold'>
+								{errMsg}
+							</p>
+						)}
 					</div>
 
-					<div className='flex flex-row items-center justify-between space-x-1'>
+					<div className="flex items-center p-3 mt-2">
+						<Button
+							text="Sign In" 
+							onClick={(e) => { handleSubmit(e) }}
+							disabled={isSubmitted}
+							bgColor="red"
+							textColor="white"
+						/>
+					</div>
+
+
+					<div className='flex flex-col items-center'>
 						<p className='font-thin'>Don't have a account?</p>
 						<Link to='/SignIn'>
-							<p className='text-cyan-500 font-bold'>Sign In</p>
+							<p className='text-red-600 font-bold'>Sign In</p>
 						</Link>
 					</div>
 				</div>

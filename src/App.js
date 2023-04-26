@@ -37,6 +37,8 @@ import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
 import AccountVerification from './components/pages/Auth/AccountVerification';
 import empty from './assets/x.svg';
 // Admin
+import { useUser } from './Hooks/useUser';
+import UserReviews from './components/pages/Admin/UserReview';
 import UserOrder1 from './components/pages/Admin/Order/UserOrder1';
 import UserOrder from './components/pages/Admin/Order/UserOrder';
 import EditUser from './components/pages/Admin/User/EditUser';
@@ -47,8 +49,12 @@ import AdminOrders from './components/pages/Admin/Order/Order';
 import CreateProduct from './components/pages/Admin/Products/CreateProduct';;
 
 
+
 const App = () => {
 	const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+	const user = useUser('user');
+	const currentUser = user?.user?.data?.user?.role;
+
 	return (
 		<>
 			{isMobile ? (
@@ -249,7 +255,11 @@ const App = () => {
 								/>
 								<Route
 									path='UserOrder1/:id'
-									element={<UserOrder1 />}
+									element={<UserOrder1/>}
+								/>
+								<Route
+									path='Reviews'
+									element={<UserReviews/>}
 								/>
 							</Route>
 						</Routes>
