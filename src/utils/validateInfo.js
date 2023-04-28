@@ -149,6 +149,16 @@ export const validatePhoneNoUpdate = (values) => {
     }
 };
 
+export const validateNameUpdate = (values) => {
+    let errors = {};
+
+    if (!values.name) {
+        errors.name = "Your Name Is Required*"
+    }
+    
+    return errors;
+};
+
 export const validateChangePassword = (values) => {
   let errors = {};
 

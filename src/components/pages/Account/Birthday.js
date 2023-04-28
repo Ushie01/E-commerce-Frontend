@@ -21,7 +21,7 @@ const Birthday = () => {
               name="search"
             />
           </div>
-          <div className="flex flex-auto fixed left-0 right-0 bottom-5">
+          <div className="flex flex-auto fixed left-0 right-0 p-4 bottom-5">
             <Button
               text={"SAVE"}
               className="m-auto"

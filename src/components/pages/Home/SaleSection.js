@@ -26,7 +26,7 @@ const SaleSection = ({
             ?
             products.map((value, index) => (
               <div
-                className={`${column === true ? "h-80" : "text-sm h-72 flex items-center justify-center"} border-gray-100 border-2 rounded-xs`}
+                className={`${column === true ? "h-80" : "text-sm h-72 flex items-center justify-center"} border-gray-200 rounded-2xl p-1 border-2 rounded-xs`}
                 key={index}
               >
               <Link to={`/Product/${value._id}`}>

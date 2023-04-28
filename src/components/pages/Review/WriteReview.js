@@ -1,7 +1,7 @@
 import { Toast } from '../../../Hooks/useToast';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { userCreateReview } from '../../../helper/api';
 import { validateCreateReview } from '../../../utils/validateInfo';
 import arrow from './../../../assets/arrow.svg';
@@ -17,6 +17,8 @@ const WriteReview = () => {
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState("");
     const [errMsg, setErrMsg] = useState("");
+    const navigate = useNavigate();
+
 
     const handleRating = (value) => { setRating(value) };
 
@@ -35,15 +37,18 @@ const WriteReview = () => {
                         text: 'Request failed!! 💥💥',
                         position: 'top-left',
                     });
+                    setTimeout(() => {
+                        navigate(`/Product/${id}`);
+                    }, 6000);
                 } else {
                     setIsSubmitted(false);
                     Toast({
                         text: 'Request successfull!! 🦅✨',
                         position: 'top-right',
                     });
-                    setErr("");
-                    setReview("");
-                    setRating("")
+                    setTimeout(() => {
+                        navigate(`/Product/${id}`);
+                    }, 4000);
                 }
             }   
         }
@@ -53,7 +58,7 @@ const WriteReview = () => {
         <div>
             <div className="flex flex-row items-center justify-between border-b-2 p-5">
                 <div className="flex flex-row">
-                    <Link to="/ProductReviews">
+                    <Link to={`/Product/${id}`}>
                         <img src={arrow} alt={arrow} className="h-7 w-7" />
                     </Link>
                     <p className="text-xl font-bold ml-3">
@@ -107,6 +112,7 @@ const WriteReview = () => {
                     >
                     </textarea>
                 </div>
+                
                 {err.review && <p className='text-red-600 text-md font-bold ml-3'>{err.review}</p>}
                 {errMsg && <p className='text-red-600 text-md font-bold ml-3'>{errMsg}</p>}
             <Footer />

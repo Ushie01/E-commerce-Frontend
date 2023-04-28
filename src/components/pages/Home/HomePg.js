@@ -19,7 +19,7 @@ const Homepage = () => {
 	const [isSearch, setIsSearch] = useState('');
 	const product = useAllProduct();
 	const productImage = product.product?.data.products
-		.slice(0, 4)
+		.slice(0, 6)
 		.map((value) => value?.productGallery[1]);
 
 	return (

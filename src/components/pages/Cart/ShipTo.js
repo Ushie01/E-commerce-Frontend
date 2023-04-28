@@ -131,7 +131,7 @@ const ShipTo = () => {
                       </div>
                     </div>
                   ))}
-                  <div className="flex flex-auto mt-12 left-0 right-0 mb-9">
+                  <div className="flex flex-auto mt-12 left-0 right-0 p-5 mb-9">
                     <Button
                       text="Next"
                       className="m-auto"

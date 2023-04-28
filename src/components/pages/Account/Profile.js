@@ -8,6 +8,7 @@ import account from "./../../../assets/account_.svg";
 import email from "./../../../assets/envelope.svg";
 import phone from "./../../../assets/phone.svg";
 import lock from "./../../../assets/lock.svg";
+import alpha from "./../../../assets/ALPHA.svg"
 
 
 const Profile = () => {
@@ -29,6 +30,18 @@ const Profile = () => {
               </div>
             </div>
           </div>
+          <Link to="/Account/ChangeName">
+            <div className="flex flex-row items-center justify-between text-black hover:bg-cyan-100 font-extrabold text-md p-6 space-x-3">
+              <div className="flex flex-row items-center justify-start space-x-5">
+                <img src={alpha} alt={alpha} className="h-5 w-5 " />
+                <p className="text-sm">Name</p>
+              </div>
+              <div className="flex flex-row items-center justify-end space-x-5">
+                <p className="text-xs text-gray-300">{userDetail?.name ? userDetail.name : 'Yet to sign up'}</p>
+                <img src={rigthArrow} alt={rigthArrow} className="h-6 w-6 " />
+              </div>
+            </div>
+          </Link>
           <Link to="/Account/Email">
             <div className="flex flex-row items-center justify-between text-black hover:bg-cyan-100 font-extrabold text-md p-6 space-x-3">
               <div className="flex flex-row items-center justify-start space-x-5">

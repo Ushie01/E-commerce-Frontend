@@ -77,7 +77,7 @@ const ForgetPassword = () => {
                       onChange={(e) => setEmail(e.target.value)}
                   />
             </div>
-          <div className="flex flex-auto fixed left-0 right-0 bottom-5">
+          <div className="flex flex-auto fixed left-0 right-0 bottom-5 p-4">
             <Button 
               text={"SEND"}
               className="m-auto"

@@ -142,7 +142,7 @@ const Navbar = ({
 											onClick={() => onHandleClick(value?.name)}>
 											<p className='text-md font-bold'>{value?.name}</p>
 										</div>
-										<hr className='border' />
+										<hr />
 									</div>
 								))}
 						</>

@@ -1,4 +1,5 @@
 import Carousel, { CarouselItem } from "./Carousel";
+import { Link } from "react-router-dom";
 import Timer from "../componentsItem/Timer";
 import Loader from "../componentsItem/Loading/Loader";
 import collection from "../../assets/collection.jpg";
@@ -18,12 +19,14 @@ const CarouselComponent = ({ image, value, mapCarosel, circleClick }) => {
           <Carousel circleClick={circleClick}>
             {image.map((img, index) => (
               <CarouselItem key={index}>
-                <div className="m-3 h-72 rounded-lg w-full">
-                  <img
-                    src={`http://localhost:5000/api/v1/products/${img}`}
-                    alt={`http://localhost:5000/api/v1/products/${img}`}
-                    className="h-72 w-full z-60 rounded"
-                  />
+                <div className="m-2 h-72 rounded-lg w-full">
+                  <Link to={`http://localhost:5000/api/v1/products/${img}`}>
+                    <img
+                      src={`http://localhost:5000/api/v1/products/${img}`}
+                      alt={`http://localhost:5000/api/v1/products/${img}`}
+                      className="h-72 w-full z-60 rounded"
+                    />
+                  </Link>
                 </div>
               </CarouselItem>
             ))}
@@ -41,7 +44,7 @@ const CarouselComponent = ({ image, value, mapCarosel, circleClick }) => {
         value === true 
         ?
         <div className="absolute -mt-56 ml-10 text-3xl text-white font-bold">
-            <div>
+            <div className="text-cyan-800 font-extrabold">
                 <p>Flash Sale</p>
                 <p>20% Off</p>
             </div>

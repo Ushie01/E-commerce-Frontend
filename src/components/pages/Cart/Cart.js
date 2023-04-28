@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../../Hooks/useProduct";
+import { useUser } from '../../../Hooks/useUser';
 import ScreenMsgPage from "../Explore/ScreenMsgPage";
 import Button from "./../../componentsItem/Button";
 import Counter from "../../componentsItem/Counter";
@@ -10,7 +11,18 @@ import image from "./../../../assets/x.svg";
 const Cart = () => {
   const { product, sum } = useCart();
   const productId = product.reverse().map(value => value._id)[0];
+  const { user } = useUser('user');
+  const userDetails = user?.data?.user;
+  const navigate = useNavigate();
+ 
+  const handleProfile = () => {
 
+		if (userDetails.name) {
+			navigate(`/ShipTo`)
+		} else {
+			navigate('/SignUp')
+		}
+	} 
     return (
       <>
         {
@@ -41,17 +53,18 @@ const Cart = () => {
                     <p className="text-cyan-500 font-extrabold">{(`₦${sum + 2000 * product.length}`).toLocaleString()}</p>
                   </div>
                 </div>
+              </div>
                 <Link
                   to="/ShipTo"
-                  className="flex left-0 right-0 bottom-6"
+                  className="flex p-4 left-0 right-0 bottom-6"
                 >
-                  <Button
+                <Button
+                    onClick={() => handleProfile()}
                     text="Check Out" 
                     bgColor='red'
                     textColor='white'
                   />
                 </Link>
-              </div>
             </>
             :
             <div className="flex items-center justify-center mt-48">

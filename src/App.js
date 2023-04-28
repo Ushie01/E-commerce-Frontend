@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import ScreenMsgPage from './components/pages/Explore/ScreenMsgPage';
 import Homepage from './components/pages/Home/HomePg';
@@ -21,14 +21,12 @@ import Offer from './components/pages/Offer/Offer';
 import Account from './components/pages/Account/Account';
 import Profile from './components/pages/Account/Profile';
 import ChangeName from './components/pages/Account/ChangeName';
-import Gender from './components/pages/Account/Gender';
 import Birthday from './components/pages/Account/Birthday';
 import Email from './components/pages/Account/Email';
 import PhoneNumber from './components/pages/Account/PhoneNumber';
 import ChangePassword from './components/pages/Account/ChangePassword';
 import Order from './components/pages/Order/Order';
 import OrderDetails from './components/pages/Order/OrderDetails';
-import Address from './components/pages/Address/Address';
 import AddAddress from './components/pages/Address/AddAddress';
 import MegaSale from './components/pages/Home/MegaSale';
 import ForgetPassword from './components/pages/Account/ForgetPassword';
@@ -36,6 +34,7 @@ import ResetPasswordToken from './components/pages/Account/ResetPasswordToken';
 import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
 import AccountVerification from './components/pages/Auth/AccountVerification';
 import empty from './assets/x.svg';
+import RedirectFunc from './utils/redirectFunct';
 // Admin
 import { useUser } from './Hooks/useUser';
 import UserReviews from './components/pages/Admin/UserReview';
@@ -54,6 +53,8 @@ const App = () => {
 	const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 	const user = useUser('user');
 	const currentUser = user?.user?.data?.user?.role;
+	console.log(currentUser);
+
 
 	return (
 		<>
@@ -146,10 +147,6 @@ const App = () => {
 								element={<ChangeName />}
 							/>
 							<Route
-								path='/Account/Gender'
-								element={<Gender />}
-							/>
-							<Route
 								path='/Account/Birthday'
 								element={<Birthday />}
 							/>
@@ -172,10 +169,6 @@ const App = () => {
 							<Route
 								path='/Order/OrderDetails/:id'
 								element={<OrderDetails />}
-							/>
-							<Route
-								path='/Account/Address'
-								element={<Address />}
 							/>
 							<Route
 								path='AddAddress/:id'
@@ -203,65 +196,59 @@ const App = () => {
 							/>
 							<Route
 								path='*'
-								element={
-									<main>
-										<h1 className='text-lg font-extrabold m-5'>
-											There's nothing here! <br />
-											<Link
-												to='/'
-												className='text-cyan-600 underline'>
-												Click here
-											</Link>{' '}
-											<br />
-											to return to home page.
-										</h1>
-									</main>
-								}
+								element={<RedirectFunc />}
 							/>
-							<Route
-								path='/Admin'
-								element={<Admin />}>
+							{currentUser === 'admin' ? (
 								<Route
-									index='Products'
-									element={<Products />}
-								/>
+									path='/Admin'
+									element={<Admin />}>
+									<Route
+										index='Products'
+										element={<Products />}
+									/>
+									<Route
+										path='Products'
+										element={<Products />}
+									/>
+									<Route
+										path='Users'
+										element={<Users />}
+									/>
+									<Route
+										path='Orders'
+										element={<AdminOrders />}
+									/>
+									<Route
+										path='CreateProduct'
+										element={<CreateProduct />}
+									/>
+									<Route
+										path='createProduct/:id'
+										element={<CreateProduct />}
+									/>
+									<Route
+										path='EditUser/:id'
+										element={<EditUser />}
+									/>
+									<Route
+										path='UserOrder/:id'
+										element={<UserOrder />}
+									/>
+									<Route
+										path='UserOrder1/:id'
+										element={<UserOrder1 />}
+									/>
+									<Route
+										path='Reviews'
+										element={<UserReviews />}
+									/>
+								</Route>
+							) : (
 								<Route
-									path='Products'
-									element={<Products />}
+									path='*'
+									element={<RedirectFunc />}
 								/>
-								<Route
-									path='Users'
-									element={<Users />}
-								/>
-								<Route
-									path='Orders'
-									element={<AdminOrders />}
-								/>
-								<Route
-									path='CreateProduct'
-									element={<CreateProduct />}
-								/>
-								<Route
-									path='createProduct/:id'
-									element={<CreateProduct />}
-								/>
-								<Route
-									path='EditUser/:id'
-									element={<EditUser />}
-								/>
-								<Route
-									path='UserOrder/:id'
-									element={<UserOrder />}
-								/>
-								<Route
-									path='UserOrder1/:id'
-									element={<UserOrder1/>}
-								/>
-								<Route
-									path='Reviews'
-									element={<UserReviews/>}
-								/>
-							</Route>
+							)}
 						</Routes>
 					</BrowserRouter>
 				</>

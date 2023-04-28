@@ -74,7 +74,7 @@ const Email = () => {
 
           {err?.email && <p className='text-red-600 text-md font-bold pl-5'>{err.email}</p>}
 
-          <div className="flex flex-auto fixed left-0 right-0 bottom-5">
+          <div className="flex flex-auto fixed left-0 right-0 bottom-5 p-4">
             <Button 
               text={"SAVE"}
               className="m-auto"

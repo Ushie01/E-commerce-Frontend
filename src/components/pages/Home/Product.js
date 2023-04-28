@@ -130,7 +130,9 @@ const ProductDetail = () => {
               {
                 !productValue?.reviews[0]
                   ?
-                  ""
+                  <Link to={`/WriteReview/${productValue?._id}`}>
+                    <p className="text-lg textColor font-bold">Leave A Review</p>
+                  </Link>
                   :
                   <Link to={`/ProductReviews/${productValue?._id}`}>
                     <p className="text-lg textColor font-bold">See More</p>
@@ -205,7 +207,7 @@ const ProductDetail = () => {
               column={true}
             />
 
-              <div className='flex items-center justify-center'>
+              <div className='flex items-center justify-center p-3 mt-10'>
                 <Button
                   text="Add To Cart"
                   onClick={onHandleSubmit} 

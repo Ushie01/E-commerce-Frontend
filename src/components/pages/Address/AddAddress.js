@@ -205,7 +205,7 @@ const AddAddress = () => {
                             {err?.phoneNumber && <p className='text-red-600 text-sm font-bold'>{err.phoneNumber}</p>}
                     </div>
                     
-                    <div className="flex left-0 mt-16 right-0 bottom-5">
+                    <div className="flex left-0 mt-16 right-0 bottom-5 p-4">
                         <Button 
                             text={"Add Address"}
                             onClick={(e) => { handleSubmit(e) }}

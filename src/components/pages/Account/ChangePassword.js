@@ -62,7 +62,7 @@ const ChangePassword = () => {
           <Navbar2
             text="Account/ChangePassword"
             image={arrow}
-            linkRoute='/Account'
+            linkRoute='/Account/Profile'
           />
             <div className="flex flex-col items-start justify-start space-y-6 p-4">
               <label className="text-md font-bold">Current Password:</label>
@@ -103,7 +103,7 @@ const ChangePassword = () => {
           </div>
           {err?.confirmPassword && <p className='text-red-600 text-md font-bold pl-5'>{err?.confirmPassword}</p>}
 
-            <div className="flex flex-auto fixed left-0 right-0 bottom-5">
+            <div className="flex flex-auto fixed left-0 right-0 bottom-5 p-4">
               <Button
                 text={"SAVE"}
                 className="m-auto"

@@ -13,7 +13,6 @@ const Order = () => {
 	const { user } = useUser('user');
 	const userId = user?.data?.user?.id;
 	const options = { month: 'long', day: 'numeric', year: 'numeric' };
-	console.log(order);
 
 	const getUserOrders = async (userId) => {
 		try {

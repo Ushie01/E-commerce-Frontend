@@ -1,5 +1,6 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSingleProduct } from "../../../Hooks/useProduct";
+import { useUser } from '../../../Hooks/useUser';
 import Navbar2 from './../../componentsItem/Navbar2';
 import Star from "../../componentsItem/Star";
 import Footer from "../../componentsItem/Footer";
@@ -8,14 +9,26 @@ import Loader from "../../componentsItem/Loading/Loader";
 import arrow from "./../../../assets/arrow.svg";
 import person from "./../../../assets/account.svg";
 
+
 const ProductReviews = () => {
   const { id } = useParams();
   const product = useSingleProduct(id);
+  const navigate = useNavigate();
   const productValue = product.product?.data?.product;
   const productValueDate = new Date(`
     ${productValue?.reviews[0]?.createdAt.split("T")[0]}
   `);
 
+  const { user } = useUser('user');
+  const userDetails = user?.data?.user;
+  
+	const handleProfile = (id) => {
+		if (id) {
+			navigate(`/WriteReview/${id}`)
+		} else {
+			navigate('/SignUp')
+		}
+  }
   
   return (
     <div>
@@ -35,6 +48,7 @@ const ProductReviews = () => {
                     <button className="m-3 h-20 text-3xl w-20 border-2 rounded-full">
                       <img src={person} alt={person} className="w-12 h-12 m-auto" />
                     </button>
+
                     <div className="flex flex-col items-start justify-start mt-5 ml-3">
                       <p className="font-bold text-2xl">{value?.user?.name}</p>
                       <div className="flex flex-row">
@@ -49,6 +63,7 @@ const ProductReviews = () => {
                         </p>
                       </div>
                     </div>
+                  
                   </div>
                   <p className="text-gray m-3 ">{value?.review}</p>
                 </div>
@@ -60,9 +75,9 @@ const ProductReviews = () => {
             <Loader />
           </div>
       }      
-      <Link to={`/WriteReview/${id}`} className="flex left-0 right-0 bottom-24">
-        <Button text="Write Review" />
-      </Link> 
+      <div className="flex left-0 right-0 bottom-0 mt-5 p-3">
+        <Button onClick={() => handleProfile(userDetails?.id)} text="Write Review" bgColor="red" textColor="white"/>
+      </div> 
       <Footer />
     </div>
   );
