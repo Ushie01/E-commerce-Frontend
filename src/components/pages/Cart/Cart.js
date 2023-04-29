@@ -16,13 +16,13 @@ const Cart = () => {
   const navigate = useNavigate();
  
   const handleProfile = () => {
-
 		if (userDetails.name) {
 			navigate(`/ShipTo`)
 		} else {
 			navigate('/SignUp')
 		}
-	} 
+  } 
+  
     return (
       <>
         {
@@ -42,15 +42,15 @@ const Cart = () => {
                 <div className="flex flex-col items-center justify-center space-y-3 w-full border-gray border-2 p-3">
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="text-gray-400">{`items (${product.length})`}</p>
-                    <p className="">{`₦${sum.toLocaleString()}`}</p>
+                    <p className="">{`₦${sum.toLocaleString()}.00`}</p>
                   </div>
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="text-gray-400">Shipping</p>
-                    <p className="">{(`₦${2000 * product.length }`)}</p>
+                    <p className="">{(`₦${2000 * product.length.toLocaleString()}.00`)}</p>
                   </div>
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="font-extrabold text-black">Total</p>
-                    <p className="text-cyan-500 font-extrabold">{(`₦${sum + 2000 * product.length}`).toLocaleString()}</p>
+                    <p className="text-cyan-500 font-extrabold">{(`₦${sum + 2000 * product.length.toLocaleString()}.00`)}</p>
                   </div>
                 </div>
               </div>

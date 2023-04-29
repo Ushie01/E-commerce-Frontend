@@ -89,7 +89,7 @@ const ResetPasswordToken = () => {
                 {err.confirmPassword && <p className='text-red-600 text-sm font-bold'>{err.confirmPassword}</p>}
                 {error && <p className='text-red-600 text-sm font-bold'>{error}</p>}
             </div>
-          <div className="flex flex-auto fixed left-0 right-0 bottom-5">
+          <div className="flex flex-auto fixed left-0 right-0 bottom-5 p-4">
             <Button 
               text={"SEND"}
               className="m-auto"

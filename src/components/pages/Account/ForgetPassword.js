@@ -54,16 +54,12 @@ const ForgetPassword = () => {
               image={arrow} 
               linkRoute='/SignIn'
             />
-            <div className='flex flex-col items-center justify-center mt-10 space-y-3'>
-                <img
-                  src={logo}
-                  alt={logo}
-                  className='h-24 w-48'
-                />
-                <p className='text-orange-400 font-bold text-2xl'>
-                  Euphorya
-                </p>
-                <p className='text-orange-200'>Input Your Email to Recover Password</p>
+            <div className="flex flex-col items-center justify-center">
+              <img src={logo} alt={logo} className="h-40 w-72 p-3 shadow-md rounded-lg" />
+              <p className="text-red-600 text-center font-bold text-2xl p-2 mt-5 rounded-lg">
+                Euphorya
+              </p>
+              <p className="text-gray-300">Input your email to recover password</p>
             </div>
             <div className="flex flex-col items-start justify-start space-y-3 p-4 mt-10">
               {/* <label className="text-md font-bold">Email</label> */}

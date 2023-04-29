@@ -31,7 +31,7 @@ export function useCart() {
     const prod = JSON.parse(localStorage.getItem('cart')) || [];
     setProduct(prod);
     const summationPrice = prod.reduce((acc, cur) => {
-      return acc + cur.price;
+      return acc + cur.price * cur.quantity;
     }, 0);
     setSum(summationPrice);
   }, []);

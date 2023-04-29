@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { postOrder } from "../../../helper/api";
+import { postOrder, flwPaymentMethod } from "../../../helper/api";
+import { useCart } from "../../../Hooks/useProduct";
+import { useUser } from "../../../Hooks/useUser";
 import { Toast } from "../../../Hooks/useToast";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +15,8 @@ import empty from "../../../assets/x.svg";
 import exclamation from "../../../assets/exclamation.svg"
 import add from "../../../assets/plus_.svg";
 
+
+
 const ShipTo = () => {
   const [addresses, setAddresses] = useState(JSON.parse(localStorage.getItem("address")) || []);
   const [deleteIndex, setDeleteIndex] = useState(null);
@@ -20,9 +24,12 @@ const ShipTo = () => {
   const [selectIndex, setSelectedIndex] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [click, setClick] = useState(false);
-  const [sum, setSum] = useState(Number);
+  const { sum } = useCart();
+  const { user } = useUser('user');
+	const userDetails = user?.data?.user
   const [cart, setCart] = useState([]);
   const navigate = useNavigate();
+
 
   // delete address
   const handleDeleteAddress = (index) => {
@@ -59,23 +66,40 @@ const ShipTo = () => {
             product: c._id,
             size: c.size
         }))
+      };
+
+      const data2 = {
+        tx_ref: Date.now(),
+        amount: sum + cart.length * 100,
+        currency: "NGN",
+        payment_options: "card,mobilemoney,ussd",
+        redirect_url: "http://localhost:3000",
+        customer: {
+          email: userDetails.email,
+          phone_number: userDetails.phoneNo,
+          name: userDetails.name
+        },
+        customizations: {
+          title: "Euphorya Order Payment",
+          description: "Payment for items in cart",
+          logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg"
+        }
       }
-      const res = await postOrder(data);
-      setIsSubmitted(true);
+     
+      const res = await flwPaymentMethod(data2);
       console.log(res);
-      setTimeout(() => {
-          navigate("/ScreenPage")
-      }, 1000);
+      // const res = await postOrder(data);
+      setIsSubmitted(true);
+      // console.log(res);
+      // setTimeout(() => {
+      //     navigate("/ScreenPage")
+      // }, 1000);
     }
   }
 
   useEffect(() => {
     const prod = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(prod)
-    const summationPrice = prod.reduce((acc, cur) => {
-      return acc + (cur.price * cur.quantity);
-    }, 0);
-    setSum(summationPrice)
+    setCart(prod);
   }, []);
 
   useEffect(() => {

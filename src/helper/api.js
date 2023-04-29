@@ -1,5 +1,8 @@
 // const baseUrl = "https://ecommerce-backend-3bm2.onrender.com/api/v1";
 const baseUrl = "http://localhost:5000/api/v1";
+// const publicKey = process.env.FLW_PUBLIC_KEY;
+const secretKey = process.env.FLW_SECRET_KEY;
+
 
 
 export const signUp = async (payload) => {
@@ -424,7 +427,6 @@ export const getAllReview = async () => {
 }
 
 export const resendToken = async (payload) => { 
-    console.log(payload);
     try {
         const userDetails = localStorage.getItem('user');
         const parsedDetails = JSON.parse(userDetails);
@@ -433,6 +435,22 @@ export const resendToken = async (payload) => {
             headers: {
             'Content-type': 'application/json',
             Authorization: `Bearer ${parsedDetails?.token}`,
+        },
+        body: JSON.stringify(payload)
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+
+export const flwPaymentMethod = async (payload) => { 
+    try {
+        return await( await fetch(`/v3/payments`, {
+        method: 'POST',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${secretKey}`,
         },
         body: JSON.stringify(payload)
     })).json()

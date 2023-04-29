@@ -78,7 +78,7 @@ const Counter = () => {
                         </Link>
                         <div className="flex flex-col items-start text-lg justify-start space-y-5 p-2 w-36 h-28">
                             <p className="text-sm">{name}</p>
-                            <p className="text-cyan-500">{`₦${price}`}</p>
+                            <p className="text-cyan-500">{`₦${price.toLocaleString()}.00`}</p>
                         </div>
                         <div className="flex flex-col w-32 h-28 p-2 space-y-9">
                             <div className="flex flex-row items-center justify-end space-x-3">

@@ -24,7 +24,7 @@ const CarouselComponent = ({ image, value, mapCarosel, circleClick }) => {
                     <img
                       src={`http://localhost:5000/api/v1/products/${img}`}
                       alt={`http://localhost:5000/api/v1/products/${img}`}
-                      className="h-72 w-full z-60 rounded"
+                      className="h-72 w-full z-60 rounded brightness-90"
                     />
                   </Link>
                 </div>

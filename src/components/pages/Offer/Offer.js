@@ -23,6 +23,7 @@ const Offer = () => {
             <img src={ten} alt={ten} className="w-1/2 h-60 rounded-r-lg" />
           </div>
         </div>
+
         <div className="absolute -mt-56 ml-10 text-3xl text-white font-bold">
           <div>
             <p>Super Flash Sale</p>
@@ -32,6 +33,7 @@ const Offer = () => {
             <Timer />
           </div>
         </div>
+        
         <div className="m-3">
           <div className="relative flex flex-row rounded-md">
             <img src={eight} alt={eight} className="w-1/2 h-60 rounded-l-lg" />

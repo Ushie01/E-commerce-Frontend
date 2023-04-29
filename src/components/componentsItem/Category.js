@@ -21,7 +21,8 @@ const Category = ({ products, column }) => {
                                     {prod?.collectionsData.split(" ")[0][0]}{prod?.collectionsData.split(" ")[1] ? prod?.collectionsData.split(" ")[1][0] : "" }
                                 </button>
                             </div>
-                            <div className="text-center m-3">{prod?.collectionsData.split(" ")[0]}</div>
+                            <div className="text-center">{prod?.collectionsData.split(" ")[0]}</div>
+                            <div className="text-center">{prod?.collectionsData.split(" ")[1]}</div>
                         </Link>
                     </div>
                 ))

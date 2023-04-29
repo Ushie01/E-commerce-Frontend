@@ -181,7 +181,7 @@ const SignUp = () => {
 
 					<div className="flex items-center p-3 mt-2">
 						<Button
-							text="Sign In" 
+							text="Sign Up" 
 							onClick={(e) => { handleSubmit(e) }}
 							disabled={isSubmitted}
 							bgColor="red"
@@ -191,7 +191,7 @@ const SignUp = () => {
 
 
 					<div className='flex flex-col items-center'>
-						<p className='font-thin'>Don't have a account?</p>
+						<p className='font-thin'>Do have an account?</p>
 						<Link to='/SignIn'>
 							<p className='text-red-600 font-bold'>Sign In</p>
 						</Link>

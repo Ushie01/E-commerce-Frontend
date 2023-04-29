@@ -96,7 +96,7 @@ const ProductDetail = () => {
               value={productValue?.ratingsAverage}
               starSize={'h-6 w-6'}
             />
-            <h1 className="font-bold text-2xl m-3 text-cyan-500">₦{productValue?.price}</h1>
+            <h1 className="font-bold text-2xl m-3 text-cyan-500">₦{`${productValue?.price.toLocaleString()}.00`}</h1>
 
             <p className="m-3 font-bold text-xl mt-6">Select Size</p>
             <div className="flex flex-row m-3 items-start justify-start space-x-4 overflow-x-auto scrollbar-hide category">
