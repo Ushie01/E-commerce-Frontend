@@ -1,22 +1,33 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../../Hooks/useProduct";
 import deleteBin from "./../../assets/delete.svg";
 import dash from "./../../assets/dash.svg";
 import plus from "./../../assets/plus.svg";
 import Favorite from "../../utils/favorite";
 
 
-const Counter = () => {
+const Counter = ({setValues, setTotalPrice}) => {
+    const { sum } = useCart('cart');
+    // console.log(sum)
     // initialize the product state from localStorage
     const [product, setProduct] = useState(JSON.parse(localStorage.getItem('cart')) || []);
     const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
-
+    const [sumItems, setSumItems] = useState(0);
+    const [sumTotalPrice, setSumTotalPrice] = useState(0);
+    // console.log(sumTotalPrice);
+    
     // cart qty increment handle
     const incrementCounter = (id, size) => {
         setProduct((prevProducts) =>
             prevProducts.map((item) =>
                 item._id === id && item.size === size
-                    ? { ...item, quantity: item.quantity + 1 }
+                    ? { 
+                        ...item,
+                        quantity: item.quantity + 1, 
+                        items: (item.quantity + 1) * item.price,
+                        totalPrice: (item.quantity + 1) * item.price + 1000
+                    }
                     : item
             )
         );
@@ -27,7 +38,12 @@ const Counter = () => {
         setProduct((prevProducts) =>
             prevProducts.map((item) =>
                 item._id === id && item.size === size
-                    ? { ...item, quantity: Math.max(1, item.quantity - 2) }
+                    ? { 
+                        ...item, 
+                        quantity: Math.max(1, item.quantity - 1),
+                        items: Math.max(1, item.quantity - 1) * item.price,
+                        totalPrice: Math.max(1, item.quantity - 1) * item.price + 1000
+                    }
                     : item
             )
         );
@@ -57,12 +73,32 @@ const Counter = () => {
         localStorage.setItem("favorites", JSON.stringify(favorite));
     }, [product, favorite]);
 
+    useEffect(() => {
+        const summationItems = product.reduce((acc, cur) => {
+            return acc + cur.items
+        }, 0);
+
+        const summationTotalPrice = product.reduce((acc, cur) => {
+            return acc + cur.totalPrice
+        }, 0);
+        
+        
+        setSumItems(summationItems);
+        setValues(sumItems);
+        setSumTotalPrice(summationTotalPrice);
+        setTotalPrice(sumTotalPrice)
+    }, [
+        product, setValues,
+        sumItems, setSumTotalPrice,
+        setTotalPrice, sumTotalPrice
+    ]);
+
 
     return (
         <>
             {product.map((item, index) => {
                 const { name, price, quantity, productGallery, _id, size } = item;
-                
+
                 return (
                     <div
                         key={index}

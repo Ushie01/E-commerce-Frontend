@@ -26,15 +26,23 @@ export const useAllProduct = () => {
 export function useCart() {
   const [product, setProduct] = useState([]);
   const [sum, setSum] = useState(0);
+  const [sumItems, setSumItems] = useState(0);
 
   useEffect(() => {
     const prod = JSON.parse(localStorage.getItem('cart')) || [];
     setProduct(prod);
+
     const summationPrice = prod.reduce((acc, cur) => {
-      return acc + cur.price * cur.quantity;
+      return acc + cur.totalPrice;
     }, 0);
     setSum(summationPrice);
+
+    const summationItems = prod.reduce((acc, cur) => {
+      return acc + cur.items
+    }, 0);
+    setSumItems(summationItems);
+
   }, []);
 
-  return { product, sum };
+  return { product, sum, sumItems };
 }

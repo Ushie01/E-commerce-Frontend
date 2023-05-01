@@ -448,11 +448,25 @@ export const flwPaymentMethod = async (payload) => {
     try {
         return await( await fetch(`/v3/payments`, {
         method: 'POST',
-            headers: {
+        headers: {
             'Content-type': 'application/json',
             Authorization: `Bearer ${secretKey}`,
         },
         body: JSON.stringify(payload)
+    })).json()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const confirmPayment = async (transactionId) => { 
+    try {
+        return await( await fetch(`/api?transaction_id=${transactionId}`, {
+        method: 'GET',
+            headers: {
+            'Content-type': 'application/json',
+            Authorization: `Bearer ${secretKey}`,
+        }
     })).json()
     } catch (error) {
         console.error(error)

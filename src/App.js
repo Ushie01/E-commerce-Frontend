@@ -35,6 +35,9 @@ import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
 import AccountVerification from './components/pages/Auth/AccountVerification';
 import empty from './assets/x.svg';
 import RedirectFunc from './utils/redirectFunct';
+import PaymentStatus from './components/pages/Cart/PaymentStatus';
+
+
 // Admin
 import { useUser } from './Hooks/useUser';
 import UserReviews from './components/pages/Admin/UserReview';
@@ -48,12 +51,10 @@ import AdminOrders from './components/pages/Admin/Order/Order';
 import CreateProduct from './components/pages/Admin/Products/CreateProduct';;
 
 
-
 const App = () => {
 	const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 	const user = useUser('user');
 	const currentUser = user?.user?.data?.user?.role;
-	console.log(currentUser);
 
 
 	return (
@@ -197,6 +198,10 @@ const App = () => {
 							<Route
 								path='*'
 								element={<RedirectFunc />}
+							/>
+							<Route
+								path='/PaymentStatus'
+								element={<PaymentStatus />}
 							/>
 							{currentUser === 'admin' ? (
 								<Route

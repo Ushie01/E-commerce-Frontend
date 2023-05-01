@@ -44,7 +44,7 @@ const CarouselComponent = ({ image, value, mapCarosel, circleClick }) => {
         value === true 
         ?
         <div className="absolute -mt-56 ml-10 text-3xl text-white font-bold">
-            <div className="text-cyan-800 font-extrabold">
+            <div className="text-cyan-400 font-extrabold">
                 <p>Flash Sale</p>
                 <p>20% Off</p>
             </div>

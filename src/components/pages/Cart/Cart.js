@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../../Hooks/useProduct";
 import { useUser } from '../../../Hooks/useUser';
@@ -8,9 +9,15 @@ import Navbar2 from "../../componentsItem/Navbar2";
 import arrow from "./../../../assets/arrow.svg";
 import image from "./../../../assets/x.svg";
 
+
 const Cart = () => {
-  const { product, sum } = useCart();
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+  const { product, sum, sumItems } = useCart();
+  const [totalPrice, setTotalPrice] = useState('');
   const productId = product.reverse().map(value => value._id)[0];
+  const [items, setItems] = useState('');
+  console.log(totalPrice);
+
   const { user } = useUser('user');
   const userDetails = user?.data?.user;
   const navigate = useNavigate();
@@ -23,6 +30,10 @@ const Cart = () => {
 		}
   } 
   
+
+
+  // console.log(updatePrice);
+
     return (
       <>
         {
@@ -36,21 +47,24 @@ const Cart = () => {
                 products={product}
               />
 
-              <Counter/>        
+              <Counter
+                setValues={setItems}
+                setTotalPrice={setTotalPrice}
+              />        
 
               <div className="m-4 flex flex-col items-center justify-center space-y-8 ">
                 <div className="flex flex-col items-center justify-center space-y-3 w-full border-gray border-2 p-3">
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="text-gray-400">{`items (${product.length})`}</p>
-                    <p className="">{`₦${sum.toLocaleString()}.00`}</p>
+                    <p className="">{`₦${items.toLocaleString()}.00`}</p>
                   </div>
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="text-gray-400">Shipping</p>
-                    <p className="">{(`₦${2000 * product.length.toLocaleString()}.00`)}</p>
+                    <p className="">{(`₦${1000 * product.length.toLocaleString()}.00`)}</p>
                   </div>
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="font-extrabold text-black">Total</p>
-                    <p className="text-cyan-500 font-extrabold">{(`₦${sum + 2000 * product.length.toLocaleString()}.00`)}</p>
+                    <p className="text-cyan-500 font-extrabold">{(`₦${totalPrice}.00`)}</p>
                   </div>
                 </div>
               </div>
