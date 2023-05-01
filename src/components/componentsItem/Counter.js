@@ -1,20 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../../Hooks/useProduct";
 import deleteBin from "./../../assets/delete.svg";
 import dash from "./../../assets/dash.svg";
 import plus from "./../../assets/plus.svg";
 import Favorite from "../../utils/favorite";
 
 
-const Counter = ({setValues, setTotalPrice}) => {
-    const { sum } = useCart('cart');
-    // console.log(sum)
+const Counter = ({setValues, setTotalPrice, setProductLength}) => {
     // initialize the product state from localStorage
     const [product, setProduct] = useState(JSON.parse(localStorage.getItem('cart')) || []);
     const [favorite, setFavorite] = useState(JSON.parse(localStorage.getItem('favorites')) || []);
     const [sumItems, setSumItems] = useState(0);
     const [sumTotalPrice, setSumTotalPrice] = useState(0);
+
     // console.log(sumTotalPrice);
     
     // cart qty increment handle
@@ -51,14 +49,22 @@ const Counter = ({setValues, setTotalPrice}) => {
 
     // cart delete Item
     const deleteItem = (id, size) => {
-        const updatedProducts = product.filter(
-        (item) => item._id !== id || item.size !== size
-        );
-        const updatedFavorite = product.filter(
-        (item) => item._id !== id);
-        setProduct(updatedProducts);
-        setFavorite(updatedFavorite);
+		const resMsg = window.confirm("Are you sure you want to delete this item?!");
+        if (resMsg === true) {
+            const updatedProducts = product.filter(
+                (item) => item._id !== id || item.size !== size
+            );
+
+            const updatedFavorites = favorite.filter(
+                (item) => item.productId !== id
+            );
+
+            setProduct(updatedProducts);
+            setFavorite(updatedFavorites);
+            setProductLength(updatedProducts.length);   
+        }
     };
+
 
     // reload dom when localStorage is set 0
     useEffect(() => {

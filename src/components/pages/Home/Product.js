@@ -43,8 +43,8 @@ const ProductDetail = () => {
       if (isClick) {
         productValue.size = isClick;
         productValue.quantity = 1;
-        productValue.items = 0;
-        productValue.totalPrice = 0;
+        productValue.items = productValue.price;
+        productValue.totalPrice = productValue.price + 1000;
         let itemsArray = JSON.parse(localStorage.getItem('cart')) || [];
         itemsArray.push(productValue);
         localStorage.setItem('cart', JSON.stringify(itemsArray));

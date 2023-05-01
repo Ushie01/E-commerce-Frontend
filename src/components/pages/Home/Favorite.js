@@ -41,10 +41,7 @@ const Favorite = () => {
                 linkRoute="/"
               />
               <SaleSection
-                products={
-                  newFavArray
-                    .filter((fav) => fav.isFavorite === true)
-                }
+                products={newFavArray.filter((fav) => fav.isFavorite === true)}
                 star={false}
                 deleteBin={false}
                 column={true}

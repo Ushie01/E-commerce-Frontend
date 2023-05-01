@@ -11,17 +11,17 @@ import image from "./../../../assets/x.svg";
 
 
 const Cart = () => {
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
-  const { product, sum, sumItems } = useCart();
+  const [cart,] = useState(JSON.parse(localStorage.getItem('cart')) || []);
+  const [productLength, setProductLength] = useState('');
   const [totalPrice, setTotalPrice] = useState('');
+  const { product } = useCart();
   const productId = product.reverse().map(value => value._id)[0];
   const [items, setItems] = useState('');
-  console.log(totalPrice);
-
   const { user } = useUser('user');
   const userDetails = user?.data?.user;
   const navigate = useNavigate();
  
+  
   const handleProfile = () => {
 		if (userDetails.name) {
 			navigate(`/ShipTo`)
@@ -29,9 +29,6 @@ const Cart = () => {
 			navigate('/SignUp')
 		}
   } 
-  
-
-
   // console.log(updatePrice);
 
     return (
@@ -50,6 +47,7 @@ const Cart = () => {
               <Counter
                 setValues={setItems}
                 setTotalPrice={setTotalPrice}
+                setProductLength={setProductLength}
               />        
 
               <div className="m-4 flex flex-col items-center justify-center space-y-8 ">
@@ -60,7 +58,7 @@ const Cart = () => {
                   </div>
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="text-gray-400">Shipping</p>
-                    <p className="">{(`₦${1000 * product.length.toLocaleString()}.00`)}</p>
+                    <p className="">{(`₦${productLength ? 1000 * productLength?.length : 1000 * cart?.length.toLocaleString()}.00`)}</p>
                   </div>
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="font-extrabold text-black">Total</p>
