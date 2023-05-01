@@ -25,6 +25,7 @@ const FlashSale = () => {
           image={arrow}
           secondImage={love}
           linkRoute={'/'}
+          secondLinkRoute={'/'}
           thirdImage={search}
         />
         <CarouselComponent

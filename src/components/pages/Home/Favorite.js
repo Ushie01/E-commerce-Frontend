@@ -1,3 +1,4 @@
+import { useAllProduct } from '../../../Hooks/useProduct';
 import ScreenMsgPage from '../Explore/ScreenMsgPage';
 import Navbar2 from '../../componentsItem/Navbar2';
 import SaleSection from './SaleSection';
@@ -7,9 +8,13 @@ import image from '../../../assets/x.svg';
 
 
 const Favorite = () => {
-  const productFromLocalStorage = JSON.parse(localStorage.getItem('cart')) || []; 
   const favoriteProductLocalStorage = JSON.parse(localStorage.getItem('favorites')) || [];
-  const uniqueProducts = [...new Map(productFromLocalStorage.map((product) => [product._id, product])).values()];
+  const product = useAllProduct();
+  const productValue = product.product?.data.products;
+  let uniqueProducts = [];
+  if (productValue) {
+    uniqueProducts = [...new Map(productValue.map((product) => [product._id, product])).values()]; 
+  }
   const newFavArray = [];
 
   // Looping through cart and favorite in localStorage and comparing isFavorite

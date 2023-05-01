@@ -20,5 +20,13 @@ module.exports = function(app) {
         })
     );
     
-     app.use(flutterwaveProxy);
+    app.use(flutterwaveProxy);
+
+    app.use(
+            '/api/v3/products',
+            createProxyMiddleware({
+            target: 'http://localhost:5000',
+            changeOrigin: true,
+        })
+    );
 };
