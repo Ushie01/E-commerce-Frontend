@@ -1,5 +1,5 @@
-// const baseUrl = "https://ecommerce-backend-3bm2.onrender.com/api/v1";
-const baseUrl = "http://localhost:5000/api/v1";
+const baseUrl = "https://ecommerce-backend-3bm2.onrender.com/api/v1";
+// const baseUrl = "http://localhost:5000/api/v1";
 // const publicKey = process.env.FLW_PUBLIC_KEY;
 const secretKey = process.env.REACT_APP_FLWS_KEY;
 
