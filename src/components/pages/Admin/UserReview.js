@@ -51,7 +51,7 @@ const UserReviews = () => {
                     </thead>
                     { reviews &&
                         reviews.map((review, index) => (
-                            <tbody>
+                            <tbody key={index}>
                                 <tr>
                                     <td className='p-2 bg-slate-200 border-spacing-2 border border-white'>
                                         {index + 1}
@@ -74,7 +74,7 @@ const UserReviews = () => {
                                         ).toLocaleDateString('en-US', options)}
                                     </td>
                                     <td className='p-2 bg-slate-100 border-spacing-2 border border-white'>
-                                        {review.user}
+                                        {review?.user?._id}
                                     </td>
                                 </tr>
                             </tbody>
