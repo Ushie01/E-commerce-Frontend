@@ -11,7 +11,6 @@ const UserReviews = () => {
     }
 
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    console.log(reviews)
 
     useEffect(() => {
         allReviews()
