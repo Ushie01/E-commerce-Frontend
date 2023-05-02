@@ -61,7 +61,7 @@ const Counter = ({setValues, setTotalPrice, setProductLength}) => {
 
             setProduct(updatedProducts);
             setFavorite(updatedFavorites);
-            setProductLength(updatedProducts.length);   
+            setProductLength(updatedProducts);   
         }
     };
 

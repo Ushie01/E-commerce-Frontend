@@ -58,7 +58,7 @@ const SignIn = () => {
 
         if (payload?.data?.user?.role.includes('user')) {
           setTimeout(() => {
-            navigate('/')
+            navigate(-2)
           }, 3000);
         }
       }

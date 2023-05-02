@@ -37,7 +37,7 @@ const ShipTo = () => {
   const [selectIndex, setSelectedIndex] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [click, setClick] = useState(false);
-  const { sum, product } = useCart();
+  const { sum } = useCart();
   const { user } = useUser('user');
 	const userDetails = user?.data?.user
   const [cart, setCart] = useState([]);
@@ -74,7 +74,7 @@ const ShipTo = () => {
 
       const data2 = {
         tx_ref: Date.now(),
-        amount: sum + product.length * 2000,
+        amount: sum,
         currency: "NGN",
         payment_options: "card,mobilemoney,ussd",
         redirect_url: "http://localhost:3000/ShipTo",

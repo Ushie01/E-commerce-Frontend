@@ -45,7 +45,7 @@ export default function AccountVerification() {
           position: 'top-right',
         });        
         setTimeout(() => {
-          navigate('/')
+          navigate('/Cart')
         }, 4000);
       } else {
         setIsSubmitted(false)

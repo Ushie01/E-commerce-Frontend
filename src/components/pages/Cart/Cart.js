@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../Hooks/useProduct";
 import { useUser } from '../../../Hooks/useUser';
 import ScreenMsgPage from "../Explore/ScreenMsgPage";
@@ -20,13 +20,15 @@ const Cart = () => {
   const { user } = useUser('user');
   const userDetails = user?.data?.user;
   const navigate = useNavigate();
+  console.log(productLength);
+  
  
   
-  const handleProfile = () => {
-		if (userDetails.name) {
-			navigate(`/ShipTo`)
+  const handleCheckOut = () => {
+		if (!userDetails) {
+			navigate(`/SignUp`)
 		} else {
-			navigate('/SignUp')
+			navigate('/ShipTo')
 		}
   } 
   // console.log(updatePrice);
@@ -58,7 +60,7 @@ const Cart = () => {
                   </div>
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="text-gray-400">Shipping</p>
-                    <p className="">{(`₦${productLength ? 1000 * productLength?.length : 1000 * cart?.length.toLocaleString()}.00`)}</p>
+                    <p className="">{(`₦${productLength ? 1000 * productLength?.length : 1000 * cart?.length}.00`)}</p>
                   </div>
                   <div className="flex flex-row items-center justify-between w-80">
                     <p className="font-extrabold text-black">Total</p>
@@ -66,17 +68,14 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
-                <Link
-                  to="/ShipTo"
-                  className="flex p-4 left-0 right-0 bottom-6"
-                >
-                <Button
-                    onClick={() => handleProfile()}
-                    text="Check Out" 
-                    bgColor='red'
-                    textColor='white'
-                  />
-                </Link>
+                <div className="flex p-4 left-0 right-0 bottom-6">
+                  <Button
+                      onClick={handleCheckOut}
+                      text="Check Out" 
+                      bgColor='red'
+                      textColor='white'
+                    />
+                </div>
             </>
             :
             <div className="flex items-center justify-center mt-48">
