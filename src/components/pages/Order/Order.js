@@ -79,7 +79,7 @@ const Order = () => {
 						) : (
 							<>					
 								<ScreenMsgPage
-									res="You haven't added an address"
+									res="You haven't added an order"
 									direction='Click here to explore'
 									image={empty}
 									button={true}
