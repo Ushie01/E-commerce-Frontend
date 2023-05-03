@@ -25,7 +25,7 @@ module.exports = function(app) {
     app.use(
             '/api/v3/products',
             createProxyMiddleware({
-            target: 'http://localhost:5000',
+            target: 'https://ecommerce-backend-3bm2.onrender.com',
             changeOrigin: true,
         })
     );

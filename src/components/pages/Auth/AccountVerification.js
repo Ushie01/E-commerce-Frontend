@@ -36,9 +36,7 @@ export default function AccountVerification() {
     setIsSubmitted(true);
     const num = value;
     if (num.toString().length === 4) { 
-      console.log(value);
       const res = await accountVerification({otp: value});
-      console.log(res);
       if (res.status.includes('success')) {
         Toast({
           text: 'Request successfull!! 🦅✨',

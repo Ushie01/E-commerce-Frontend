@@ -18,8 +18,6 @@ const Homepage = () => {
 	const [isEnter, setIsEnter] = useState('');
 	const [isSearch, setIsSearch] = useState('');
 	const product = useAllProduct();
-	const productV = product.product?.data.products;
-	console.log(productV);
 	const productImage = product.product?.data.products
 		.slice(0, 6)
 		.map((value) => value?.productGallery[1]);

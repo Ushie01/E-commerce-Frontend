@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { postOrder, flwPaymentMethod, confirmPayment } from "../../../helper/api";
+import { Link } from "react-router-dom";
+import { flwPaymentMethod } from "../../../helper/api";
 import { useCart } from "../../../Hooks/useProduct";
 import { useUser } from "../../../Hooks/useUser";
 import { Toast } from "../../../Hooks/useToast";
@@ -14,21 +14,11 @@ import arrow from "../../../assets/arrow.svg";
 import empty from "../../../assets/x.svg";
 import exclamation from "../../../assets/exclamation.svg"
 import add from "../../../assets/plus_.svg";
-import check from '../../../assets/check-lg.svg';
-import failed from '../../../assets/x.svg';
-
 
 
 
 const ShipTo = () => {
   //Payment Confirmation State
-	const [selectAddress] = useState(JSON.parse(localStorage.getItem('selectedAddress')) || {});
-	const [postOrderCall, setPostOrderCall] = useState(false);
-	const params = new URLSearchParams(window.location.search);
-	const txRef = params.get('tx_ref');
-	const transactionId = params.get('transaction_id');
-  const [values, setValues] = useState([]);
-  let errorRes = '';
 
   //Order State
   const [addresses, setAddresses] = useState(JSON.parse(localStorage.getItem("address")) || []);
@@ -39,9 +29,8 @@ const ShipTo = () => {
   const [click, setClick] = useState(false);
   const { sum } = useCart();
   const { user } = useUser('user');
-	const userDetails = user?.data?.user
-  const [cart, setCart] = useState([]);
-  const navigate = useNavigate();
+  const userDetails = user?.data?.user;
+
 
 
   // delete address
@@ -72,12 +61,12 @@ const ShipTo = () => {
 
     } else {
 
-      const data2 = {
+      const payload = {
         tx_ref: Date.now(),
         amount: sum,
         currency: "NGN",
         payment_options: "card,mobilemoney,ussd",
-        redirect_url: "http://localhost:3000/ShipTo",
+        redirect_url: "http://localhost:3000/PaymentStatus",
         customer: {
           email: userDetails.email,
           phone_number: userDetails.phoneNo,
@@ -90,69 +79,14 @@ const ShipTo = () => {
         }
       }
 
-      const res = await flwPaymentMethod(data2);
-      if (res.status.includes("success")) {
+      const res = await flwPaymentMethod(payload);
+      if (res?.status.includes("success")) {
         window.location.replace(`${res.data.link}`)
       }
 
       setIsSubmitted(true);
     }
   }
-
-  //api handleTo payment to flw
-	const confirmPaymentFlw = async (id) => {
-		const res = await confirmPayment(id);
-		setValues(res?.data);
-	};
-
-	if (!values) {
-		errorRes = 'Error Verifying Payment';
-  }
-  
-	useEffect(() => {
-		const data = {
-			shippingAddress: selectAddress,
-			shippingPrice: cart.length * 1000,
-			totalPrice: sum,
-			paymentMethod: 'flw',
-			orderItems: cart.map((c) => ({
-				qty: c.quantity,
-				price: c.price * c.quantity,
-				product: c._id,
-				size: c.size,
-			})),
-		};
-
-		if (values?.status === 'successful' && values?.tx_ref === txRef && !postOrderCall) {
-			const postOrderApi = async () => {
-				const res = await postOrder(data);
-        if (res.status.includes('success')) {
-          localStorage.removeItem('cart');
-          setTimeout(() => {
-            navigate('/')
-          }, 4000)
-        }
-			};
-			setPostOrderCall(true);
-			postOrderApi();
-		}
-  }, [
-    values, txRef,
-    cart, selectAddress,
-    sum, postOrderCall, navigate
-  ]);
-
-
-	useEffect(() => {
-		confirmPaymentFlw(transactionId);
-  }, [transactionId]);
-  
-
-  useEffect(() => {
-    const prod = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(prod);
-  }, []);
-
   
   useEffect(() => {
     localStorage.setItem("address", JSON.stringify(addresses));
@@ -161,10 +95,7 @@ const ShipTo = () => {
 
   return (
     <>
-      {
-        !values
-        ?
-          <>
+
             <div>
               <ToastContainer />
             </div>
@@ -251,42 +182,7 @@ const ShipTo = () => {
                       linkRoute="/ShipTo"
                     />
                   </div>
-                </>
-              }
-          </>
-          :
-          	<>
-              <Navbar2
-                image={arrow}
-                text='Payment Status'
-                linkRoute={`/Cart`}
-              />
-
-              <div className='mt-8'>
-                {values?.status === 'successful' &&
-                  values?.tx_ref === txRef && (
-                    <ScreenMsgPage
-                      res='Payment successful'
-                      image={check}
-                    />
-                )}
-              
-                {values?.status === 'failed'
-                  && values?.tx_ref === txRef && (
-                    <ScreenMsgPage
-                      res='Payment successful'
-                      image={failed}
-                    />
-                )}
-              
-                {errorRes && (
-                  <ScreenMsgPage
-                    res={errorRes}
-                    image={failed}
-                  />
-                )}
-              </div>
-            </>
+              </>
        }
     </>
   );

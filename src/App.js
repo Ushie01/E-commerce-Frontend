@@ -35,7 +35,7 @@ import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
 import AccountVerification from './components/pages/Auth/AccountVerification';
 import empty from './assets/x.svg';
 import RedirectFunc from './utils/redirectFunct';
-
+import PaymentStatus from './components/pages/Cart/PaymentStatus';
 
 // Admin
 import { useUser } from './Hooks/useUser';
@@ -193,6 +193,10 @@ const App = () => {
 							<Route
 								path='/AccountVerification'
 								element={<AccountVerification />}
+							/>
+							<Route
+								path='/PaymentStatus'
+								element={<PaymentStatus />}
 							/>
 							<Route
 								path='*'
