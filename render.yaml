@@ -1,0 +1,32 @@
+proxies:
+  - path: /api
+    backend: https://api.flutterwave.com/v3
+  - path: /v3/payments
+    backend: https://api.flutterwave.com
+  - path: /api/v3/products
+    backend: https://ecommerce-backend-3bm2.onrender.com
+
+services:
+  - name: web
+    buildCommand: npm run build
+    startCommand: npm start
+    routes:
+      - path: /api/*
+        destination: https://api.flutterwave.com/v3
+        middleware:
+          - name: http-proxy
+            options:
+              target: https://api.flutterwave.com/v3
+              pathRewrite:
+                '^/api': ''
+              changeOrigin: true
+              onProxyReq:
+                - function: |
+                    function onProxyReq(proxyReq, req, res) {
+                      const transactionId = req.query.transaction_id;
+                      if (transactionId) {
+                        const newUrl = `/transactions/${transactionId}/verify`;
+                        proxyReq.path = newUrl;
+                        proxyReq.setHeader('X-Target-Path', newUrl);
+                      }
+                    }
