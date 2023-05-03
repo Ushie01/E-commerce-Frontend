@@ -37,8 +37,8 @@ const SaleSection = ({
                 <div className={`${column === true ? "w-full" : "w-36"}`}>
                     <Link to={`/Product/${value._id}`}>
                       <img
-                        src={`http://localhost:5000/api/v1/products/${value.productGallery[0]}`}
-                        alt={`http://localhost:5000/api/v1/products/${value.productGallery[0]}`}
+                        src={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${value.productGallery[0]}`}
+                        alt={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${value.productGallery[0]}`}
                         className={`pl-1 pr-1 m-auto`}
                       />
                      </Link>

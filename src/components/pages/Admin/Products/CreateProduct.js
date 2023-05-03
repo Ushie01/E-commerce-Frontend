@@ -330,8 +330,8 @@ const CreateProduct = () => {
                                     <div key={index} className='flex flex-row'>
                                         <p className='font-bold'>{`${index + 1}. `}</p>
                                         <img
-                                            src={`http://localhost:5000/api/v1/products/${image}`}
-                                            alt={`http://localhost:5000/api/v1/products/${image}`}
+                                            src={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${image}`}
+                                            alt={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${image}`}
                                             className='h-28 w-20 rounded-lg shadow-lg'
                                         />
                                     </div>

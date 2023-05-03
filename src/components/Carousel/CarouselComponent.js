@@ -20,10 +20,10 @@ const CarouselComponent = ({ image, value, mapCarosel, circleClick }) => {
             {image.map((img, index) => (
               <CarouselItem key={index}>
                 <div className="m-2 h-72 rounded-lg w-full">
-                  <Link to={`http://localhost:5000/api/v1/products/${img}`}>
+                  <Link to={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${img}`}>
                     <img
-                      src={`http://localhost:5000/api/v1/products/${img}`}
-                      alt={`http://localhost:5000/api/v1/products/${img}`}
+                      src={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${img}`}
+                      alt={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${img}`}
                       className="h-72 w-full z-60 rounded brightness-90"
                     />
                   </Link>

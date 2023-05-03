@@ -35,7 +35,6 @@ import ForgetPasswordRes from './components/pages/Account/ForgetPasswordRes';
 import AccountVerification from './components/pages/Auth/AccountVerification';
 import empty from './assets/x.svg';
 import RedirectFunc from './utils/redirectFunct';
-import PaymentStatus from './components/pages/Cart/PaymentStatus';
 
 
 // Admin
@@ -198,10 +197,6 @@ const App = () => {
 							<Route
 								path='*'
 								element={<RedirectFunc />}
-							/>
-							<Route
-								path='/PaymentStatus'
-								element={<PaymentStatus />}
 							/>
 							{currentUser === 'admin' ? (
 								<Route

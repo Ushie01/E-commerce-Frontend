@@ -37,10 +37,10 @@ const TableRow = ({ product, index, handleDelete }) => {
             </td>
             <td className='p-2 bg-slate-50 border-spacing-2 border border-white'>
                 <Link
-                    to={`http://localhost:5000/api/v1/products/${product.productGallery[0]}`}>
+                    to={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${product.productGallery[0]}`}>
                     <div className='w-28'>
                         <img
-                            src={`http://localhost:5000/api/v1/products/${product.productGallery[0]}`}
+                            src={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${product.productGallery[0]}`}
                             alt={product.productGallery[0]}
                         />
                     </div>
