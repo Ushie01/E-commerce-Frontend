@@ -446,7 +446,7 @@ export const resendToken = async (payload) => {
 
 export const flwPaymentMethod = async (payload) => { 
     try {
-        return await( await fetch(`/v3/payments`, {
+        return await( await fetch(`https://api.flutterwave.com/v3/payments`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -461,7 +461,7 @@ export const flwPaymentMethod = async (payload) => {
 
 export const confirmPayment = async (transactionId) => { 
     try {
-        const response = await fetch(`/api?transaction_id=${transactionId}`, {
+        const response = await fetch(`https://api.flutterwave.com/v3/api?transaction_id=${transactionId}`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
