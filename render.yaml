@@ -1,7 +1,0 @@
-proxies:
-  - path: /api
-    backend: https://api.flutterwave.com/v3
-  - path: /v3/payments
-    backend: https://api.flutterwave.com
-  - path: /api/v3/products
-    backend: https://ecommerce-backend-3bm2.onrender.com
