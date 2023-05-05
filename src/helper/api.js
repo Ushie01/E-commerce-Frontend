@@ -465,7 +465,6 @@ export const flwPaymentMethod = async (payload) => {
   }
 }
 
-
 export const confirmPayment = async (transactionId) => { 
     try {
         const response = await fetch(`/api?transaction_id=${transactionId}`, {
