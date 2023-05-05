@@ -1,5 +1,5 @@
 const baseUrl = "https://ecommerce-backend-3bm2.onrender.com/api/v1";
-const baseUrlFw = 'https://api.flutterwave.com/v3';
+// const baseUrlFw = 'https://api.flutterwave.com/v3';
 // const publicKey = process.env.FLW_PUBLIC_KEY;
 const secretKey = process.env.REACT_APP_FLWS_KEY;
 
@@ -449,20 +449,22 @@ export const resendToken = async (payload) => {
 }
 
 
-export const flwPaymentMethod = async (payload) => { 
-    try {
-        return await( await fetch(`${baseUrlFw}/payments`, {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            Authorization: `Bearer ${secretKey}`,
-        },
-        body: JSON.stringify(payload)
-    })).json()
-    } catch (error) {
-        console.error(error)
-    }
+export const flwPaymentMethod = async (payload) => {
+  try {
+    const response = await fetch('/api/flw-payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    return response.json();
+  } catch (error) {
+    console.error(error);
+  }
 }
+
 
 export const confirmPayment = async (transactionId) => { 
     try {
