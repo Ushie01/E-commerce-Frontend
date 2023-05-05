@@ -1,5 +1,5 @@
 const baseUrl = "https://ecommerce-backend-3bm2.onrender.com/api/v1";
-// const baseUrl = "http://localhost:5000/api/v1";
+const baseUrlFw = 'https://api.flutterwave.com/v3';
 // const publicKey = process.env.FLW_PUBLIC_KEY;
 const secretKey = process.env.REACT_APP_FLWS_KEY;
 
@@ -49,16 +49,20 @@ export const googleSignIn = async (payload) => {
 
 export const getAllProducts = async () => {
     try {
-        return await( await fetch(`${baseUrl}/products`, {
-        method: 'GET',
-        headers: {
-            'Content-type': 'application/json',
-        }
-    })).json()
+        const response = await fetch(`${baseUrl}/products`, {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            // mode: 'no-cors', // add this line to enable no-cors mode
+        });
+        const data = await response.json();
+        return data;
     } catch (error) {
-        console.error(error)
-    } 
-}
+        console.error(error);
+    }
+};
+
 
 export const getSingleProduct = async (id) => {
     try {
@@ -446,7 +450,7 @@ export const resendToken = async (payload) => {
 
 export const flwPaymentMethod = async (payload) => { 
     try {
-        return await( await fetch(`/v3/payments`, {
+        return await( await fetch(`${baseUrlFw}/payments`, {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
