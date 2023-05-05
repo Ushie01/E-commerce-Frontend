@@ -12,26 +12,27 @@ const Products = () => {
     const uniqueProducts = [];
 	const products = allProduct?.product?.data?.products;
 	
-
-    products?.forEach((product) => {
-        if (
-                product.name.toLowerCase().includes(inputText.toLowerCase()) ||
-                product.brand.toLowerCase().includes(inputText.toLowerCase()) ||
-                product.collectionsData
-                    ?.toLowerCase()
-                    ?.includes(inputText?.toLowerCase()) ||
-                product._id
-                    ?.toLowerCase()
-                    ?.includes(inputText?.toLowerCase()) 
-            ) {
-                const index = uniqueProducts?.findIndex(
-                    (p) => p.name === product.name
-                );
-                if (index === -1) {
-                    uniqueProducts.push(product);
-                }
-            }
-    });
+    if (products){
+		products?.forEach((product) => {
+			if (
+					product.name.toLowerCase().includes(inputText.toLowerCase()) ||
+					product.brand.toLowerCase().includes(inputText.toLowerCase()) ||
+					product.collectionsData
+						.toLowerCase()
+						.includes(inputText.toLowerCase()) ||
+					product._id
+						.toLowerCase()
+						.includes(inputText.toLowerCase()) 
+				) {
+					const index = uniqueProducts?.findIndex(
+						(p) => p.name === product.name
+					);
+					if (index === -1) {
+						uniqueProducts.push(product);
+					}
+				}
+		});
+	}
 
 	const handleDelete = async (id) => {
 		const resMsg = window.confirm("Are you sure you want to delete this user document?!");
