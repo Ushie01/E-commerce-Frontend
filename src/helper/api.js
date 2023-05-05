@@ -274,7 +274,8 @@ export const updateProduct = async ({id, formData}) => {
             method: 'PATCH',
             body: formData,
             headers: {
-                Authorization: `Bearer ${parsedDetails?.token}`
+                Authorization: `Bearer ${parsedDetails?.token}`,
+                'Content-Type': 'application/x-www-form-urlencoded'
             }
         });
 

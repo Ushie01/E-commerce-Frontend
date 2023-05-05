@@ -107,10 +107,10 @@ const UserOrderBoard = ({ order }) => {
                             - product Image:{' '}
                             <span className='text-black ml-2'>
                                 <Link
-                                    to={`http://localhost:5000/api/v1/products/${value.product?.productGallery[0]}`}>
+                                    to={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${value.product?.productGallery[0]}`}>
                                     <div className='w-28 shadow-xl rounded-lg'>
                                         <img
-                                            src={`http://localhost:5000/api/v1/products/${value.product?.productGallery[0]}`}
+                                            src={`https://ecommerce-backend-3bm2.onrender.com/api/v1/products/${value.product?.productGallery[0]}`}
                                             alt={value.product?.productGallery[0]}
                                             className="rounded-lg"
                                         />
