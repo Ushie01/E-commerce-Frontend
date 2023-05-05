@@ -11,19 +11,20 @@ const Products = () => {
     const [inputText, setInputText] = useState("");
     const uniqueProducts = [];
 	const products = allProduct?.product?.data?.products;
+	
 
     products?.forEach((product) => {
         if (
                 product.name.toLowerCase().includes(inputText.toLowerCase()) ||
                 product.brand.toLowerCase().includes(inputText.toLowerCase()) ||
                 product.collectionsData
-                    .toLowerCase()
-                    .includes(inputText.toLowerCase()) ||
+                    ?.toLowerCase()
+                    ?.includes(inputText?.toLowerCase()) ||
                 product._id
-                    .toLowerCase()
-                    .includes(inputText.toLowerCase()) 
+                    ?.toLowerCase()
+                    ?.includes(inputText?.toLowerCase()) 
             ) {
-                const index = uniqueProducts.findIndex(
+                const index = uniqueProducts?.findIndex(
                     (p) => p.name === product.name
                 );
                 if (index === -1) {
